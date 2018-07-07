@@ -1,0 +1,42 @@
+.flag-width,
+.match-team-group {
+    text-align: left!important;
+}
+
+.sidebar-card-body {
+    padding: 0px 0px 5px;
+    border-bottom: 1px solid #dedede;
+    color: black;
+    text-align: left!important;
+}
+
+.sidebar-card-body .status_offon {
+    margin-left: -15px;
+}
+
+.sidebar-card-body .live_badge {
+    margin-top: 20px;
+}
+
+.list-cursor {
+    cursor: pointer;
+}
+
+.header p {
+    background: #425279;
+    margin: 0px;
+    color: #ffffff;
+    padding: 2px 15px;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .sidebar-card-body .matches_dateAside {
+        padding: 0px !important;
+        margin-bottom: 5px;
+    }
+}
+
+.sidebar-nomatche {
+    border: none;
+}

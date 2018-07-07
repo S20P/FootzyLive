@@ -1,0 +1,107 @@
+<div class="card">
+    <div class="card-body sidebar-card-body" *ngFor="let item_details of match_ground_details;let j = index">
+        <div class="list-cursor" *ngIf="match_ground_details.length>0" (click)="matchdetails_go(item_details.id,item_details.comp_id)">
+            <div *ngIf="j==0" class="header">
+                <p>{{item_details.time|date:short}}</p>
+            </div>
+            <div class="r-dashbord-team">
+                <div class="col-md-5 col-sm-5 col-xs-5  match-team-group">
+                    <p class="upertxt">{{item_details.match_number}}</p>
+
+                    <!-- Live -->
+                    <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' ;else offlineTime2">
+                        <div *ngIf="item_details.live_status;else offlineTime2">
+                            <div *ngIf="item_details.status=='';else status2">
+                                <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
+                            </div>
+                            <ng-template #status2>
+                                <div *ngIf="item_details.status=='HT';else second2 || item_details.status=='FT';else second2">
+                                    <p class="match_time">{{item_details.status}}</p>
+                                </div>
+                                <ng-template #second2>
+                                    <p class="match_time">{{item_details.status}}'</p>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <!--end  Live -->
+
+                    <!-- offline -->
+                    <ng-template #offlineTime2>
+                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' ;else time2">
+                            <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
+                        </div>
+                        <ng-template #time2>
+                            <p class="match_time">{{item_details.status}}</p>
+                        </ng-template>
+
+                    </ng-template>
+                    <!--end offline -->
+
+                    <p class="btm-txt">{{item_details.match_type}}</p>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 r-flag-team">
+                    <!-- Live -->
+                    <div *ngIf="item_details.live_status;else offlineTeam2">
+                        <p>
+                            <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+
+                            <span *ngIf="item_details.localteam_score !==''" class="score">
+                                {{item_details.localteam_score}}
+                            </span> {{item_details.localteam_name}}
+                        </p>
+                        <p>
+                            <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+
+                            <span *ngIf="item_details.visitorteam_score !==''" class="score">
+                                {{item_details.visitorteam_score}} 
+                            </span> {{item_details.visitorteam_name}}
+                        </p>
+                    </div>
+                    <!--end Live -->
+
+
+                    <!-- offline  -->
+                    <ng-template #offlineTeam2>
+                        <p>
+                            <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                            <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' && item_details.localteam_score !=='' " class="score">
+                                {{item_details.localteam_score}}
+                            </span> {{item_details.localteam_name}}
+                        </p>
+                        <p>
+                            <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+
+                            <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' && item_details.visitorteam_score !=='' " class="score">
+                                    {{item_details.visitorteam_score}} 
+                            </span> {{item_details.visitorteam_name}}
+                        </p>
+                    </ng-template>
+                    <!--end offline  -->
+
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-1 circle">
+                    <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.'">
+                        <div *ngIf="item_details.live_status" class="live_badge">
+                            <span class="status_offon ">LIVE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-cursor" *ngIf="match_ground_details.length<=0">
+        <div class="card-body sidebar-card-body sidebar-nomatche">
+            <div class="header">
+                <p>{{currentdaydate|date:short}}</p>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12  match-team-group">
+                <div class="list-line">
+                    <h4>No matches scheduled for today</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
