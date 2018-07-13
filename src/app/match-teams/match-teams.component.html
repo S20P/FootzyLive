@@ -21,9 +21,9 @@
             <div class="col-sm-12 col-md-8 col-lg-8 remove_right_padding">
                 <div class="card list_item">
                     <div class="match-list-card-body collapse in" id="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
-                        <div *ngFor="let item of teams_collection;let t = index">
+                        <div *ngFor="let item of teams_collection|orderBy:'team_name';let t = index">
                             <div *ngIf="teams_collection.length > 0">
-                                <div (click)="teamdetails(item.team_id)">
+                                <div (click)="teamdetails(item.team_id,item.team_name)">
                                     <div class="row match-list theme-hover">
                                         <div class="list-line">
 

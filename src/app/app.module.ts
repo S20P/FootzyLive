@@ -10,7 +10,7 @@ import { MatchService } from './service/match.service';
 import { AppRoutingModule, routingComponents } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { ArrayShort } from './short-array.pipe';
+import { GroupByPipe } from './short-array.pipe';
 
 import { OrderModule } from 'ngx-order-pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -26,13 +26,27 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MessagingService } from './service/firebase/messaging.service';
 import { JsCustomeFunScriptService } from './service/jsCustomeFun/jsCustomeFunScript.service';
+import { CompetitionGroupComponent } from './competition-group/competition-group.component';
+import { CompetitionTeamsComponent } from './competition-teams/competition-teams.component';
+import { CompetitionPlayerComponent } from './competition-player/competition-player.component';
+import { CompetitionMatchesComponent } from './competition-matches/competition-matches.component';
+import { TeamSquadComponent } from './team-squad/team-squad.component';
+import { TeamNextMatchesComponent } from './team-next-matches/team-next-matches.component';
+import { TeamPreviousMatchesComponent } from './team-previous-matches/team-previous-matches.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    ArrayShort,
-    SidebarComponent //Pipe
+    GroupByPipe,
+    SidebarComponent,
+    CompetitionGroupComponent,
+    CompetitionTeamsComponent,
+    CompetitionPlayerComponent,
+    CompetitionMatchesComponent,
+    TeamSquadComponent,
+    TeamNextMatchesComponent,
+    TeamPreviousMatchesComponent,
   ],
   imports: [
     BrowserModule,

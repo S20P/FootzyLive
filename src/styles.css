@@ -1249,3 +1249,16 @@ i.fa.fa-circle {
 .hide-responsive-list .team_d {
     padding: 4px 8px;
 }
+
+.numerType .match_time {
+    margin-top: 15px !important;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.team_player {
+    background: #c3c3c32e !important;
+    padding: 5px 20px !important;
+}

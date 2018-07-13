@@ -8,6 +8,9 @@ import 'rxjs/add/observable/timer';
 declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
+import * as moment from 'moment-timezone';
+import "moment-timezone";
+import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
 
 @Component({
   selector: 'app-match-group',
@@ -20,9 +23,7 @@ export class MatchGroupComponent implements OnInit {
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  AllCompetitions = [];
-
-
+  
   GroupA_collection = [];
   GroupB_collection = [];
   GroupC_collection = [];
@@ -31,16 +32,30 @@ export class MatchGroupComponent implements OnInit {
   GroupF_collection = [];
   GroupG_collection = [];
   GroupH_collection = [];
+  
+  localtimezone;
+  firstDay_Month;
+  lastDay_Month;
 
     constructor(
     private route: ActivatedRoute,
     private router: Router,
     private matchService: MatchService,
-    private orderPipe: OrderPipe
-  ) { }
+    private orderPipe: OrderPipe,
+    private jsCustomeFun: JsCustomeFunScriptService
+  ) {
+    this.localtimezone = this.jsCustomeFun.LocalTimeZone();
+    this.firstDay_Month = this.jsCustomeFun.firstDay_Month();
+    this.lastDay_Month = this.jsCustomeFun.lastDay_Month();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      var comp_id = parseInt(params.get("id"));
+      console.log("comp_id___using _g",comp_id);
+    });
+   }
 
   ngOnInit() {
     this.setTimer();
+    this.localtimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.GetAllCompetitions();
   }
 
@@ -55,14 +70,26 @@ export class MatchGroupComponent implements OnInit {
     this.GroupG_collection = [];
     this.GroupH_collection = [];
 
-    this.matchService.GetAllCompetitions().subscribe(data => {
-      //console.log("GetAllCompetitions",data);
-      this.AllCompetitions = data['data'];
-      for (var i = 0; i < this.AllCompetitions.length; i++) {
+    var Competitions = [];
+    var key = [];
 
-        //filter group for FIFA 1056 only
-        if(this.AllCompetitions[i].id==1056){
-        this.matchService.GetAllCompetitions_ById(this.AllCompetitions[i].id).subscribe(data => {
+    var param = {
+      "firstDay": this.firstDay_Month,
+      "lastDay": this.lastDay_Month,
+      "localtimezone": this.localtimezone
+    }
+    this.matchService.GetAllCompetitionMatchesByMonth(param).subscribe(data => {
+    
+      var result = data['data'];
+
+      if (result !== undefined) {
+        for (var k = 0; k < result.length; k++) {
+
+         var com = result[k].competitions;
+
+      if (key.indexOf(com['id']) == -1) {
+    
+       this.matchService.GetAllCompetitions_ById(com['id'],com['season']).subscribe(data => {
           console.log("GetCompetitionStandingById", data);
 
           var result = data['data'];
@@ -105,20 +132,18 @@ export class MatchGroupComponent implements OnInit {
           }
 
         });
-         }
+        key.push(com['id']); // push value to key
+      } else {
+
       }
+    }
+  }
+    
+    
     });
 
-
-    console.log("GroupA_collection", this.GroupA_collection);
-    console.log("GroupB_collection", this.GroupB_collection);
-    console.log("GroupC_collection", this.GroupC_collection);
-    console.log("GroupD_collection", this.GroupD_collection);
-    console.log("GroupE_collection", this.GroupE_collection);
-    console.log("GroupF_collection", this.GroupF_collection);
-    console.log("GroupG_collection", this.GroupG_collection);
-    console.log("GroupH_collection", this.GroupH_collection);
-
+   
+    
 
   }
   teamdetails(team_id) {
@@ -135,8 +160,4 @@ export class MatchGroupComponent implements OnInit {
       this.showloader = false;
     });
   }
-
-
-
-
 }

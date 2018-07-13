@@ -5,56 +5,47 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MatchesApiService {
 
-  // private url_live = 'http://206.189.161.54:8080/';
+  private url_live = "https://api.footzyscore.com";
 
+  private socket;
 
-   private url_live = 'https://api.footzylive.com';
-
-  
-  //private url_local = "http://312102c9.ngrok.io";
-  
-  //private url1 = 'http://206.189.161.54:8080/SendSocketData';
-
-    private socket;
-
-
-  constructor() {     
+  constructor() {
     var connection = {
-      "force new connection":true,
-      "reconnectionAttempts":"Infinity",
+      "force new connection": true,
+      "reconnectionAttempts": "Infinity",
       "timeout": 10000,
-      "transports":["websocket"]
+      "transports": ["websocket"]
     };
 
 
-    this.socket = io.connect(this.url_live,{
+    this.socket = io.connect(this.url_live, connection, {
       transports: ['xhr-polling']
     });
-    
-    console.log("socket",this.socket);
+
+    console.log("socket", this.socket);
     this.socket.on("response", (data) => {
-     // console.log('TodoAdded: '+JSON.stringify(data));
-    });
-   }
-   
-   public getMessages = () => {
-    return Observable.create((observer) => {
-        this.socket.on('response', (data) => {
-            observer.next(data);
-        });
+      // console.log('TodoAdded: '+JSON.stringify(data));
     });
   }
 
-   public sendMessage(message) {
-      return  this.socket.emit('SendSocketData', message);
-   }
-
-    public liveMatches(){
-      return Observable.create((observer) => {
-        this.socket.on('response', (data) => {
-            observer.next(data);
-        });
+  public getMessages = () => {
+    return Observable.create((observer) => {
+      this.socket.on('response', (data) => {
+        observer.next(data);
+      });
     });
-    
-    }
+  }
+
+  public sendMessage(message) {
+    return this.socket.emit('SendSocketData', message);
+  }
+
+  public liveMatches() {
+    return Observable.create((observer) => {
+      this.socket.on('response', (data) => {
+        observer.next(data);
+      });
+    });
+
+  }
 }

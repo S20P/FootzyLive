@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.header {
+    padding: 1px 15px;
+}
+
 .header p {
     background: #425279;
     margin: 0px;
@@ -39,4 +43,21 @@
 
 .sidebar-nomatche {
     border: none;
+}
+
+.sidebar-card {
+    margin-bottom: 0px !important;
+}
+
+.sidebar_date {
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.sidebar_date p {
+    margin: 0px;
+    color: #425279;
+    padding: 5px 15px;
+    font-weight: bold;
+    background: #d8d8d8 !important;
 }

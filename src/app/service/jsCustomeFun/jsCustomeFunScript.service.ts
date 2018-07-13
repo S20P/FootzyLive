@@ -13,10 +13,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class JsCustomeFunScriptService {
 
-
+  date;
 
   constructor(private http: HttpClient) {
-
+    this.date = new Date();
   }
 
 
@@ -74,11 +74,25 @@ export class JsCustomeFunScriptService {
     let month = arr[1];
     let year = arr[2];
     return year + "-" + month + "-" + day;
-
   }
 
 
-  
+  LocalTimeZone(){
+   return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
+
+
+  firstDay_Month(){
+    var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    var firstDay_formate = moment(firstDay).format("YYYY-MM-DD");
+    return firstDay_formate;
+  }
+
+  lastDay_Month(){
+    var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+    var lastDay_formate = moment(lastDay).format("YYYY-MM-DD");
+   return lastDay_formate;
+  }
 
 
 

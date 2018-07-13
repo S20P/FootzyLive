@@ -8,6 +8,7 @@ import { StadiumDetailComponent } from './stadium-detail/stadium-detail.componen
 import { MatchTeamsComponent } from './match-teams/match-teams.component';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
+import { CompetitionComponent } from './competition/competition.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'matches', pathMatch: 'full' },
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'teams', component: MatchTeamsComponent },  //All Teams
   { path: 'team/:id', component: TeamDetailComponent },  //Team details
   { path: 'player/:id', component: PlayerDetailComponent },  //Team details
-  
+  { path: 'competition/:id', component: CompetitionComponent },  //Team details
 ];
 
 
@@ -35,5 +36,6 @@ export const routingComponents = [MatchesDashboardComponent,
   StadiumDetailComponent,
   MatchTeamsComponent,
   TeamDetailComponent,
-  PlayerDetailComponent
+  PlayerDetailComponent,
+  CompetitionComponent
 ];

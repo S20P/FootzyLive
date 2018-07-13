@@ -21,14 +21,10 @@ import 'rxjs/add/observable/timer';
 declare var jQuery: any;
 declare var $: any;
 import { DatePipe } from '@angular/common';
-// import * as moment from 'moment';
-
 import * as moment from 'moment-timezone';
 import "moment-timezone";
-// import * as moment from 'moment';
-// import * as tz from "moment-timezone";
-
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
+import { concat } from 'rxjs/operators';
 
 
 @Component({
@@ -38,36 +34,23 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
 })
 
 export class MatchesDashboardComponent implements OnInit {
+  paramDate: any;
   message: string;
   messages = [];
-  paramDate: any;
-  AllCompetitions = [];
-  AllCompetitions_match = [];
-  match_ground_details = [];
-  datepicker_afterview;
   alldaymatch_list = [];
-  lastHeightPosted = null;
-  loading;
-  // match_dropdown_title = [
-  //   "TODAY'S MATCHES",
-  //   "All Matches",
-  //   "Group Matches",
-  //   "Round of 16",
-  //   "Quater-Finals",
-  //   "Semi-Finals",
-  //   "For 3rd Place",
-  //   "Final",
-  // ];
   localmatches = [];
-  All_Matches = [];
   timezone;
+  todays_Matches_title;
+  localtimezone;
+  firstDay_Month;
+  lastDay_Month;
+  public match_ground_details = [];
   public showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  todays_Matches_title;
-
-  constructor(private matchesApiService: MatchesApiService,
+  constructor(
+    private matchesApiService: MatchesApiService,
     private matchService: MatchService,
     private router: Router,
     private route: ActivatedRoute,
@@ -75,32 +58,25 @@ export class MatchesDashboardComponent implements OnInit {
     private liveMatchesApiService: MatchesApiService,
     private jsCustomeFun: JsCustomeFunScriptService
 
-  ) { }
+  ) {
+
+    this.localtimezone = this.jsCustomeFun.LocalTimeZone();
+    this.firstDay_Month = this.jsCustomeFun.firstDay_Month();
+    this.lastDay_Month = this.jsCustomeFun.lastDay_Month();
+
+  }
 
 
   ngOnInit() {
 
-
-
-    // var utcTime = moment.utc("2018-06-30 18:00").format('YYYY-MM-DD HH:mm');      
-    // var localTime  = moment.utc(utcTime).toDate();
-    // console.log("IST Date : ", moment(localTime).format('YYYY-MM-DD hh:mm:ss a'));
-
-
-
     this.localmatches = [];
     this.match_ground_details = [];
 
-    // moment.js utc local timezone UTC
-
     this.setTimer();
     this.GetLocaltypeMatches();
-
-    this.GetAllCompetitions();
     this.dateSchedule_ini();
 
     $('#datepicker').datepicker();
-
     $('#datepicker').datepicker('setDate', 'today');
 
     var today = $('#datepicker').val();
@@ -115,46 +91,32 @@ export class MatchesDashboardComponent implements OnInit {
     this.GetMatchesByDate(this.paramDate);
 
     let self = this;
+
     $("#datepicker").on("change", function () {
       var selected = $(this).val();
       console.log("date is one", selected);
-      this.paramDate = selected;
-      this.todays_Matches_title = selected;
+      self.paramDate = selected;
+      self.todays_Matches_title = selected;
       console.log("date is currentdaydate", currentdaydate);
-      self.GetMatchesByDate(selected);
+      self.GetMatchesByDate(self.paramDate);
     });
 
     this.liveMatchesApiService.liveMatches().subscribe(data => {
-      // console.log("Live-Matches-data", data);
-      // console.log("live data1", data['data']['events']);
-      // var result = data['data'];
-      // var events = result.events;
-      // console.log("live events", events);
-
       this.GetMatchesByCompetition_ById_live();
-
     });
 
+    var param = {
+      "firstDay": this.firstDay_Month,
+      "lastDay": this.lastDay_Month,
+      "localtimezone": this.localtimezone
+    }
 
-
-
+    this.GetAllCompetitionMatchesByMonth(param);
 
   }
-
-  // GetAllKnockout(){
-  //   this.matchService.GetAllKnockout().subscribe(data => {
-  //     console.log("GetAllKnockout", data);
-  //   });
-  // }
-
-  get_title(title) {
-    console.log("title is", title);
-  }
-
 
   GetLocaltypeMatches() {
     this.localmatches = [];
-
     this.matchService.GetStaticMatches().subscribe(res => {
       for (let i = 0; i < res['length']; i++) {
         this.localmatches.push(res[i]);
@@ -162,17 +124,12 @@ export class MatchesDashboardComponent implements OnInit {
     });
   }
 
-
+  //Render date in datepicker
   dateSchedule_ini() {
-
-    //this.loadjquery();
+    var self = this;
     var array = this.alldaymatch_list;
 
-    console.log("date-list", this.alldaymatch_list);
-
     $('#datepicker').datepicker({
-      //changeMonth: true,
-      // changeYear: true,
       inline: true,
       showOtherMonths: true,
       dateFormat: 'yy-mm-dd',
@@ -183,49 +140,63 @@ export class MatchesDashboardComponent implements OnInit {
           return [true];
         }
         return [true, "highlight", string];
+      },
+
+      onChangeMonthYear: function (dateText, inst, dateob) {
+
+        var navidatedMonth = new Date(dateob.selectedYear, dateob.selectedMonth, dateob.selectedDay)
+        var firstDay = new Date(navidatedMonth.getFullYear(), navidatedMonth.getMonth(), 1);
+        var lastDay = new Date(navidatedMonth.getFullYear(), navidatedMonth.getMonth() + 1, 0);
+
+        var firstDay_formate = moment(firstDay).format("YYYY-MM-DD");
+        var lastDay_formate = moment(lastDay).format("YYYY-MM-DD");
+
+        var param = {
+          "firstDay": firstDay_formate,
+          "lastDay": lastDay_formate,
+          "localtimezone": self.localtimezone
+        };
+
+        self.GetAllCompetitionMatchesByMonth(param);
+
       }
     });
 
   }
 
 
+
   GetMatchesByCompetition_ById_live() {
 
     let current_matchId;
     this.liveMatchesApiService.liveMatches().subscribe(data => {
-
       console.log("Live-Matches-data", data);
-
       var result = data['data'];
-
       console.log("live data", data['data']['events']);
-
-      console.log("Matches is Live", data);
+      // console.log("Matches is Live", data);
       if (result.events !== undefined) {
-
-
         var result_events = data['data'].events;
-
+        //   console.log("live_item-data", live_item);
         current_matchId = result_events['id'];
-
         var item = result_events;
+        for (let j = 0; j < this.match_ground_details['length']; j++) {
+          console.log("**", this.match_ground_details[j]);
+          var group = this.match_ground_details[j].group;
 
-        for (let i = 0; i < this.match_ground_details['length']; i++) {
-          if (this.match_ground_details[i].id == current_matchId) {
-
-            var status_offon;
-
-            status_offon = true;
-
-            this.match_ground_details[i]['status'] = item.status;
-            this.match_ground_details[i]['localteam_score'] = item.localteam_score;
-            this.match_ground_details[i]['visitorteam_score'] = item.visitorteam_score;
-            this.match_ground_details[i]['id'] = item.id;
-            this.match_ground_details[i]['live_status'] = status_offon;
-
+          for (let i = 0; i < group['length']; i++) {
+            if (group[i].id == current_matchId) {
+              console.log("group[i].id", group[i].id);
+              console.log("current_matchId", current_matchId);
+              var status_offon;
+              status_offon = true;
+              group[i]['status'] = item.status;
+              group[i]['localteam_score'] = item.localteam_score;
+              group[i]['visitorteam_score'] = item.visitorteam_score;
+              group[i]['id'] = item.id;
+              group[i]['live_status'] = status_offon;
+            }
           }
         }
-
       }
     });
 
@@ -233,168 +204,145 @@ export class MatchesDashboardComponent implements OnInit {
 
   }
 
-  GetMatchesByDate(selected) {
+  //API GetAllCompetitionMatchesByMonth---
 
-    // this.loadjquery();
+  GetAllCompetitionMatchesByMonth(param) {
 
-    this.todays_Matches_title = selected;
-    console.log("selected date is...", selected);
+    this.matchService.GetAllCompetitionMatchesByMonth(param).subscribe(record => {
 
-    // let result = [];
+      var result = record['data'];
+
+      if (result !== undefined) {
+        for (var k = 0; k < result.length; k++) {
+          let myString = result[k].formatted_date;
+          let fulldate = this.jsCustomeFun.SpliteStrDateFormat(myString);
+          //I have a simple case of pushing unique values into array.
+          if (this.alldaymatch_list.indexOf(fulldate) == -1) {
+            this.alldaymatch_list.push(fulldate);
+          }
+          this.loadjquery();
+        }
+      }
+    });
+
+    console.log("short List of Date by Month", this.alldaymatch_list);
+
+  }
+
+  GetMatchesByDate(paramDate) {
+    this.todays_Matches_title = paramDate;
     this.match_ground_details = [];
 
     for (let i = 0; i < this.match_ground_details['length']; i++) {
       this.match_ground_details.splice(i, 1);
     }
+    console.log("Selected short date is", paramDate);
 
-    //  console.log("dddddd",paramDate);
-    // parameter: date (Date Format Must be YYYY-MM-DD)-------------
-    // let date = paramDate;
-    this.matchService.GetMatchesByDate(selected).subscribe(data => {
-      console.log("GetMatchesByDate", data);
-      // this.match_ground_details.push(data['data']);
+    var param = {
+      "date": paramDate,
+      "localtimezone": this.localtimezone
+    }
 
-      var result = data['data'];
+    this.matchService.GetAllCompetitionMatchesByDate(param).subscribe(record => {
+      console.log("record by selected Date", record);
+
+      var result = record['data'];
+
+      var self = this;
+
       if (result !== undefined) {
-        for (var j = 0; j < result['length']; j++) {
 
-          //Change UTC timezone to IST(Local)
-          let timezone = selected + " " + result[j].time;
-          // this.timezone = timezone;
+        var array = result,
+          groups = Object.create(null),
+          grouped = [];
 
-          console.log("rrrr", timezone);
+        array.forEach(function (item) {
 
-          let match_time = this.jsCustomeFun.ChangeTimeZone(timezone);
+          let timezone = paramDate + " " + item.time;
+          let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
+          let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
 
-          let live_status = this.jsCustomeFun.CompareTimeDate(match_time);
-
-          console.log("time ", match_time);
-
-          var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + result[j].localteam_id + ".png";
-          var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + result[j].visitorteam_id + ".png";
-
-        
+          var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.localteam_id + ".png";
+          var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.visitorteam_id + ".png";
 
           var status;
-          if (result[j].status == "") {
+          if (item.status == "") {
             status = match_time;
           }
           else {
-            status = result[j].status;
+            status = item.status;
           }
 
-          var selected1 = this.jsCustomeFun.SpliteStrDateFormat(result[j].formatted_date);
-          var date11 = new Date(selected1 + " " + result[j].time);
+          var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
+          var date11 = new Date(selected1 + " " + item.time);
 
-          //   var type = [];
           let match_number;
           let match_type;
-          for (let i = 0; i < this.localmatches['length']; i++) {
+          for (let i = 0; i < self.localmatches['length']; i++) {
 
-            let selected2 = this.jsCustomeFun.SpliteStrDateFormat(this.localmatches[i].formatted_date);
-            var date22 = new Date(selected2 + " " + this.localmatches[i].time);
+            let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
+            var date22 = new Date(selected2 + " " + self.localmatches[i].time);
 
-            if (result[j].id == this.localmatches[i].id) {
-              console.log("data is ok..", this.localmatches[i]);
-              match_number = this.localmatches[i].match_number;
-              match_type = this.localmatches[i].match_type;
-
+            if (item.id == self.localmatches[i].id) {
+              match_number = self.localmatches[i].match_number;
+              match_type = self.localmatches[i].match_type;
             }
-            // if (date11.getTime() == date22.getTime()) {
-            //   console.log("data is ok..", this.localmatches[i]);
-            //   match_number = this.localmatches[i].match_number;
-            //   match_type = this.localmatches[i].match_type;
-            // }
-
           }
+          var competitions = item.competitions;
 
-          this.match_ground_details.push({
-            "comp_id": result[j].comp_id,
-            "et_score": result[j].et_score,
-            "formatted_date": result[j].formatted_date,
-            "ft_score": result[j].ft_score,
-            "ht_score": result[j].ht_score,
-            "localteam_id": result[j].localteam_id,
-            "localteam_name": result[j].localteam_name,
-            "localteam_score": result[j].localteam_score,
+          if (!groups[competitions.id]) {
+            groups[competitions.id] = [];
+            grouped.push({ competitions: competitions, group: groups[competitions.id] });
+          }
+          groups[competitions.id].push({
+            "comp_id": item.comp_id,
+            "et_score": item.et_score,
+            "formatted_date": item.formatted_date,
+            "ft_score": item.ft_score,
+            "ht_score": item.ht_score,
+            "localteam_id": item.localteam_id,
+            "localteam_name": item.localteam_name,
+            "localteam_score": item.localteam_score,
             "localteam_image": flag__loal,
-            "penalty_local": result[j].penalty_local,
-            "penalty_visitor": result[j].penalty_visitor,
-            "season": result[j].season,
+            "penalty_local": item.penalty_local,
+            "penalty_visitor": item.penalty_visitor,
+            "season": item.season,
             "status": status,
             "time": match_time,
-            "venue": result[j].venue,
-            "venue_city": result[j].venue_city,
-            "venue_id": result[j].venue_id,
-            "visitorteam_id": result[j].visitorteam_id,
-            "visitorteam_name": result[j].visitorteam_name,
-            "visitorteam_score": result[j].visitorteam_score,
+            "venue": item.venue,
+            "venue_city": item.venue_city,
+            "venue_id": item.venue_id,
+            "visitorteam_id": item.visitorteam_id,
+            "visitorteam_name": item.visitorteam_name,
+            "visitorteam_score": item.visitorteam_score,
             "visitorteam_image": flag_visit,
-            "week": result[j].week,
-            "_id": result[j]._id,
-            "id": result[j].id,
+            "week": item.week,
+            "_id": item._id,
+            "id": item.id,
             "live_status": live_status,
             "match_number": match_number,
             "match_type": match_type,
+            "competitions": item.competitions
           });
-        }
+        });
+        console.log("grouped", grouped);
+        this.match_ground_details = grouped;
       }
-    });
-
-    console.log("filter-date_data", this.match_ground_details);
+    })
 
   }
 
 
-  GetAllCompetitions() {
-
-    this.All_Matches = [];
-    //this.alldaymatch_list = [];
-
-    this.matchService.GetAllCompetitions().subscribe(data => {
-      //console.log("GetAllCompetitions",data);
-      this.AllCompetitions = data['data'];
-      for (var i = 0; i < this.AllCompetitions.length; i++) {
-
-        if (this.AllCompetitions[i].id == '1056') {
-
-          this.AllCompetitions_match.push({
-            "id": this.AllCompetitions[i].id, "name": this.AllCompetitions[i].name,
-          }
-          );
-
-          this.matchService.GetAllCompetitions_ById(this.AllCompetitions[i].id).subscribe(data => {
-            console.log("GetCompetitionStandingById", data);
-          });
-
-          this.matchService.GetMatchesByCompetition_ById(this.AllCompetitions[i].id).subscribe(data => {
-            console.log("GetMatchesByCompetition_ById", data);
-
-            var result = data['data'];
-
-            this.All_Matches.push(result);
-
-            if (result !== undefined) {
-              for (var k = 0; k < result.length; k++) {
-                let myString = result[k].formatted_date;
-
-                let fulldate = this.jsCustomeFun.SpliteStrDateFormat(myString);
-
-                this.alldaymatch_list.push(fulldate);
-                this.loadjquery();
-
-              }
-            }
-          });
-        }
-      }
-    });
-    console.log('AllCompetitions_details', this.AllCompetitions_match);
+  CompetitionDetails(comp_id, comp_name, season) {
+    console.log("going to CompetitionDetails page...", comp_id);
+    this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
   }
 
   matchdetails(id, comp_id) {
     this.router.navigate([id, { "comp_id": comp_id }], { relativeTo: this.route });
   }
+
+
 
   loadjquery() {
     setTimeout(function () {
@@ -403,24 +351,16 @@ export class MatchesDashboardComponent implements OnInit {
   }
 
   sendMessage() {
-    //  console.log("message",this.message);
     let msg = this.matchesApiService.sendMessage(this.message);
-    //  console.log("msg sent",msg);
     this.message = '';
   }
   public setTimer() {
-
-    // set showloader to true to show loading div on view
     this.showloader = true;
-
     this.timer = Observable.timer(2000); // 5000 millisecond means 5 seconds
     this.subscription = this.timer.subscribe(() => {
-      // set showloader to false to hide loading div from view after 5 seconds
       this.showloader = false;
     });
   }
-
-
 
 
 

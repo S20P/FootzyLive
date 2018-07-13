@@ -7,7 +7,8 @@ import 'rxjs/add/observable/timer';
 declare var jQuery: any;
 declare var $: any;
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
-
+import * as moment from 'moment-timezone';
+import "moment-timezone";
 
 @Component({
   selector: 'app-match-teams',
@@ -23,62 +24,102 @@ export class MatchTeamsComponent implements OnInit {
   AllCompetitions = [];
   teams_collection = [];
 
+  localtimezone;
+  firstDay_Month;
+  lastDay_Month;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private matchService: MatchService,
     private jsCustomeFun: JsCustomeFunScriptService
-    
-  ) { }
+
+  ) {
+
+    this.localtimezone = this.jsCustomeFun.LocalTimeZone();
+    this.firstDay_Month = this.jsCustomeFun.firstDay_Month();
+    this.lastDay_Month = this.jsCustomeFun.lastDay_Month();
+
+  }
 
   ngOnInit() {
     this.setTimer();
+    this.localtimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
     this.GetAllCompetitions();
   }
 
-
   GetAllCompetitions() {
 
-    this.matchService.GetAllCompetitions().subscribe(data => {
-      //console.log("GetAllCompetitions",data);
-      this.AllCompetitions = data['data'];
-      for (var i = 0; i < this.AllCompetitions.length; i++) {
-        //filter group for FIFA 1056 only
-        if (this.AllCompetitions[i].id == 1056) {
-          this.matchService.GetAllCompetitions_ById(this.AllCompetitions[i].id).subscribe(data => {
-            console.log("GetCompetitionStandingById", data);
+    var Competitions = [];
+    var key = [];
 
-            var result = data['data'];
 
-            if (result !== undefined) {
-              for (let teams of result) {
+    var team_key = [];
+    var param = {
+      "firstDay": this.firstDay_Month,
+      "lastDay": this.lastDay_Month,
+      "localtimezone": this.localtimezone
+    }
 
-                var Teamflag = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + teams['team_id'] + ".png";
-             
-                this.teams_collection.push({
-                  "team_id": teams['team_id'],
-                  "team_name": teams['team_name'],
-                  "team_flag": Teamflag
-                });
+    this.matchService.GetAllCompetitionMatchesByMonth(param).subscribe(data => {
+
+      var result = data['data'];
+
+      if (result !== undefined) {
+
+        for (var k = 0; k < result.length; k++) {
+
+
+          var com = result[k].competitions;
+
+          if (key.indexOf(com['id']) == -1) {
+
+            this.matchService.GetAllTopTeamByCompId(com['id'], com['season']).subscribe(data => {
+              console.log("GetAllTopTeamByCompId", data);
+
+              var result = data['data'];
+
+              if (result !== undefined) {
+                for (let items of result) {
+                  console.log("team-item", items);
+
+                  var detailsOfTeam = items['data'];
+                  for (let teams of detailsOfTeam) {
+                    var Teamflag = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + teams['teamid'] + ".png";
+
+                    if (team_key.indexOf(teams['teamid']) == -1) {
+
+
+
+                      this.teams_collection.push({
+                        "team_id": teams['teamid'],
+                        "team_name": teams['teamname'],
+                        "team_flag": Teamflag
+                      });
+
+                      team_key.push(teams['teamid']); // push value to key
+                    } else {
+
+                    }
+
+                  }
+                }
               }
-            }
-          });
+
+            });
+            key.push(com['id']); // push value to key
+          } else {
+
+          }
         }
       }
     });
 
-
-
-
-
-
-    console.log("teams_collection", this.teams_collection);
-
+    console.log("?Teams--", this.teams_collection);
   }
-
-
-  teamdetails(team_id) {
-    this.router.navigate(['/team', team_id]);
+  teamdetails(team_id,team_name) {
+    this.router.navigate(['/team', team_id,{ "team_name": team_name }]);
   }
 
   public setTimer() {
