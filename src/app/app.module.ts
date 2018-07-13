@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -26,27 +26,14 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MessagingService } from './service/firebase/messaging.service';
 import { JsCustomeFunScriptService } from './service/jsCustomeFun/jsCustomeFunScript.service';
-import { CompetitionGroupComponent } from './competition-group/competition-group.component';
-import { CompetitionTeamsComponent } from './competition-teams/competition-teams.component';
-import { CompetitionPlayerComponent } from './competition-player/competition-player.component';
-import { CompetitionMatchesComponent } from './competition-matches/competition-matches.component';
-import { TeamSquadComponent } from './team-squad/team-squad.component';
-import { TeamNextMatchesComponent } from './team-next-matches/team-next-matches.component';
-import { TeamPreviousMatchesComponent } from './team-previous-matches/team-previous-matches.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     GroupByPipe,
-    SidebarComponent,
-    CompetitionGroupComponent,
-    CompetitionTeamsComponent,
-    CompetitionPlayerComponent,
-    CompetitionMatchesComponent,
-    TeamSquadComponent,
-    TeamNextMatchesComponent,
-    TeamPreviousMatchesComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +50,7 @@ import { TeamPreviousMatchesComponent } from './team-previous-matches/team-previ
     AngularFireStorageModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [MatchesApiService,MatchService,DatePipe,PushNotificationService, MessagingService,JsCustomeFunScriptService
+  providers: [MatchesApiService, MatchService, DatePipe, PushNotificationService, MessagingService, JsCustomeFunScriptService
   ],
   bootstrap: [AppComponent]
 })

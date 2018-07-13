@@ -10,6 +10,16 @@ import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { CompetitionComponent } from './competition/competition.component';
 
+import { CompetitionGroupComponent } from './competition-group/competition-group.component';
+import { CompetitionTeamsComponent } from './competition-teams/competition-teams.component';
+import { CompetitionPlayerComponent } from './competition-player/competition-player.component';
+import { CompetitionMatchesComponent } from './competition-matches/competition-matches.component';
+import { TeamSquadComponent } from './team-squad/team-squad.component';
+import { TeamNextMatchesComponent } from './team-next-matches/team-next-matches.component';
+import { TeamPreviousMatchesComponent } from './team-previous-matches/team-previous-matches.component';
+import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'matches', pathMatch: 'full' },
   { path: 'matches', component: MatchesDashboardComponent },  //All Matches
@@ -21,6 +31,7 @@ const routes: Routes = [
   { path: 'team/:id', component: TeamDetailComponent },  //Team details
   { path: 'player/:id', component: PlayerDetailComponent },  //Team details
   { path: 'competition/:id', component: CompetitionComponent },  //Team details
+  { path: 'competition', component: CompetitionsListComponent },  //Team details
 ];
 
 
@@ -37,5 +48,13 @@ export const routingComponents = [MatchesDashboardComponent,
   MatchTeamsComponent,
   TeamDetailComponent,
   PlayerDetailComponent,
-  CompetitionComponent
+  CompetitionComponent,
+  CompetitionGroupComponent,
+  CompetitionTeamsComponent,
+  CompetitionPlayerComponent,
+  CompetitionMatchesComponent,
+  TeamSquadComponent,
+  TeamNextMatchesComponent,
+  TeamPreviousMatchesComponent,
+  CompetitionsListComponent,
 ];

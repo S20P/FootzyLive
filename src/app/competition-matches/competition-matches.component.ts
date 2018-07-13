@@ -22,10 +22,18 @@ export class CompetitionMatchesComponent implements OnInit {
 
   match_ground_details = [];
   localmatches = [];
+  list_matches = [];
+  League_name;
 
   comp_id;
   competition_name;
   season;
+
+  // order: string;
+  // data : any[] = [{name:'2018-06-24', artist:'rudy'},{name:'2018-06-19', artist:'drusko'},{name:'2018-07-14', artist:'needell'},{name:'2018-07-11', artist:'gear'}];
+  // array: any[] = [{ name: 'John' }, { name: 'Mary' }, { name: 'Adam' }];
+  // order: string = 'name';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -53,6 +61,11 @@ export class CompetitionMatchesComponent implements OnInit {
 
     this.GetAllCompetitions();
     this.GetLocaltypeMatches();
+    // this.order ="formatted_date"; 
+    // console.log("test-order-pipe", this.orderPipe.transform(this.data, this.order));
+
+
+
   }
   GetLocaltypeMatches() {
     this.localmatches = [];
@@ -62,6 +75,11 @@ export class CompetitionMatchesComponent implements OnInit {
       }
     });
   }
+
+
+
+
+
   GetAllCompetitions() {
     this.matchService.GetAllMatchesByWeek(this.comp_id, this.season).subscribe(data => {
       console.log("GetAllMatchesByWeek", data);
@@ -79,8 +97,18 @@ export class CompetitionMatchesComponent implements OnInit {
           if (!groups[_id]) {
             groups[_id] = [];
             var formatted_date = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
+            var checkstr = $.isNumeric(_id);
+            var comp_name;
+            if (checkstr == true) {
+              comp_name = "Week " + _id;
+            } else {
+              comp_name = _id;
+            }
 
-            grouped.push({ type: { _id: _id, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id }, group: groups[_id] });
+            self.list_matches.push({ _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id });
+
+
+            grouped.push({ type: { _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id }, group: groups[_id] });
           }
           for (let data of matche_data) {
 
@@ -158,6 +186,9 @@ export class CompetitionMatchesComponent implements OnInit {
     });
 
     console.log("All Tops Matches by week are", this.match_ground_details);
+    console.log("list dropdown", this.list_matches);
+
+
   }
 
   GetMatchesByCompetition_ById_live() {

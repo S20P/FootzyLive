@@ -29,10 +29,13 @@ export class MatchService {
   GetAllTopTeamByCompId_API: string = this._baseurl_local + "MobileAPI/GetAllTopTeamByCompId";
   GetAllTopPlayerByCompId_API: string = this._baseurl_local + "MobileAPI/GetAllTopPlayerByCompId";
   GetAllMatchesByWeek_API: string = this._baseurl_local + "MobileAPI/GetAllMatchesByWeek";
-  
   GetSquadByTeamId_API: string = this._baseurl_local + "MobileAPI/GetSquadByTeamId";
   GetPreviousMatchesTeamById_API: string = this._baseurl_local + "MobileAPI/GetPreviousMatchesTeamById";
   GetNextMatchesTeamById_API: string = this._baseurl_local + "MobileAPI/GetNextMatchesTeamById";
+  GetAllLeague_API : string = this._baseurl_local + "MobileAPI/GetAllLeague";
+
+
+
 
   constructor(private http: HttpClient) {
   }
@@ -173,6 +176,11 @@ export class MatchService {
   }
   GetNextMatchesTeamById(team_id) {
     let apiurl = `${this.GetNextMatchesTeamById_API + '?team_id=' + team_id +'&pageNo=1&size=1000'}`;
+    return this.http.get(apiurl);
+  }
+
+  GetAllLeague(){
+    let apiurl = `${this.GetAllLeague_API}`;
     return this.http.get(apiurl);
   }
 
