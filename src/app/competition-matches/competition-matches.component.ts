@@ -28,7 +28,7 @@ export class CompetitionMatchesComponent implements OnInit {
   comp_id;
   competition_name;
   season;
-
+  position;
   // order: string;
   // data : any[] = [{name:'2018-06-24', artist:'rudy'},{name:'2018-06-19', artist:'drusko'},{name:'2018-07-14', artist:'needell'},{name:'2018-07-11', artist:'gear'}];
   // array: any[] = [{ name: 'John' }, { name: 'Mary' }, { name: 'Adam' }];
@@ -77,10 +77,7 @@ export class CompetitionMatchesComponent implements OnInit {
   }
 
 
-
-
-
-  GetAllCompetitions() {
+  GetAllCompetitions_backup() {
     this.matchService.GetAllMatchesByWeek(this.comp_id, this.season).subscribe(data => {
       console.log("GetAllMatchesByWeek", data);
       var result = data['data'];
@@ -182,6 +179,250 @@ export class CompetitionMatchesComponent implements OnInit {
 
         this.match_ground_details = grouped;
         console.log("matches_Group", grouped);
+      }
+    });
+
+    console.log("All Tops Matches by week are", this.match_ground_details);
+    console.log("list dropdown", this.list_matches);
+
+
+  }
+  GetAllCompetitions() {
+
+    var list = [];
+
+    this.matchService.GetAllMatchesByWeek(this.comp_id, this.season).subscribe(data => {
+      console.log("GetAllMatchesByWeek", data);
+      var result = data['data'];
+      var self = this;
+      if (result !== undefined) {
+
+        var array = result.reduce((r, { week, formatted_date }, index, arr) => {
+          // console.log("id", index);
+          // console.log("value", arr[index]);
+          var data = arr[index];
+          var last = r[r.length - 1];
+
+          var paramDate = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
+
+          let timezone = paramDate + " " + data.time;
+          let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
+          let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
+
+          var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.localteam_id + ".png";
+          var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.visitorteam_id + ".png";
+
+          var status;
+          if (data.status == "") {
+            status = match_time;
+          }
+          else {
+            status = data.status;
+          }
+
+          var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
+          var date11 = new Date(selected1 + " " + data.time);
+
+          let match_number;
+          let match_type;
+          for (let i = 0; i < self.localmatches['length']; i++) {
+
+            let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
+            var date22 = new Date(selected2 + " " + self.localmatches[i].time);
+
+            if (data.id == self.localmatches[i].id) {
+              // console.log("data is ok..", self.localmatches[i]);
+              match_number = self.localmatches[i].match_number;
+              match_type = self.localmatches[i].match_type;
+            }
+          }
+          var checkstr = $.isNumeric(week);
+          var week;
+          if (checkstr == true) {
+            week = "Week " + week;
+          } else {
+            week = week;
+          }
+          var obj = {
+            "comp_id": data.comp_id,
+            "et_score": data.et_score,
+            "formatted_date": data.formatted_date,
+            "ft_score": data.ft_score,
+            "ht_score": data.ht_score,
+            "localteam_id": data.localteam_id,
+            "localteam_name": data.localteam_name,
+            "localteam_score": data.localteam_score,
+            "localteam_image": flag__loal,
+            "penalty_local": data.penalty_local,
+            "penalty_visitor": data.penalty_visitor,
+            "season": data.season,
+            "status": status,
+            "time": match_time,
+            "venue": data.venue,
+            "venue_city": data.venue_city,
+            "venue_id": data.venue_id,
+            "visitorteam_id": data.visitorteam_id,
+            "visitorteam_name": data.visitorteam_name,
+            "visitorteam_score": data.visitorteam_score,
+            "visitorteam_image": flag_visit,
+            "week": data.week,
+            "_id": data._id,
+            "id": data.id,
+            "live_status": live_status,
+            "match_number": match_number,
+            "match_type": match_type,
+          };
+
+          if (last && last.week.week === week) {
+            last.group.push(obj);
+          } else {
+            r.push({ week: { week, formatted_date }, group: [obj] });
+          }
+          return r;
+        }, [])
+
+        //console.log(array);
+
+
+        for (let p = 0; p < array['length']; p++) {
+          console.log("item_week", array[p].week);
+          var post_date = array[p].week.formatted_date;
+          console.log("post_date", post_date);
+
+          var dl = self.jsCustomeFun.SpliteStrDateFormat(post_date);
+          console.log("dl", dl);
+
+          let timezone = dl + " " + "00:00";
+          let trans_date = self.jsCustomeFun.ChangeTimeZone(timezone);
+
+          console.log("trans_date", trans_date);
+
+          var date1 = new Date(trans_date);
+          var date2 = new Date();
+
+          console.log("date1", date1);
+          console.log("date2", date2);
+
+
+          var d1 = date1.getTime();
+          var d2 = date2.getTime();
+
+          if (d1 > d2) {
+            console.log("date-comapre is d1", d1);
+            console.log("date-comapre is d2", d2);
+
+            var pos = p - 1;
+            this.position = pos;
+            console.log("pos", pos);
+          }
+        }
+
+
+
+
+
+
+        this.match_ground_details = array;
+
+
+
+
+
+
+
+        // var array = result,
+        //   groups = Object.create(null),
+        //   grouped = [];
+        // array.forEach(function (item) {
+        //   var _id = item._id;
+        //   var matche_data = item.entries;
+
+        //   if (!groups[_id]) {
+        //     groups[_id] = [];
+        //     var formatted_date = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
+        //     var checkstr = $.isNumeric(_id);
+        //     var comp_name;
+        //     if (checkstr == true) {
+        //       comp_name = "Week " + _id;
+        //     } else {
+        //       comp_name = _id;
+        //     }
+
+        //     self.list_matches.push({ _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id });
+
+        //     grouped.push({ type: { _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id }, group: groups[_id] });
+        //   }
+        //   for (let data of matche_data) {
+
+        //     var paramDate = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
+
+        //     let timezone = paramDate + " " + data.time;
+        //     let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
+        //     let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
+
+        //     var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.localteam_id + ".png";
+        //     var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.visitorteam_id + ".png";
+
+        //     var status;
+        //     if (data.status == "") {
+        //       status = match_time;
+        //     }
+        //     else {
+        //       status = data.status;
+        //     }
+
+        //     var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
+        //     var date11 = new Date(selected1 + " " + data.time);
+
+        //     let match_number;
+        //     let match_type;
+        //     for (let i = 0; i < self.localmatches['length']; i++) {
+
+        //       let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
+        //       var date22 = new Date(selected2 + " " + self.localmatches[i].time);
+
+        //       if (data.id == self.localmatches[i].id) {
+        //         // console.log("data is ok..", self.localmatches[i]);
+        //         match_number = self.localmatches[i].match_number;
+        //         match_type = self.localmatches[i].match_type;
+        //       }
+        //     }
+
+        //     groups[_id].push({
+        //       "comp_id": data.comp_id,
+        //       "et_score": data.et_score,
+        //       "formatted_date": data.formatted_date,
+        //       "ft_score": data.ft_score,
+        //       "ht_score": data.ht_score,
+        //       "localteam_id": data.localteam_id,
+        //       "localteam_name": data.localteam_name,
+        //       "localteam_score": data.localteam_score,
+        //       "localteam_image": flag__loal,
+        //       "penalty_local": data.penalty_local,
+        //       "penalty_visitor": data.penalty_visitor,
+        //       "season": data.season,
+        //       "status": status,
+        //       "time": match_time,
+        //       "venue": data.venue,
+        //       "venue_city": data.venue_city,
+        //       "venue_id": data.venue_id,
+        //       "visitorteam_id": data.visitorteam_id,
+        //       "visitorteam_name": data.visitorteam_name,
+        //       "visitorteam_score": data.visitorteam_score,
+        //       "visitorteam_image": flag_visit,
+        //       "week": data.week,
+        //       "_id": data._id,
+        //       "id": data.id,
+        //       "live_status": live_status,
+        //       "match_number": match_number,
+        //       "match_type": match_type,
+        //       "competitions": data.competitions
+        //     });
+        //   }
+        // });
+
+        // this.match_ground_details = grouped;
+        // console.log("matches_Group", grouped);
       }
     });
 

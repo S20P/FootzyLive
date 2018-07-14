@@ -2,18 +2,18 @@
     <div class="col-md-12">
         <div>
             <select name="" class="" id="" #defaultValue>
-                <option *ngFor="let item of list_matches|orderBy:'formatted_date':'desc';let i = index" [selected]="i==0" value="{{item._id}}">
-                    {{item._id}}
+                <option *ngFor="let item of match_ground_details|orderBy:'formatted_date';let i = index" [selected]="i==position" value="{{item.week.week}}">
+                    {{item.week.week}}
                 </option>
             </select>
         </div>
 
-        <div *ngFor="let item of match_ground_details|orderBy:'type.formatted_date':'desc'; let i = index">
+        <div *ngFor="let item of match_ground_details; let i = index">
 
-            <div *ngIf="defaultValue.value===item.type._id">
+            <div *ngIf="defaultValue.value===item.week.week">
                 <div class="card">
                     <div class="col-md-12 header">
-                        <h4>{{item.type._id}}</h4>
+                        <h4>{{item.week.week}}</h4>
                     </div>
 
                     <!-- <div *ngFor="let item_details of obj.group">
@@ -23,7 +23,7 @@
                         <div class="col-md-12">
                             <div *ngFor="let item_details of item.group|orderBy:'formatted_date';let j = index">
 
-                                <div class="row match-detail" *ngIf="item_details.comp_id==item.type.comp_id" (click)="matchdetails(item_details.id,item_details.comp_id)">
+                                <div class="row match-detail" (click)="matchdetails(item_details.id,item_details.comp_id)">
                                     <!-- hide Responshive -->
                                     <div class="show-responsive-list">
                                         <!-- Time & Status -->

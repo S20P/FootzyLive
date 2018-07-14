@@ -28,12 +28,14 @@ export class MatchService {
   GetCompetitionStandingById_API: string = this._baseurl_local + "MobileAPI/GetCompetitionStandingById";
   GetAllTopTeamByCompId_API: string = this._baseurl_local + "MobileAPI/GetAllTopTeamByCompId";
   GetAllTopPlayerByCompId_API: string = this._baseurl_local + "MobileAPI/GetAllTopPlayerByCompId";
-  GetAllMatchesByWeek_API: string = this._baseurl_local + "MobileAPI/GetAllMatchesByWeek";
+  // GetAllMatchesByWeek_API: string = this._baseurl_local + "MobileAPI/GetAllMatchesByWeek";
   GetSquadByTeamId_API: string = this._baseurl_local + "MobileAPI/GetSquadByTeamId";
   GetPreviousMatchesTeamById_API: string = this._baseurl_local + "MobileAPI/GetPreviousMatchesTeamById";
   GetNextMatchesTeamById_API: string = this._baseurl_local + "MobileAPI/GetNextMatchesTeamById";
   GetAllLeague_API : string = this._baseurl_local + "MobileAPI/GetAllLeague";
+  GetAllMatchesByWeek_API: string = this._baseurl_local + "MobileAPI/GetAllMatchesByCompId";
 
+  
 
 
 

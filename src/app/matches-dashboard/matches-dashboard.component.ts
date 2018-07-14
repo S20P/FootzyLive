@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { MatchesApiService } from '../service/live_match/matches-api.service';
 import { MatchService } from '../service/match.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -339,7 +339,8 @@ export class MatchesDashboardComponent implements OnInit {
   }
 
   matchdetails(id, comp_id) {
-    this.router.navigate([id, { "comp_id": comp_id }], { relativeTo: this.route });
+    this.router.navigate(['/matches', id, { "comp_id": comp_id }]);
+    //  this.router.navigate(['/matches',id], { queryParams: comp_id, skipLocationChange: true});
   }
 
 

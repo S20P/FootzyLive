@@ -156,7 +156,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                         this.match_detailcollection[i]['live_status'] = status_offon;
 
                         let events_data = result_events['events'];
-                        for (var e = 0; e < events_data.length; e++) {
+                        for (var e = 0; e < events_data['length']; e++) {
 
                             let result_pipe_l = events_data[e].result.replace(']', '');
                             let result_pipe = result_pipe_l.replace('[', '');
@@ -388,7 +388,7 @@ export class MatchesDetailComponentComponent implements OnInit {
             var result = data['data'];
 
             if (result !== undefined) {
-                for (var l = 0; l < result.length; l++) {
+                for (var l = 0; l < result['length']; l++) {
 
                     let lineup = result[l].lineup;
                     let subs = result[l].subs;
@@ -397,7 +397,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                     //    localteam_lineup------------------------------------------------------------------------------------
                     let localteam_lineup = lineup['localteam'];
 
-                    for (var lt = 0; lt < localteam_lineup.length; lt++) {
+                    for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
                         var localteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_lineup[lt].id + ".jpg";
 
@@ -419,7 +419,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let localteam_subs = subs['localteam'];
 
-                    for (var lts = 0; lts < localteam_subs.length; lts++) {
+                    for (var lts = 0; lts < localteam_subs['length']; lts++) {
                         var localteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_subs[lts].id + ".jpg";
 
 
@@ -442,7 +442,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let visitorteam_lineup = lineup['visitorteam'];
 
-                    for (var vt = 0; vt < visitorteam_lineup.length; vt++) {
+                    for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
                         var visitorteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_lineup[vt].id + ".jpg";
 
@@ -462,7 +462,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let visitorteam_subs = subs['visitorteam'];
 
-                    for (var vts = 0; vts < visitorteam_subs.length; vts++) {
+                    for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
                         var visitorteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_subs[vts].id + ".jpg";
 
@@ -486,7 +486,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     //  comments---------------------------------------------------------------------------------------
 
-                    for (var c = 0; c < comments.length; c++) {
+                    for (var c = 0; c < comments['length']; c++) {
 
 
                         let GoalType = false;
@@ -597,7 +597,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     //   lt for localteam && vt for visitorteam
 
-                    for (var st = 0; st < localteam_match_stats.length; st++) {
+                    for (var st = 0; st < localteam_match_stats['length']; st++) {
                         this.match_stats_collection.push({
                             "lt_corners": localteam_match_stats[st].corners,
                             "lt_fouls": localteam_match_stats[st].fouls,
@@ -666,7 +666,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                     //    localteam_lineup------------------------------------------------------------------------------------
                     let localteam_lineup = lineup['localteam'];
 
-                    for (var lt = 0; lt < localteam_lineup.length; lt++) {
+                    for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
                         var localteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_lineup[lt].id + ".jpg";
 
@@ -688,7 +688,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let localteam_subs = subs['localteam'];
 
-                    for (var lts = 0; lts < localteam_subs.length; lts++) {
+                    for (var lts = 0; lts < localteam_subs['length']; lts++) {
                         var localteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_subs[lts].id + ".jpg";
 
 
@@ -711,7 +711,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let visitorteam_lineup = lineup['visitorteam'];
 
-                    for (var vt = 0; vt < visitorteam_lineup.length; vt++) {
+                    for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
                         var visitorteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_lineup[vt].id + ".jpg";
 
@@ -731,7 +731,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     let visitorteam_subs = subs['visitorteam'];
 
-                    for (var vts = 0; vts < visitorteam_subs.length; vts++) {
+                    for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
                         var visitorteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_subs[vts].id + ".jpg";
 
@@ -752,7 +752,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     //  comments---------------------------------------------------------------------------------------
 
-                    for (var c = 0; c < comments.length; c++) {
+                    for (var c = 0; c < comments['length']; c++) {
 
 
                         let GoalType = false;
@@ -865,7 +865,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     //   lt for localteam && vt for visitorteam
 
-                    for (var st = 0; st < localteam_match_stats.length; st++) {
+                    for (var st = 0; st < localteam_match_stats['length']; st++) {
                         this.match_stats_collection.push({
                             "lt_corners": localteam_match_stats[st].corners,
                             "lt_fouls": localteam_match_stats[st].fouls,
@@ -1052,11 +1052,13 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 //    localteam_lineup------------------------------------------------------------------------------------
                                 let localteam_lineup = lineup['localteam'];
 
-                                for (var lt = 0; lt < localteam_lineup.length; lt++) {
+                                console.log("1055", localteam_lineup);
+                                
+                                if(localteam_lineup == !null){
+
+                                for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
                                     var localteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_lineup[lt].id + ".jpg";
-
-
 
                                     this.localteam_player_lineup.push({
                                         "id": localteam_lineup[lt].id,
@@ -1067,6 +1069,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                     });
                                 }
+                            }
                                 //   end localteam_lineup-----------------------------------------------------------------------------------
 
 
@@ -1074,21 +1077,18 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                 let localteam_subs = subs['localteam'];
 
-                                for (var lts = 0; lts < localteam_subs.length; lts++) {
+                                if(localteam_subs == !null){
+                                for (var lts = 0; lts < localteam_subs['length']; lts++) {
                                     var localteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_subs[lts].id + ".jpg";
-
-
-
                                     this.localteam_player_subs.push({
                                         "id": localteam_subs[lts].id,
                                         "name": localteam_subs[lts].name,
                                         "number": localteam_subs[lts].number,
                                         "pos": localteam_subs[lts].pos,
                                         "picture": localteamSubsPayer_url,
-
-
                                     });
                                 }
+                            }
                                 //  end  localteam_subs------------------------------------------------------------------------------------
 
 
@@ -1096,11 +1096,11 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 //    visitorteam_lineup------------------------------------------------------------------------------------
 
                                 let visitorteam_lineup = lineup['visitorteam'];
+                                if(visitorteam_lineup == !null){
 
-                                for (var vt = 0; vt < visitorteam_lineup.length; vt++) {
+                                for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
                                     var visitorteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_lineup[vt].id + ".jpg";
-
 
 
                                     this.visitorteam_player_lineup.push({
@@ -1111,13 +1111,14 @@ export class MatchesDetailComponentComponent implements OnInit {
                                         "picture": visitorteamLinePlayer_url,
                                     });
                                 }
+                            }
                                 //  end visitorteam_lineup--------------------------------------------------------------------------------
 
                                 //    visitorteam_subs------------------------------------------------------------------------------------
 
                                 let visitorteam_subs = subs['visitorteam'];
-
-                                for (var vts = 0; vts < visitorteam_subs.length; vts++) {
+                                if(visitorteam_subs == !null){
+                                for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
                                     var visitorteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_subs[vts].id + ".jpg";
 
@@ -1131,6 +1132,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                         "picture": visitorteamSubsPayer_url,
                                     });
                                 }
+                            }
                                 //  end visitorteam_subs------------------------------------------------------------------------------------
 
 
@@ -1141,7 +1143,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                 //  comments---------------------------------------------------------------------------------------
 
-                                for (var c = 0; c < comments.length; c++) {
+                                for (var c = 0; c < comments['length']; c++) {
 
 
                                     let GoalType = false;
@@ -1251,8 +1253,8 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 let visitorteam_match_stats = match_stats['visitorteam'];
 
                                 //   lt for localteam && vt for visitorteam
-
-                                for (var st = 0; st < localteam_match_stats.length; st++) {
+                                if(localteam_match_stats == !null && visitorteam_match_stats == !null){
+                                for (var st = 0; st < localteam_match_stats['length']; st++) {
                                     this.match_stats_collection.push({
                                         "lt_corners": localteam_match_stats[st].corners,
                                         "lt_fouls": localteam_match_stats[st].fouls,
@@ -1275,6 +1277,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                     });
 
                                 }
+                            }
                                 //  end  match_stats------------------------------------------------------------------------------------
                             }
 
