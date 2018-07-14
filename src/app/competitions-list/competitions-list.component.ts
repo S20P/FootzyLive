@@ -22,6 +22,12 @@ export class CompetitionsListComponent implements OnInit {
 
   Competition_list = [];
   Competition_flag;
+
+  public showloader: boolean = false;
+  private subscription: Subscription;
+  private timer: Observable<any>;
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,6 +41,8 @@ this.Competition_flag = "assets/img/comp_flag.png";
   }
 
   ngOnInit() {
+    this.setTimer();
+    
     this.Competition_list = [];
     this.GetAllCompetitions_list();
   }
@@ -61,6 +69,12 @@ this.Competition_flag = "assets/img/comp_flag.png";
     this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
   }
 
-
+  public setTimer() {
+    this.showloader = true;
+    this.timer = Observable.timer(2000); // 5000 millisecond means 5 seconds
+    this.subscription = this.timer.subscribe(() => {
+      this.showloader = false;
+    });
+  }
 
 }
