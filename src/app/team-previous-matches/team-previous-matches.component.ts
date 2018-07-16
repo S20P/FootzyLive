@@ -24,7 +24,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
   localmatches = [];
   PreviousMatchesTeam = [];
 
-   constructor(
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
     private matchService: MatchService,
@@ -40,20 +40,20 @@ export class TeamPreviousMatchesComponent implements OnInit {
       let team_name = params.get("team_name");
       this.team_name = team_name;
     });
-  
+
   }
 
 
   ngOnInit() {
-    
+
     this.team_flage = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + this.team_id + ".png";
     this.PreviousMatchesTeam = [];
     this.GetLocaltypeMatches();
     this.GetPreviousMatches();
-    
-   }
 
-   GetLocaltypeMatches() {
+  }
+
+  GetLocaltypeMatches() {
     this.localmatches = [];
     this.matchService.GetStaticMatches().subscribe(res => {
       for (let i = 0; i < res['length']; i++) {
@@ -62,7 +62,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
     });
   }
 
-   GetPreviousMatches() {
+  GetPreviousMatches() {
     this.PreviousMatchesTeam = [];
 
     for (let i = 0; i < this.PreviousMatchesTeam['length']; i++) {
@@ -78,7 +78,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
 
       var self = this;
 
-     
+
 
       if (result !== undefined) {
 
@@ -94,7 +94,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
 
           var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.localteam_id + ".png";
           var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.visitorteam_id + ".png";
-          
+
           var team_w = false;
           var team_l = false;
           var team_d = false;
@@ -147,6 +147,24 @@ export class TeamPreviousMatchesComponent implements OnInit {
               match_type = self.localmatches[i].match_type;
             }
           }
+
+
+          var lats_score_local;
+          var lats_score_vist;
+          var vscore;
+          var lscore;
+          if (item.localteam_score == "" || item.localteam_score == null   || item.localteam_score !== undefined || item.visitorteam_score == "" || item.visitorteam_score == null || item.visitorteam_score !== undefined) {
+            vscore = 0;
+            lscore = 0;
+          }
+
+          if (item.last_score !== "" && item.last_score !== null && item.last_score !==undefined) {
+            var ls = item.last_score;
+            let string1 = ls.split("-", 2);
+
+            lats_score_local = parseInt(string1[1]) + parseInt(lscore);
+            lats_score_vist = parseInt(string1[0]) + parseInt(vscore);
+          }
           var competitions = item.competitions;
 
           if (!groups[competitions.id]) {
@@ -185,6 +203,8 @@ export class TeamPreviousMatchesComponent implements OnInit {
             "team_w": team_w,
             "team_l": team_l,
             "team_d": team_d,
+            "lats_score_local": lats_score_local,
+            "lats_score_vist": lats_score_vist
           });
         });
         console.log("grouped", grouped);
@@ -193,12 +213,12 @@ export class TeamPreviousMatchesComponent implements OnInit {
     })
   }
 
-  matchdetails(id, comp_id) {
-    this.router.navigate(['/matches', id, { "comp_id": comp_id }]);
+  matchdetails(id) {
+    this.router.navigate(['/matches', id]);
   }
-  CompetitionDetails(comp_id,comp_name,season){
-    console.log("going to CompetitionDetails page...",comp_id);
-    this.router.navigate(['/competition', comp_id,{ "comp_name": comp_name,"season":season }]);
- }
- 
+  CompetitionDetails(comp_id, comp_name, season) {
+    console.log("going to CompetitionDetails page...", comp_id);
+    this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
+  }
+
 }

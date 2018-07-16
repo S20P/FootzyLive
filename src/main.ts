@@ -7,7 +7,7 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
-    window.console.log = function () { };
+  window.console.log = function () { };
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
@@ -16,7 +16,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 //console.log("env is",environment);
 
 if (environment.production == true) {
-  window.console.log = function(){};
+ window.console.log = function(){};
 }
 
 
@@ -25,7 +25,7 @@ if (environment.production == true) {
 
 
 if (isDevMode()) {
-   window.console.log = function(){};
+  window.console.log = function(){};
 }
 
 

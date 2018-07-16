@@ -62,7 +62,7 @@ export class CompetitionPlayerComponent implements OnInit {
             grouped.push({ type: type, group: groups[type] });
           }
           for (let teams of detailsOfTeam) {
-           
+
             var flag = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + teams['player_id'] + ".jpg";
             groups[type].push({
               "player_id": teams['player_id'],
@@ -81,6 +81,6 @@ export class CompetitionPlayerComponent implements OnInit {
     console.log("All Tops Player are", this.player_collection);
   }
   Playerdetails(player_id) {
-    this.router.navigate(['/player', player_id]);
-}
+    this.router.navigate(['/player', player_id, { "comp_id": this.comp_id, "season": this.season }]);
+  }
 }

@@ -21,6 +21,8 @@ export class PlayerDetailComponent implements OnInit {
   player_id;
   player_collection = [];
   player_status: boolean;
+  comp_id;
+  season;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,6 +37,8 @@ export class PlayerDetailComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = parseInt(params.get("id"));
       this.player_id = id;
+      this.comp_id = parseInt(params.get("comp_id"));
+      this.season = params.get("season");
     });
 
 
@@ -44,7 +48,7 @@ export class PlayerDetailComponent implements OnInit {
   PlayerDetails() {
     this.player_collection = [];
     let player_id = this.player_id;
-    this.matchService.GetPlayerById(player_id).subscribe(data => {
+    this.matchService.GetPlayerById(player_id,this.comp_id,this.season).subscribe(data => {
       console.log("Player_Details", data);
 
       var result = data['data'];
@@ -76,20 +80,9 @@ export class PlayerDetailComponent implements OnInit {
             "picture": TeamPlayer_url,
             "goals": goals
           });
-
-
-
         }
-
-
       }
-
-
-
-
     });
-
-
     console.log("Player collection", this.player_collection)
 
   }

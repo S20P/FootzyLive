@@ -75,8 +75,6 @@ export class MatchesDetailComponentComponent implements OnInit {
         this.route.paramMap.subscribe((params: ParamMap) => {
             let id = parseInt(params.get("id"));
             this.id = id;
-            let comp_id = parseInt(params.get("comp_id"));
-            this.comp_id = comp_id;
             //   this.GetMatchesByCompetition_ById();
             //   this.GetCommentariesByMatchId(this.id);
             this.GetMatchDeatilByMatchId(this.id);
@@ -1037,6 +1035,8 @@ export class MatchesDetailComponentComponent implements OnInit {
                                         "ic_event_own_goal": ic_event_own_goal,
                                         "ic_event_goal": ic_event_goal
                                     });
+
+                                this.events_collection.reverse();
                             }
                         }
 
@@ -1053,23 +1053,23 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 let localteam_lineup = lineup['localteam'];
 
                                 console.log("1055", localteam_lineup);
-                                
-                                if(localteam_lineup == !null){
 
-                                for (var lt = 0; lt < localteam_lineup['length']; lt++) {
+                                if (localteam_lineup !== null) {
 
-                                    var localteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_lineup[lt].id + ".jpg";
+                                    for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
-                                    this.localteam_player_lineup.push({
-                                        "id": localteam_lineup[lt].id,
-                                        "name": localteam_lineup[lt].name,
-                                        "number": localteam_lineup[lt].number,
-                                        "pos": localteam_lineup[lt].pos,
-                                        "picture": localteamLinePlayer_url,
+                                        var localteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_lineup[lt].id + ".jpg";
 
-                                    });
+                                        this.localteam_player_lineup.push({
+                                            "id": localteam_lineup[lt].id,
+                                            "name": localteam_lineup[lt].name,
+                                            "number": localteam_lineup[lt].number,
+                                            "pos": localteam_lineup[lt].pos,
+                                            "picture": localteamLinePlayer_url,
+
+                                        });
+                                    }
                                 }
-                            }
                                 //   end localteam_lineup-----------------------------------------------------------------------------------
 
 
@@ -1077,18 +1077,18 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                 let localteam_subs = subs['localteam'];
 
-                                if(localteam_subs == !null){
-                                for (var lts = 0; lts < localteam_subs['length']; lts++) {
-                                    var localteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_subs[lts].id + ".jpg";
-                                    this.localteam_player_subs.push({
-                                        "id": localteam_subs[lts].id,
-                                        "name": localteam_subs[lts].name,
-                                        "number": localteam_subs[lts].number,
-                                        "pos": localteam_subs[lts].pos,
-                                        "picture": localteamSubsPayer_url,
-                                    });
+                                if (localteam_subs !== null) {
+                                    for (var lts = 0; lts < localteam_subs['length']; lts++) {
+                                        var localteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + localteam_subs[lts].id + ".jpg";
+                                        this.localteam_player_subs.push({
+                                            "id": localteam_subs[lts].id,
+                                            "name": localteam_subs[lts].name,
+                                            "number": localteam_subs[lts].number,
+                                            "pos": localteam_subs[lts].pos,
+                                            "picture": localteamSubsPayer_url,
+                                        });
+                                    }
                                 }
-                            }
                                 //  end  localteam_subs------------------------------------------------------------------------------------
 
 
@@ -1096,43 +1096,43 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 //    visitorteam_lineup------------------------------------------------------------------------------------
 
                                 let visitorteam_lineup = lineup['visitorteam'];
-                                if(visitorteam_lineup == !null){
+                                if (visitorteam_lineup !== null) {
 
-                                for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
+                                    for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
-                                    var visitorteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_lineup[vt].id + ".jpg";
+                                        var visitorteamLinePlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_lineup[vt].id + ".jpg";
 
 
-                                    this.visitorteam_player_lineup.push({
-                                        "id": visitorteam_lineup[vt].id,
-                                        "name": visitorteam_lineup[vt].name,
-                                        "number": visitorteam_lineup[vt].number,
-                                        "pos": visitorteam_lineup[vt].pos,
-                                        "picture": visitorteamLinePlayer_url,
-                                    });
+                                        this.visitorteam_player_lineup.push({
+                                            "id": visitorteam_lineup[vt].id,
+                                            "name": visitorteam_lineup[vt].name,
+                                            "number": visitorteam_lineup[vt].number,
+                                            "pos": visitorteam_lineup[vt].pos,
+                                            "picture": visitorteamLinePlayer_url,
+                                        });
+                                    }
                                 }
-                            }
                                 //  end visitorteam_lineup--------------------------------------------------------------------------------
 
                                 //    visitorteam_subs------------------------------------------------------------------------------------
 
                                 let visitorteam_subs = subs['visitorteam'];
-                                if(visitorteam_subs == !null){
-                                for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
+                                if (visitorteam_subs !== null) {
+                                    for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
-                                    var visitorteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_subs[vts].id + ".jpg";
+                                        var visitorteamSubsPayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + visitorteam_subs[vts].id + ".jpg";
 
 
 
-                                    this.visitorteam_player_subs.push({
-                                        "id": visitorteam_subs[vts].id,
-                                        "name": visitorteam_subs[vts].name,
-                                        "number": visitorteam_subs[vts].number,
-                                        "pos": visitorteam_subs[vts].pos,
-                                        "picture": visitorteamSubsPayer_url,
-                                    });
+                                        this.visitorteam_player_subs.push({
+                                            "id": visitorteam_subs[vts].id,
+                                            "name": visitorteam_subs[vts].name,
+                                            "number": visitorteam_subs[vts].number,
+                                            "pos": visitorteam_subs[vts].pos,
+                                            "picture": visitorteamSubsPayer_url,
+                                        });
+                                    }
                                 }
-                            }
                                 //  end visitorteam_subs------------------------------------------------------------------------------------
 
 
@@ -1253,31 +1253,31 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 let visitorteam_match_stats = match_stats['visitorteam'];
 
                                 //   lt for localteam && vt for visitorteam
-                                if(localteam_match_stats == !null && visitorteam_match_stats == !null){
-                                for (var st = 0; st < localteam_match_stats['length']; st++) {
-                                    this.match_stats_collection.push({
-                                        "lt_corners": localteam_match_stats[st].corners,
-                                        "lt_fouls": localteam_match_stats[st].fouls,
-                                        "lt_offsides": localteam_match_stats[st].offsides,
-                                        "lt_possesiontime": localteam_match_stats[st].possesiontime,
-                                        "lt_redcards": localteam_match_stats[st].redcards,
-                                        "lt_saves": localteam_match_stats[st].saves,
-                                        "lt_shots_ongoal": localteam_match_stats[st].shots_ongoal,
-                                        "lt_shots_total": localteam_match_stats[st].shots_total,
-                                        "lt_yellowcards": localteam_match_stats[st].yellowcards,
-                                        "vt_corners": visitorteam_match_stats[st].corners,
-                                        "vt_fouls": visitorteam_match_stats[st].fouls,
-                                        "vt_offsides": visitorteam_match_stats[st].offsides,
-                                        "vt_possesiontime": visitorteam_match_stats[st].possesiontime,
-                                        "vt_redcards": visitorteam_match_stats[st].redcards,
-                                        "vt_saves": visitorteam_match_stats[st].saves,
-                                        "vt_shots_ongoal": visitorteam_match_stats[st].shots_ongoal,
-                                        "vt_shots_total": visitorteam_match_stats[st].shots_total,
-                                        "vt_yellowcards": visitorteam_match_stats[st].yellowcards
-                                    });
+                                if (localteam_match_stats !== null && visitorteam_match_stats !== null) {
+                                    for (var st = 0; st < localteam_match_stats['length']; st++) {
+                                        this.match_stats_collection.push({
+                                            "lt_corners": localteam_match_stats[st].corners,
+                                            "lt_fouls": localteam_match_stats[st].fouls,
+                                            "lt_offsides": localteam_match_stats[st].offsides,
+                                            "lt_possesiontime": localteam_match_stats[st].possesiontime,
+                                            "lt_redcards": localteam_match_stats[st].redcards,
+                                            "lt_saves": localteam_match_stats[st].saves,
+                                            "lt_shots_ongoal": localteam_match_stats[st].shots_ongoal,
+                                            "lt_shots_total": localteam_match_stats[st].shots_total,
+                                            "lt_yellowcards": localteam_match_stats[st].yellowcards,
+                                            "vt_corners": visitorteam_match_stats[st].corners,
+                                            "vt_fouls": visitorteam_match_stats[st].fouls,
+                                            "vt_offsides": visitorteam_match_stats[st].offsides,
+                                            "vt_possesiontime": visitorteam_match_stats[st].possesiontime,
+                                            "vt_redcards": visitorteam_match_stats[st].redcards,
+                                            "vt_saves": visitorteam_match_stats[st].saves,
+                                            "vt_shots_ongoal": visitorteam_match_stats[st].shots_ongoal,
+                                            "vt_shots_total": visitorteam_match_stats[st].shots_total,
+                                            "vt_yellowcards": visitorteam_match_stats[st].yellowcards
+                                        });
 
+                                    }
                                 }
-                            }
                                 //  end  match_stats------------------------------------------------------------------------------------
                             }
 

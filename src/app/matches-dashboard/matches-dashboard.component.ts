@@ -288,6 +288,24 @@ export class MatchesDashboardComponent implements OnInit {
               match_type = self.localmatches[i].match_type;
             }
           }
+          var lats_score_local;
+          var lats_score_vist;
+          var vscore;
+          var lscore;
+          if (item.localteam_score == "" || item.localteam_score == null   || item.localteam_score !== undefined || item.visitorteam_score == "" || item.visitorteam_score == null || item.visitorteam_score !== undefined) {
+            vscore = 0;
+            lscore = 0;
+          }
+
+          if (item.last_score !== "" && item.last_score !== null && item.last_score !==undefined) {
+            var ls = item.last_score;
+            let string1 = ls.split("-", 2);
+
+            lats_score_local = parseInt(string1[1]) + parseInt(lscore);
+            lats_score_vist = parseInt(string1[0]) + parseInt(vscore);
+          }
+
+
           var competitions = item.competitions;
 
           if (!groups[competitions.id]) {
@@ -322,7 +340,9 @@ export class MatchesDashboardComponent implements OnInit {
             "live_status": live_status,
             "match_number": match_number,
             "match_type": match_type,
-            "competitions": item.competitions
+            "competitions": item.competitions,
+            "lats_score_local": lats_score_local,
+            "lats_score_vist": lats_score_vist
           });
         });
         console.log("grouped", grouped);
@@ -338,8 +358,8 @@ export class MatchesDashboardComponent implements OnInit {
     this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
   }
 
-  matchdetails(id, comp_id) {
-    this.router.navigate(['/matches', id, { "comp_id": comp_id }]);
+  matchdetails(id) {
+    this.router.navigate(['/matches', id]);
     //  this.router.navigate(['/matches',id], { queryParams: comp_id, skipLocationChange: true});
   }
 

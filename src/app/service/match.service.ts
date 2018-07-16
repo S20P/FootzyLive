@@ -76,8 +76,8 @@ export class MatchService {
     return this.http.get(apiurl);
   }
 
-  GetPlayerById(player_id) {
-    let apiurl = `${this.GetPlayerById_API + '?player_id=' + player_id}`;
+  GetPlayerById(player_id,comp_id, season) {
+    let apiurl = `${this.GetPlayerById_API + '?player_id=' + player_id+'&season=' + season + '&comp_id=' + comp_id}`;
     return this.http.get(apiurl);
   }
 

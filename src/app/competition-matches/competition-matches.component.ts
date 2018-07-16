@@ -29,6 +29,7 @@ export class CompetitionMatchesComponent implements OnInit {
   competition_name;
   season;
   position;
+  height;
   // order: string;
   // data : any[] = [{name:'2018-06-24', artist:'rudy'},{name:'2018-06-19', artist:'drusko'},{name:'2018-07-14', artist:'needell'},{name:'2018-07-11', artist:'gear'}];
   // array: any[] = [{ name: 'John' }, { name: 'Mary' }, { name: 'Adam' }];
@@ -63,7 +64,7 @@ export class CompetitionMatchesComponent implements OnInit {
     this.GetLocaltypeMatches();
     // this.order ="formatted_date"; 
     // console.log("test-order-pipe", this.orderPipe.transform(this.data, this.order));
-
+    this.height = 40;
 
 
   }
@@ -243,6 +244,25 @@ export class CompetitionMatchesComponent implements OnInit {
           } else {
             week = week;
           }
+
+
+          var lats_score_local;
+          var lats_score_vist;
+          var vscore;
+          var lscore;
+          if (data.localteam_score == "" || data.localteam_score == null   || data.localteam_score !== undefined || data.visitorteam_score == "" || data.visitorteam_score == null || data.visitorteam_score !== undefined) {
+            vscore = 0;
+            lscore = 0;
+          }
+
+          if (data.last_score !== "" && data.last_score !== null && data.last_score !==undefined) {
+            var ls = data.last_score;
+            let string1 = ls.split("-", 2);
+
+            lats_score_local = parseInt(string1[1]) + parseInt(lscore);
+            lats_score_vist = parseInt(string1[0]) + parseInt(vscore);
+          }
+
           var obj = {
             "comp_id": data.comp_id,
             "et_score": data.et_score,
@@ -271,6 +291,8 @@ export class CompetitionMatchesComponent implements OnInit {
             "live_status": live_status,
             "match_number": match_number,
             "match_type": match_type,
+            "lats_score_local": lats_score_local,
+            "lats_score_vist": lats_score_vist
           };
 
           if (last && last.week.week === week) {
@@ -284,7 +306,7 @@ export class CompetitionMatchesComponent implements OnInit {
         //console.log(array);
 
 
-        for (let p = 0; p < array['length']; p++) {
+        for (let p = 0; p < array.reverse()['length']; p++) {
           console.log("item_week", array[p].week);
           var post_date = array[p].week.formatted_date;
           console.log("post_date", post_date);
@@ -313,7 +335,11 @@ export class CompetitionMatchesComponent implements OnInit {
 
             var pos = p - 1;
             this.position = pos;
+
             console.log("pos", pos);
+          }
+          else {
+            this.position = 0;
           }
         }
 
@@ -472,8 +498,15 @@ export class CompetitionMatchesComponent implements OnInit {
   teamdetails(team_id) {
     this.router.navigate(['/team', team_id]);
   }
-  matchdetails(id, comp_id) {
-    this.router.navigate(['/matches', id, { "comp_id": comp_id }]);
+  matchdetails(id) {
+    this.router.navigate(['/matches', id]);
+  }
+
+  onchangefillter(pos) {
+    console.log("filter is change", pos);
+    this.position = pos;
+
+
   }
 
 }

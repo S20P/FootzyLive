@@ -36,18 +36,6 @@
     .lds-ring {}
 }
 
-@media (min-width: 768px) {
-    .match_time {
-        margin-top: 25px;
-    }
-    p.upertxt {
-        margin-top: 15px;
-    }
-    .flag-width {
-        margin-top: 5px;
-    }
-}
-
 @media (max-width: 992px) {
     .match-page-section {
         padding: 5px;

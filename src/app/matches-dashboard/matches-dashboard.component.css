@@ -37,14 +37,19 @@
 }
 
 @media (min-width: 768px) {
-    .match_time {
-        margin-top: 25px;
+    .matchscore[_ngcontent-c1] {
+        margin-top: 11px;
+        padding: 4px 0 6px;
+        background: #f2f2f2;
+    }
+    .match_time p {
+        font-weight: bold;
     }
     p.upertxt {
-        margin-top: 15px;
+        /* margin-top: 15px; */
     }
     .flag-width {
-        margin-top: 5px;
+        /* margin-top: 5px; */
     }
 }
 
@@ -95,9 +100,15 @@
 .more-link {
     float: right;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .more-link:hover {
     float: right;
     color: black
+}
+
+.match-team-group h1 {
+    margin: 0;
 }
