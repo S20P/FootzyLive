@@ -52,7 +52,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 // }
 
 @Pipe({
-    name: 'orderBy'
+    name: 'orderBy_ace_desc'
 })
 export class GroupByPipe implements PipeTransform {
 transform(array, orderBy, asc = true){
