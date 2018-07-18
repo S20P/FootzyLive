@@ -14,46 +14,50 @@
             <div class="col-md-12">
                 <div class="match-page-header">
                     <p>{{competition_name}}</p>
-
-                    <div class="overflow_perant-select" id="style_perant-2">
-                        <div class="select_perant" id="style_perant" tabindex="1">
-                            <div *ngFor="let item of Competition_list;let i = index">
-                                <div *ngFor="let item_details of item.availableSeason;let j = index">
-                                    <input (click)="onchangefillter(j)" value="j" class="selectopt_perant" name="defaultValueSelectd{{j}}" type="radio" id="opt_perant{{j}}" [checked]="j==position">
-                                    <label for="opt_perant{{j}}" class="option_perant"> {{item_details}}</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
+
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
                     <!-- tabs menu  -->
                     <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#tab1_table" data-toggle="tab">Table</a>
-                            </li>
-                            <li>
-                                <a href="#tab2_Matches" data-toggle="tab">Matches</a>
-                            </li>
-                            <li>
-                                <a href="#tab3_TopPlayers" data-toggle="tab">Top players</a>
-                            </li>
-                            <li>
-                                <a href="#tab4_TopTeams" data-toggle="tab">Top teams</a>
-                            </li>
-                        </ul>
+                        <div class="no-margin row">
+                            <ul class="nav nav-tabs col-md-9">
+                                <li class="active">
+                                    <a href="#tab1_table" data-toggle="tab">Table</a>
+                                </li>
+                                <li>
+                                    <a href="#tab2_Matches" data-toggle="tab">Matches</a>
+                                </li>
+                                <li>
+                                    <a href="#tab3_TopPlayers" data-toggle="tab">Top players</a>
+                                </li>
+                                <li>
+                                    <a href="#tab4_TopTeams" data-toggle="tab">Top teams</a>
+                                </li>
+                            </ul>
+                            <div class="col-md-3">
+                                <div class="overflow_perant-select" id="style_perant-2">
+                                    <div class="select_perant" id="style_perant" tabindex="1">
+                                        <div *ngFor="let item of Competition_list;let i = index">
+                                            <div *ngFor="let item_details of item.availableSeason;let j = index">
+                                                <input (click)="onchangefillter(j)" value="j" class="selectopt_perant" name="defaultValueSelectd{{j}}" type="radio" id="opt_perant{{j}}" [checked]="j==position">
+                                                <label for="opt_perant{{j}}" class="option_perant"> {{item_details}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- end tabs menu  -->
 
                     <div class="row">
 
-                        <div class="col-sm-12 col-md-8 col-lg-8 remove_right_padding">
+                        <div class="col-sm-12 col-md-8 col-lg-8 top-tab-spacing remove_right_padding">
                             <!-- tabs body  -->
 
                             <div class="">
@@ -97,6 +101,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div id="group1">
+        <div id="group1" *ngIf="SquadTeam.length > 0">
             <div class="groupp-list-navbar">
                 <table class=" table grouptable">
                     <thead>
@@ -33,12 +33,11 @@
                         </table>
                     </div>
                 </div>
-                <div *ngIf="SquadTeam.length <= 0" class="card match-list">
-                    <div class="text-left">
-                        <p class="col-md-12">Not found </p>
-                    </div>
-                </div>
-
+            </div>
+        </div>
+        <div *ngIf="SquadTeam.length <= 0" class="card">
+            <div class="list-line row match-list">
+                <p class="col-md-12 text-left">Not Player Found</p>
             </div>
         </div>
     </div>

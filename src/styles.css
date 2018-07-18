@@ -1030,7 +1030,7 @@ i.fa.fa-circle {
 
 .circle-team {
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 15px;
     color: #fff;
     padding: 0px;
 }
@@ -1109,7 +1109,7 @@ i.fa.fa-circle {
 }
 
 span.upertxt.dashed {
-    padding: 0 20px;
+    padding: 0 10px;
     font-weight: bold;
 }
 
@@ -1144,6 +1144,8 @@ span.upertxt.dashed {
     float: none;
     padding: 0;
     text-align: center;
+    margin-bottom: 3px;
+    margin-top: -3px;
 }
 
 .agg_pen ul li {
@@ -1193,6 +1195,7 @@ span.upertxt.dashed {
 
 .match-team-group h1 {
     margin: 0!important;
+    padding-top: 5px;
 }
 
 .slogen {
@@ -1203,4 +1206,8 @@ span.upertxt.dashed {
 
 .no-padding {
     padding: 0px;
+}
+
+.table-header td {
+    padding: 15px 0px 15px 9px !important;
 }

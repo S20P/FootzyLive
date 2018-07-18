@@ -54,13 +54,13 @@
                                         <!-- Live -->
 
                                         <div *ngIf="item_details.live_status;else offlineTeam1">
-                                            <div class="row">
-                                                <div class="matchscore">
-                                                    <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</span>
-                                                    <span class="upertxt dashed">-</span>
-                                                    <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</span>
-                                                </div>
+
+                                            <div class="matchscore">
+                                                <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</span>
+                                                <span class="upertxt dashed">-</span>
+                                                <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</span>
                                             </div>
+
 
                                         </div>
                                         <!-- end live -->
