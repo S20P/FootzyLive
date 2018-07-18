@@ -45,11 +45,6 @@ td.first {
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
-.team_player {
-    background: #c3c3c32e;
-    padding: 5px 20px;
-}
-
 .team_player h4 {
     font-weight: bold;
 }

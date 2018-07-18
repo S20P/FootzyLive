@@ -15,7 +15,7 @@
 }
 
 .playerlist {
-    border-bottom: 1px solid #dddd;
+    border-bottom: 1px solid #eee !important;
     padding-top: 10px;
 }
 

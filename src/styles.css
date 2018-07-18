@@ -1082,7 +1082,7 @@ i.fa.fa-circle {
 }
 
 .team_player {
-    background: #c3c3c32e !important;
+    background-color: #d8d8d8 !important;
     padding: 5px 20px !important;
 }
 
@@ -1210,4 +1210,9 @@ span.upertxt.dashed {
 
 .table-header td {
     padding: 15px 0px 15px 9px !important;
+}
+
+.playerlist {
+    border-bottom: 1px solid lightgrey;
+    border-color: solid lightgrey;
 }

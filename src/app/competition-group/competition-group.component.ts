@@ -24,7 +24,9 @@ export class CompetitionGroupComponent implements OnInit {
   comp_id;
   competition_name;
   season;
-  
+
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,7 +48,7 @@ export class CompetitionGroupComponent implements OnInit {
   ngOnInit() {
 
   }
-
+ 
 
   filterData(i) {
     console.log("position is", i);

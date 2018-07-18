@@ -29,7 +29,6 @@
                                         <h4 *ngIf="item.type!=='Group'" class="col-sm-12 teamgroupname">{{item.type}}</h4>
                                         <table class=" table grouptable">
                                             <thead>
-
                                                 <tr>
                                                     <td class="first">Pos</td>
                                                     <td> Team </td>
@@ -41,7 +40,7 @@
                                                     <td class="last">PTS</td>
                                                 </tr>
                                             </thead>
-                                            <tbody *ngFor="let item_details of item.group|orderBy:'position'">
+                                            <tbody *ngFor="let item_details of item.group|orderBy:'position':ascending">
                                                 <tr (click)="teamdetails(item_details.team_id,item_details.team_name)">
                                                     <td>{{item_details.position}}</td>
                                                     <td>{{item_details.team_name}}</td>
