@@ -37,12 +37,12 @@ export class CompetitionsListComponent implements OnInit {
     private liveMatchesApiService: MatchesApiService,
 
   ) {
-this.Competition_flag = "assets/img/comp_flag.png";
+    this.Competition_flag = "assets/img/avt_flag.png";
   }
 
   ngOnInit() {
     this.setTimer();
-    
+
     this.Competition_list = [];
     this.GetAllCompetitions_list();
   }
@@ -58,15 +58,12 @@ this.Competition_flag = "assets/img/comp_flag.png";
         }
       }
     });
-
     console.log("ALL Competition_list***", this.Competition_list);
-
   }
 
-
-  CompetitionDetails(comp_id, comp_name, season) {
+  CompetitionDetails(comp_id) {
     console.log("going to CompetitionDetails page...", comp_id);
-    this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
+    this.router.navigate(['/competition', comp_id]);
   }
 
   public setTimer() {

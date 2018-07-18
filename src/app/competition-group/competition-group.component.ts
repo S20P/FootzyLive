@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, Input } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,19 +19,12 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
   styleUrls: ['./competition-group.component.css']
 })
 export class CompetitionGroupComponent implements OnInit {
-
-  GroupA_collection = [];
-  GroupB_collection = [];
-  GroupC_collection = [];
-  GroupD_collection = [];
-  GroupE_collection = [];
-  GroupF_collection = [];
-  GroupG_collection = [];
-  GroupH_collection = [];
-
+  position: number;
+  Group_collection = [];
   comp_id;
   competition_name;
   season;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,92 +32,95 @@ export class CompetitionGroupComponent implements OnInit {
     private orderPipe: OrderPipe,
     private jsCustomeFun: JsCustomeFunScriptService
   ) {
-  
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
-      this.competition_name = params.get("comp_name");
-      this.season = params.get("season");
     });
+  }
+  @Input()
+  set SelectedSeason(message: number) {
+    this.position = message;
+    this.filterData(message);
+    console.log("perent dropdown select position", this.position);
   }
 
   ngOnInit() {
 
-    var com = {
-      comp_id:this.comp_id,
-      competition_name:this.competition_name,
-      season:this.season
-    }
-   console.log("com_",com);
-
-     
-    this.GetAllCompetitions();
   }
 
-  GetAllCompetitions() {
 
-    this.GroupA_collection = [];
-    this.GroupB_collection = [];
-    this.GroupC_collection = [];
-    this.GroupD_collection = [];
-    this.GroupE_collection = [];
-    this.GroupF_collection = [];
-    this.GroupG_collection = [];
-    this.GroupH_collection = [];
+  filterData(i) {
+    console.log("position is", i);
+    this.matchService.GetAllLeague().subscribe(data => {
+      console.log("GetAllCompetitions_list", data);
+      var result = data['data'];
+      if (result !== undefined) {
+        for (let item of result) {
+          if (item.id == this.comp_id) {
+            this.competition_name = item.name;
+            for (let r = 0; r < item.availableSeason['length']; r++) {
 
-    
-    this.matchService.GetAllCompetitions_ById(this.comp_id, this.season).subscribe(data => {
+              if (r == i) {
+                this.season = item.availableSeason[i];
+                var com = {
+                  comp_id: this.comp_id,
+                  competition_name: this.competition_name,
+                  season: this.season
+                }
+                this.GetAllCompetitions(com);
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  GetAllCompetitions(com) {
+
+    console.log("com_", com);
+    var season = com.season;
+
+    this.Group_collection = [];
+
+    this.matchService.GetAllCompetitions_ById(this.comp_id, season).subscribe(data => {
       console.log("GetCompetitionStandingById", data);
 
       var result = data['data'];
 
       if (result !== undefined) {
-        for (let group of result) {
-          if (group['comp_group'] == "Group A") {
-            //console.log("GroupA_data",group);
-            this.GroupA_collection.push(group);
+
+        var array = result,
+          groups = Object.create(null),
+          grouped = [];
+
+        array.forEach(function (item) {
+
+          var item_group;
+          if (item.comp_group == null) {
+            item_group = "Group"
           }
-          if (group['comp_group'] == "Group B") {
-            //console.log("GroupB_data",group);
-            this.GroupB_collection.push(group);
+          else {
+            item_group = item.comp_group;
           }
-          if (group['comp_group'] == "Group C") {
-            //console.log("GroupC_data",group);
-            this.GroupC_collection.push(group);
+
+
+          if (!groups[item_group]) {
+            groups[item_group] = [];
+
+            grouped.push({ type: item_group, group: groups[item_group] });
           }
-          if (group['comp_group'] == "Group D") {
-            //console.log("GroupD_data",group);
-            this.GroupD_collection.push(group);
-          }
-          if (group['comp_group'] == "Group E") {
-            //console.log("GroupE_data",group);
-            this.GroupE_collection.push(group);
-          }
-          if (group['comp_group'] == "Group F") {
-            //console.log("GroupF_data",group);
-            this.GroupF_collection.push(group);
-          }
-          if (group['comp_group'] == "Group G") {
-            //console.log("GroupG_data",group);
-            this.GroupG_collection.push(group);
-          }
-          if (group['comp_group'] == "Group H") {
-            //console.log("GroupH_data",group);
-            this.GroupH_collection.push(group);
-          }
-        }
+
+          groups[item_group].push(item);
+        });
+        this.Group_collection = grouped;
+        console.log("Group_collection", grouped);
+
       }
 
     });
-
-
-
-
-
-
-
   }
-  teamdetails(team_id) {
-    this.router.navigate(['/team', team_id]);
+  teamdetails(team_id, team_name) {
+    this.router.navigate(['/team', team_id, { "team_name": team_name }]);
   }
 
 }

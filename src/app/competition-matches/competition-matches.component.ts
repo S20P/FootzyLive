@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, Input } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -21,19 +21,21 @@ import { MatchesApiService } from '../service/live_match/matches-api.service';
 export class CompetitionMatchesComponent implements OnInit {
 
   match_ground_details = [];
-  localmatches = [];
+
   list_matches = [];
   League_name;
 
   comp_id;
   competition_name;
   season;
-  position;
+  selectedposition;
   height;
-  // order: string;
-  // data : any[] = [{name:'2018-06-24', artist:'rudy'},{name:'2018-06-19', artist:'drusko'},{name:'2018-07-14', artist:'needell'},{name:'2018-07-11', artist:'gear'}];
-  // array: any[] = [{ name: 'John' }, { name: 'Mary' }, { name: 'Adam' }];
-  // order: string = 'name';
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+
+  @Input()
+  set SelectedSeason(message: number) {
+    this.filterData(message);
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -45,10 +47,9 @@ export class CompetitionMatchesComponent implements OnInit {
 
   ) {
 
+
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
-      this.competition_name = params.get("comp_name");
-      this.season = params.get("season");
     });
 
     this.liveMatchesApiService.liveMatches().subscribe(data => {
@@ -58,141 +59,40 @@ export class CompetitionMatchesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.localmatches = [];
-
-    this.GetAllCompetitions();
-    this.GetLocaltypeMatches();
-    // this.order ="formatted_date"; 
-    // console.log("test-order-pipe", this.orderPipe.transform(this.data, this.order));
-    this.height = 40;
-
-
-  }
-  GetLocaltypeMatches() {
-    this.localmatches = [];
-    this.matchService.GetStaticMatches().subscribe(res => {
-      for (let i = 0; i < res['length']; i++) {
-        this.localmatches.push(res[i]);
-      }
-    });
   }
 
-
-  GetAllCompetitions_backup() {
-    this.matchService.GetAllMatchesByWeek(this.comp_id, this.season).subscribe(data => {
-      console.log("GetAllMatchesByWeek", data);
+  filterData(i) {
+    console.log("position is", i);
+    this.matchService.GetAllLeague().subscribe(data => {
+      console.log("GetAllCompetitions_list", data);
       var result = data['data'];
-      var self = this;
       if (result !== undefined) {
-
-        var array = result,
-          groups = Object.create(null),
-          grouped = [];
-        array.forEach(function (item) {
-          var _id = item._id;
-          var matche_data = item.entries;
-
-          if (!groups[_id]) {
-            groups[_id] = [];
-            var formatted_date = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
-            var checkstr = $.isNumeric(_id);
-            var comp_name;
-            if (checkstr == true) {
-              comp_name = "Week " + _id;
-            } else {
-              comp_name = _id;
-            }
-
-            self.list_matches.push({ _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id });
-
-
-            grouped.push({ type: { _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id }, group: groups[_id] });
-          }
-          for (let data of matche_data) {
-
-            var paramDate = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
-
-
-            let timezone = paramDate + " " + data.time;
-            let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
-            let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
-
-            var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.localteam_id + ".png";
-            var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.visitorteam_id + ".png";
-
-            var status;
-            if (data.status == "") {
-              status = match_time;
-            }
-            else {
-              status = data.status;
-            }
-
-            var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
-            var date11 = new Date(selected1 + " " + data.time);
-
-            let match_number;
-            let match_type;
-            for (let i = 0; i < self.localmatches['length']; i++) {
-
-              let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
-              var date22 = new Date(selected2 + " " + self.localmatches[i].time);
-
-              if (data.id == self.localmatches[i].id) {
-                // console.log("data is ok..", self.localmatches[i]);
-                match_number = self.localmatches[i].match_number;
-                match_type = self.localmatches[i].match_type;
+        for (let item of result) {
+          if (item.id == this.comp_id) {
+            this.competition_name = item.name;
+            for (let r = 0; r < item.availableSeason['length']; r++) {
+              if (r == i) {
+                this.season = item.availableSeason[i];
+                var com = {
+                  comp_id: this.comp_id,
+                  competition_name: this.competition_name,
+                  season: this.season
+                }
+                this.GetAllCompetitions(com);
               }
             }
-
-            groups[_id].push({
-              "comp_id": data.comp_id,
-              "et_score": data.et_score,
-              "formatted_date": data.formatted_date,
-              "ft_score": data.ft_score,
-              "ht_score": data.ht_score,
-              "localteam_id": data.localteam_id,
-              "localteam_name": data.localteam_name,
-              "localteam_score": data.localteam_score,
-              "localteam_image": flag__loal,
-              "penalty_local": data.penalty_local,
-              "penalty_visitor": data.penalty_visitor,
-              "season": data.season,
-              "status": status,
-              "time": match_time,
-              "venue": data.venue,
-              "venue_city": data.venue_city,
-              "venue_id": data.venue_id,
-              "visitorteam_id": data.visitorteam_id,
-              "visitorteam_name": data.visitorteam_name,
-              "visitorteam_score": data.visitorteam_score,
-              "visitorteam_image": flag_visit,
-              "week": data.week,
-              "_id": data._id,
-              "id": data.id,
-              "live_status": live_status,
-              "match_number": match_number,
-              "match_type": match_type,
-              "competitions": data.competitions
-            });
           }
-        });
-
-        this.match_ground_details = grouped;
-        console.log("matches_Group", grouped);
+        }
       }
     });
-
-    console.log("All Tops Matches by week are", this.match_ground_details);
-    console.log("list dropdown", this.list_matches);
-
-
   }
-  GetAllCompetitions() {
 
+  GetAllCompetitions(com) {
+    var season = com.season;
     var list = [];
-
-    this.matchService.GetAllMatchesByWeek(this.comp_id, this.season).subscribe(data => {
+    this.match_ground_details = [];
+    this.list_matches = [];
+    this.matchService.GetAllMatchesByWeek(this.comp_id, season).subscribe(data => {
       console.log("GetAllMatchesByWeek", data);
       var result = data['data'];
       var self = this;
@@ -210,8 +110,8 @@ export class CompetitionMatchesComponent implements OnInit {
           let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
           let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
 
-          var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.localteam_id + ".png";
-          var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.visitorteam_id + ".png";
+          var flag__loal = self.flage_baseUrl + data.localteam_id + ".png";
+          var flag_visit = self.flage_baseUrl + data.visitorteam_id + ".png";
 
           var status;
           if (data.status == "") {
@@ -224,19 +124,6 @@ export class CompetitionMatchesComponent implements OnInit {
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
           var date11 = new Date(selected1 + " " + data.time);
 
-          let match_number;
-          let match_type;
-          for (let i = 0; i < self.localmatches['length']; i++) {
-
-            let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
-            var date22 = new Date(selected2 + " " + self.localmatches[i].time);
-
-            if (data.id == self.localmatches[i].id) {
-              // console.log("data is ok..", self.localmatches[i]);
-              match_number = self.localmatches[i].match_number;
-              match_type = self.localmatches[i].match_type;
-            }
-          }
           var checkstr = $.isNumeric(week);
           var week;
           if (checkstr == true) {
@@ -246,22 +133,36 @@ export class CompetitionMatchesComponent implements OnInit {
           }
 
 
+          // AGG (0-0)--------------------------------------------
           var lats_score_local;
           var lats_score_vist;
           var vscore;
           var lscore;
-          if (data.localteam_score == "" || data.localteam_score == null   || data.localteam_score !== undefined || data.visitorteam_score == "" || data.visitorteam_score == null || data.visitorteam_score !== undefined) {
+          if (data.localteam_score == "" || data.localteam_score == null || data.localteam_score == undefined || data.visitorteam_score == "" || data.visitorteam_score == null || data.visitorteam_score == undefined) {
             vscore = 0;
             lscore = 0;
           }
+          else {
+            vscore = data.visitorteam_score;
+            lscore = data.localteam_score;
+          }
 
-          if (data.last_score !== "" && data.last_score !== null && data.last_score !==undefined) {
+          if (data.last_score !== "" && data.last_score !== null && data.last_score !== undefined) {
             var ls = data.last_score;
             let string1 = ls.split("-", 2);
-
             lats_score_local = parseInt(string1[1]) + parseInt(lscore);
             lats_score_vist = parseInt(string1[0]) + parseInt(vscore);
           }
+          // end AGG (0-0)-------------------------------------------
+
+          //PEN (0-0)------------------------------------------------
+          var penalty_localvist = false;
+
+          if (data.penalty_local !== "" && data.penalty_local !== null && data.penalty_local !== undefined && data.penalty_visitor !== "" && data.penalty_visitor !== null && data.penalty_visitor !== undefined) {
+            penalty_localvist = true;
+          }
+          //end PEN (0-0)--------------------------------------------
+
 
           var obj = {
             "comp_id": data.comp_id,
@@ -275,6 +176,7 @@ export class CompetitionMatchesComponent implements OnInit {
             "localteam_image": flag__loal,
             "penalty_local": data.penalty_local,
             "penalty_visitor": data.penalty_visitor,
+            "penalty_localvist": penalty_localvist,
             "season": data.season,
             "status": status,
             "time": match_time,
@@ -289,8 +191,6 @@ export class CompetitionMatchesComponent implements OnInit {
             "_id": data._id,
             "id": data.id,
             "live_status": live_status,
-            "match_number": match_number,
-            "match_type": match_type,
             "lats_score_local": lats_score_local,
             "lats_score_vist": lats_score_vist
           };
@@ -334,121 +234,17 @@ export class CompetitionMatchesComponent implements OnInit {
             console.log("date-comapre is d2", d2);
 
             var pos = p - 1;
-            this.position = pos;
+            this.selectedposition = pos;
 
             console.log("pos", pos);
           }
           else {
-            this.position = 0;
+            this.selectedposition = 0;
           }
         }
 
-
-
-
-
-
         this.match_ground_details = array;
 
-
-
-
-
-
-
-        // var array = result,
-        //   groups = Object.create(null),
-        //   grouped = [];
-        // array.forEach(function (item) {
-        //   var _id = item._id;
-        //   var matche_data = item.entries;
-
-        //   if (!groups[_id]) {
-        //     groups[_id] = [];
-        //     var formatted_date = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
-        //     var checkstr = $.isNumeric(_id);
-        //     var comp_name;
-        //     if (checkstr == true) {
-        //       comp_name = "Week " + _id;
-        //     } else {
-        //       comp_name = _id;
-        //     }
-
-        //     self.list_matches.push({ _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id });
-
-        //     grouped.push({ type: { _id: comp_name, formatted_date: formatted_date, total: item.total, comp_id: item.comp_id }, group: groups[_id] });
-        //   }
-        //   for (let data of matche_data) {
-
-        //     var paramDate = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
-
-        //     let timezone = paramDate + " " + data.time;
-        //     let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
-        //     let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
-
-        //     var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.localteam_id + ".png";
-        //     var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + data.visitorteam_id + ".png";
-
-        //     var status;
-        //     if (data.status == "") {
-        //       status = match_time;
-        //     }
-        //     else {
-        //       status = data.status;
-        //     }
-
-        //     var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
-        //     var date11 = new Date(selected1 + " " + data.time);
-
-        //     let match_number;
-        //     let match_type;
-        //     for (let i = 0; i < self.localmatches['length']; i++) {
-
-        //       let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
-        //       var date22 = new Date(selected2 + " " + self.localmatches[i].time);
-
-        //       if (data.id == self.localmatches[i].id) {
-        //         // console.log("data is ok..", self.localmatches[i]);
-        //         match_number = self.localmatches[i].match_number;
-        //         match_type = self.localmatches[i].match_type;
-        //       }
-        //     }
-
-        //     groups[_id].push({
-        //       "comp_id": data.comp_id,
-        //       "et_score": data.et_score,
-        //       "formatted_date": data.formatted_date,
-        //       "ft_score": data.ft_score,
-        //       "ht_score": data.ht_score,
-        //       "localteam_id": data.localteam_id,
-        //       "localteam_name": data.localteam_name,
-        //       "localteam_score": data.localteam_score,
-        //       "localteam_image": flag__loal,
-        //       "penalty_local": data.penalty_local,
-        //       "penalty_visitor": data.penalty_visitor,
-        //       "season": data.season,
-        //       "status": status,
-        //       "time": match_time,
-        //       "venue": data.venue,
-        //       "venue_city": data.venue_city,
-        //       "venue_id": data.venue_id,
-        //       "visitorteam_id": data.visitorteam_id,
-        //       "visitorteam_name": data.visitorteam_name,
-        //       "visitorteam_score": data.visitorteam_score,
-        //       "visitorteam_image": flag_visit,
-        //       "week": data.week,
-        //       "_id": data._id,
-        //       "id": data.id,
-        //       "live_status": live_status,
-        //       "match_number": match_number,
-        //       "match_type": match_type,
-        //       "competitions": data.competitions
-        //     });
-        //   }
-        // });
-
-        // this.match_ground_details = grouped;
-        // console.log("matches_Group", grouped);
       }
     });
 
@@ -502,11 +298,9 @@ export class CompetitionMatchesComponent implements OnInit {
     this.router.navigate(['/matches', id]);
   }
 
-  onchangefillter(pos) {
+  onchangefillter_matches(pos) {
     console.log("filter is change", pos);
-    this.position = pos;
-
-
+    this.selectedposition = pos;
   }
 
 }

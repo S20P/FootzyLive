@@ -179,7 +179,7 @@
                                                     <!-- Score & Group of Team -->
 
                                                     <div class="col-sm-2 col-xs-3 flag-width">
-                                                        <img [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                        <img [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.png'" />
                                                         <p>{{item_details.localteam_name}}</p>
                                                     </div>
 
@@ -241,7 +241,7 @@
 
                                                     <div class="col-sm-2 col-xs-3 flag-width">
 
-                                                        <img [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                        <img [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.png'" />
                                                         <p>{{item_details.visitorteam_name}}</p>
                                                     </div>
 
@@ -306,13 +306,13 @@
                                                         <!-- Live -->
                                                         <div *ngIf="item_details.live_status;else offlineTeam2">
                                                             <p>
-                                                                <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                                <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.png'" />
                                                                 <span *ngIf="item_details.visitorteam_score !==''" class="score">
                                                          {{item_details.localteam_score}}
                                                     </span> {{item_details.localteam_name}}
                                                             </p>
                                                             <p>
-                                                                <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                                <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.png'" />
                                                                 <span *ngIf="item_details.visitorteam_score !==''" class="score">
                                                       {{item_details.visitorteam_score}} 
                                                   </span> {{item_details.visitorteam_name}}
@@ -324,14 +324,14 @@
                                                         <!-- offline  -->
                                                         <ng-template #offlineTeam2>
                                                             <p>
-                                                                <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                                <img class="flag-width" [src]="item_details.localteam_image" onError="this.src='assets/img/avt_flag.png'" />
 
                                                                 <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' && item_details.visitorteam_score !==''" class="score">
                                                        {{item_details.localteam_score}}
                                                    </span> {{item_details.localteam_name}}
                                                             </p>
                                                             <p>
-                                                                <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.jpg'" />
+                                                                <img class="flag-width" [src]="item_details.visitorteam_image" onError="this.src='assets/img/avt_flag.png'" />
 
                                                                 <span *ngIf="item_details.status==='FT' || item_details.status!=='Pen.' && item_details.visitorteam_score !=='' " class="score">
                                                         {{item_details.visitorteam_score}} 

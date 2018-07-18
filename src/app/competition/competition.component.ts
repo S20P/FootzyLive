@@ -42,19 +42,9 @@ export class CompetitionComponent implements OnInit {
   comp_id;
   competition_name;
   season;
+  position: number = 0;
 
-
-
-  GroupA_collection = [];
-  GroupB_collection = [];
-  GroupC_collection = [];
-  GroupD_collection = [];
-  GroupE_collection = [];
-  GroupF_collection = [];
-  GroupG_collection = [];
-  GroupH_collection = [];
-  
-
+  Competition_list = [];
 
 
   constructor(
@@ -72,14 +62,38 @@ export class CompetitionComponent implements OnInit {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
-      this.competition_name = params.get("comp_name");
-      this.season = params.get("season");
+      this.GetAllCompetitions_list();
+      // this.competition_name = params.get("comp_name");
+      // this.season = params.get("season");
     });
 
   }
 
   ngOnInit() {
     this.setTimer();
+  }
+
+  GetAllCompetitions_list() {
+
+    this.Competition_list = [];
+    this.matchService.GetAllLeague().subscribe(data => {
+      console.log("GetAllCompetitions_list", data);
+      var result = data['data'];
+      if (result !== undefined) {
+        for (let item of result) {
+          if (item.id == this.comp_id) {
+            this.competition_name = item.name;
+            this.Competition_list.push(item);
+          }
+        }
+      }
+    });
+    console.log("current selected compitation", this.Competition_list);
+  }
+
+  onchangefillter(pos) {
+    console.log("filter is change", pos);
+    this.position = pos;
   }
 
   public setTimer() {
@@ -89,7 +103,4 @@ export class CompetitionComponent implements OnInit {
       this.showloader = false;
     });
   }
-
-
-
 }

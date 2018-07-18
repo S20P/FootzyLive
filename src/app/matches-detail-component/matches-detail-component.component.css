@@ -1,14 +1,4 @@
-.match-detail-section {
-    padding: 40px 0px;
-    /* text-transform: uppercase; */
-}
-
 .team-detail-header {
-    text-align: center;
-    background-color: #223052;
-    /* background-image: url("/assets/img/score_bg.jpg"); */
-    background-position: center;
-    color: #FFF;
     padding: 20px 10px 10px;
 }
 
@@ -253,18 +243,6 @@ img.lineup_title_img {
     MARGIN: 7px 0 0PX;
 }
 
-@media (min-width: 992px) and (max-width: 1300px) {
-    .match-detail-section {
-        padding: 40px;
-    }
-}
-
-@media (max-width: 992px) {
-    .match-detail-section {
-        padding: 0px;
-    }
-}
-
 @media (max-width: 767px) {
     .lineup_one.theme-body-color {
         margin-bottom: 15px;
@@ -328,8 +306,8 @@ img.lineup_title_img {
 }
 
 .slogen {
-    color: gray;
-    font-size: 14px;
+    /* color: gray;
+    font-size: 14px; */
     margin: 0px;
     line-height: 25px;
     padding: 10px;
@@ -470,29 +448,6 @@ ul.nav.nav-tabs {
     /* text-transform: uppercase; */
     font-size: 14px;
     font-weight: bold;
-}
-
-@media (min-width: 992px) {
-    .remove_left_padding {
-        padding-left: 7.5px;
-    }
-    .remove_right_padding {
-        padding-right: 7.5px;
-    }
-    .match-page-section {
-        padding: 40px 0px;
-    }
-}
-
-.sidebar {
-    padding: 15px 15px 0 0px;
-}
-
-
-/* custome progress bar css */
-
-.no-padding {
-    padding: 0px;
 }
 
 .status-progress {

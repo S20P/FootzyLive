@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, Input } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,6 +23,8 @@ export class CompetitionTeamsComponent implements OnInit {
   comp_id;
   competition_name;
   season;
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,17 +35,47 @@ export class CompetitionTeamsComponent implements OnInit {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
-      this.competition_name = params.get("comp_name");
-      this.season = params.get("season");
     });
+  }
+  @Input()
+  set SelectedSeason(message: number) {
+    this.filterData(message);
   }
 
   ngOnInit() {
-    this.GetAllCompetitions();
 
   }
-  GetAllCompetitions() {
-    this.matchService.GetAllTopTeamByCompId(this.comp_id, this.season).subscribe(data => {
+  filterData(i) {
+    console.log("position is", i);
+    this.matchService.GetAllLeague().subscribe(data => {
+      console.log("GetAllCompetitions_list", data);
+      var result = data['data'];
+      if (result !== undefined) {
+        for (let item of result) {
+          if (item.id == this.comp_id) {
+            this.competition_name = item.name;
+            for (let r = 0; r < item.availableSeason['length']; r++) {
+
+              if (r == i) {
+                this.season = item.availableSeason[i];
+                var com = {
+                  comp_id: this.comp_id,
+                  competition_name: this.competition_name,
+                  season: this.season
+                }
+                this.GetAllCompetitions(com);
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+  GetAllCompetitions(com) {
+    var season = com.season;
+    this.teams_collection = [];
+    var self = this;
+    this.matchService.GetAllTopTeamByCompId(this.comp_id, season).subscribe(data => {
       console.log("GetAllTopTeamByCompId", data);
       var result = data['data'];
 
@@ -61,7 +93,7 @@ export class CompetitionTeamsComponent implements OnInit {
             grouped.push({ type: type, group: groups[type] });
           }
           for (let teams of detailsOfTeam) {
-            var Teamflag = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + teams['teamid'] + ".png";
+            var Teamflag = self.flage_baseUrl + teams['teamid'] + ".png";
             groups[type].push({
               "team_id": teams['teamid'],
               "team_name": teams['teamname'],
@@ -78,7 +110,7 @@ export class CompetitionTeamsComponent implements OnInit {
 
     console.log("All Tops Teams are", this.teams_collection);
   }
-  teamdetails(team_id,team_name) {
-    this.router.navigate(['/team', team_id,{ "team_name": team_name }]);
+  teamdetails(team_id, team_name) {
+    this.router.navigate(['/team', team_id, { "team_name": team_name }]);
   }
 }

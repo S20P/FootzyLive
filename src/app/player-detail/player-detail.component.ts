@@ -23,6 +23,8 @@ export class PlayerDetailComponent implements OnInit {
   player_status: boolean;
   comp_id;
   season;
+  player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/"; 
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -58,7 +60,7 @@ export class PlayerDetailComponent implements OnInit {
       if (result !== undefined) {
         for (let player of result) {
 
-          var TeamPlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + player['id'] + ".jpg";
+          var TeamPlayer_url = this.player_baseUrl + player['id'] + ".jpg";
          
 
           this.player_collection.push({

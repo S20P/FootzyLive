@@ -23,7 +23,7 @@
                     <div class="match-list-card-body collapse in" id="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
                         <div *ngFor="let item of Competition_list|orderBy:'name';let t = index">
                             <div *ngIf="Competition_list.length > 0">
-                                <div (click)="CompetitionDetails(item.id,item.name,item.season)">
+                                <div (click)="CompetitionDetails(item.id)">
                                     <div class="row match-list theme-hover">
                                         <div class="list-line">
                                             <div class="col-md-10 col-sm-10 col-xs-10">

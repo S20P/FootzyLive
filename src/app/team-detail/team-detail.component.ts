@@ -25,6 +25,7 @@ export class TeamDetailComponent implements OnInit {
   team_id;
   team_name;
   team_flage;
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/"; 
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +49,7 @@ export class TeamDetailComponent implements OnInit {
 
   ngOnInit() {
     this.setTimer();
-    this.team_flage = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + this.team_id + ".png";
+    this.team_flage = this.flage_baseUrl + this.team_id + ".png";
      }
   
 

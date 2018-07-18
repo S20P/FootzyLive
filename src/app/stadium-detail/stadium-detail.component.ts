@@ -26,7 +26,8 @@ export class StadiumDetailComponent implements OnInit {
   stadiumDetail_collecction;
   AllCompetitions = [];
   match_ground_details = [];
- localmatches = [];
+  localmatches = [];
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
 
   constructor(
     private route: ActivatedRoute,
@@ -133,7 +134,7 @@ export class StadiumDetailComponent implements OnInit {
 
   GetAllCompetitions() {
     this.GetLocaltypeMatches();
-    
+
     this.match_ground_details = [];
 
     this.matchService.GetAllCompetitions().subscribe(data => {
@@ -147,9 +148,9 @@ export class StadiumDetailComponent implements OnInit {
           var result = data['data'];
 
           if (result !== undefined) {
-            
-        for (var j = 0; j < result['length']; j++) {
-              
+
+            for (var j = 0; j < result['length']; j++) {
+
               if (result[j].venue_id == this.stadium_id) {
                 console.log("item is....", result[j]);
 
@@ -162,77 +163,77 @@ export class StadiumDetailComponent implements OnInit {
                 let match_time = this.jsCustomeFun.ChangeTimeZone(timezone);
 
                 console.log("time ", match_time);
-                
 
 
-                      var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + result[j].localteam_id + ".png";
-                      var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + result[j].visitorteam_id + ".png";
 
-                    
+                var flag__loal = this.flage_baseUrl + result[j].localteam_id + ".png";
+                var flag_visit = this.flage_baseUrl + result[j].visitorteam_id + ".png";
 
-                      let live_status = this.jsCustomeFun.CompareTimeDate(match_time);
 
-                      var selected1 = this.jsCustomeFun.SpliteStrDateFormat(result[j].formatted_date);
-                      var date11 = new Date(selected1 + " " + result[j].time);
-            
-                   //   var type = [];
-                      var match_number;
-                      var match_type;
-                      for (let i = 0; i < this.localmatches['length']; i++) {
-            
-                        let selected2 = this.jsCustomeFun.SpliteStrDateFormat(this.localmatches[i].formatted_date);
-            
-                        var date22 = new Date(selected2 + " " + this.localmatches[i].time);
-            
-                        if (date11.getTime() == date22.getTime()) {
-                          console.log("data is ok..", this.localmatches[i]);
-                          match_number =this.localmatches[i].match_number;
-                          match_type =this.localmatches[i].match_type;
-                        }
-                      }
 
-                      var status;
-                      if (result[j].status == "") {
-                        status = match_time;
-                      }
-                      else {
-                        status = result[j].status;
-                      }
+                let live_status = this.jsCustomeFun.CompareTimeDate(match_time);
 
-                      this.match_ground_details.push({
-                        "comp_id": result[j].comp_id,
-                        "et_score": result[j].et_score,
-                        "formatted_date": result[j].formatted_date,
-                        "ft_score": result[j].ft_score,
-                        "ht_score": result[j].ht_score,
-                        "localteam_id": result[j].localteam_id,
-                        "localteam_name": result[j].localteam_name,
-                        "localteam_score": result[j].localteam_score,
-                        "localteam_image": flag__loal,
-                        "penalty_local": result[j].penalty_local,
-                        "penalty_visitor": result[j].penalty_visitor,
-                        "season": result[j].season,
-                        "status": status,
-                        "time": match_time,
-                        "venue": result[j].venue,
-                        "venue_city": result[j].venue_city,
-                        "venue_id": result[j].venue_id,
-                        "visitorteam_id": result[j].visitorteam_id,
-                        "visitorteam_name": result[j].visitorteam_name,
-                        "visitorteam_score": result[j].visitorteam_score,
-                        "visitorteam_image": flag_visit,
-                        "week": result[j].week,
-                        "_id": result[j]._id,
-                        "id": result[j].id,
-                        "live_status": live_status,
-                        "match_number": match_number,
-                        "match_type": match_type,
-                        
-                      });
+                var selected1 = this.jsCustomeFun.SpliteStrDateFormat(result[j].formatted_date);
+                var date11 = new Date(selected1 + " " + result[j].time);
 
-                    
-                
-                
+                //   var type = [];
+                var match_number;
+                var match_type;
+                for (let i = 0; i < this.localmatches['length']; i++) {
+
+                  let selected2 = this.jsCustomeFun.SpliteStrDateFormat(this.localmatches[i].formatted_date);
+
+                  var date22 = new Date(selected2 + " " + this.localmatches[i].time);
+
+                  if (date11.getTime() == date22.getTime()) {
+                    console.log("data is ok..", this.localmatches[i]);
+                    match_number = this.localmatches[i].match_number;
+                    match_type = this.localmatches[i].match_type;
+                  }
+                }
+
+                var status;
+                if (result[j].status == "") {
+                  status = match_time;
+                }
+                else {
+                  status = result[j].status;
+                }
+
+                this.match_ground_details.push({
+                  "comp_id": result[j].comp_id,
+                  "et_score": result[j].et_score,
+                  "formatted_date": result[j].formatted_date,
+                  "ft_score": result[j].ft_score,
+                  "ht_score": result[j].ht_score,
+                  "localteam_id": result[j].localteam_id,
+                  "localteam_name": result[j].localteam_name,
+                  "localteam_score": result[j].localteam_score,
+                  "localteam_image": flag__loal,
+                  "penalty_local": result[j].penalty_local,
+                  "penalty_visitor": result[j].penalty_visitor,
+                  "season": result[j].season,
+                  "status": status,
+                  "time": match_time,
+                  "venue": result[j].venue,
+                  "venue_city": result[j].venue_city,
+                  "venue_id": result[j].venue_id,
+                  "visitorteam_id": result[j].visitorteam_id,
+                  "visitorteam_name": result[j].visitorteam_name,
+                  "visitorteam_score": result[j].visitorteam_score,
+                  "visitorteam_image": flag_visit,
+                  "week": result[j].week,
+                  "_id": result[j]._id,
+                  "id": result[j].id,
+                  "live_status": live_status,
+                  "match_number": match_number,
+                  "match_type": match_type,
+
+                });
+
+
+
+
 
               }
             }

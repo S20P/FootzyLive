@@ -38,7 +38,7 @@ export class MatchesDashboardComponent implements OnInit {
   message: string;
   messages = [];
   alldaymatch_list = [];
-  localmatches = [];
+
   timezone;
   todays_Matches_title;
   localtimezone;
@@ -48,6 +48,8 @@ export class MatchesDashboardComponent implements OnInit {
   public showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
+
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
 
   constructor(
     private matchesApiService: MatchesApiService,
@@ -69,11 +71,12 @@ export class MatchesDashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.localmatches = [];
+    console.log("flageurl url is", this.flage_baseUrl);
+
     this.match_ground_details = [];
 
     this.setTimer();
-    this.GetLocaltypeMatches();
+
     this.dateSchedule_ini();
 
     $('#datepicker').datepicker();
@@ -115,14 +118,6 @@ export class MatchesDashboardComponent implements OnInit {
 
   }
 
-  GetLocaltypeMatches() {
-    this.localmatches = [];
-    this.matchService.GetStaticMatches().subscribe(res => {
-      for (let i = 0; i < res['length']; i++) {
-        this.localmatches.push(res[i]);
-      }
-    });
-  }
 
   //Render date in datepicker
   dateSchedule_ini() {
@@ -262,8 +257,8 @@ export class MatchesDashboardComponent implements OnInit {
           let match_time = self.jsCustomeFun.ChangeTimeZone(timezone);
           let live_status = self.jsCustomeFun.CompareTimeDate(match_time);
 
-          var flag__loal = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.localteam_id + ".png";
-          var flag_visit = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + item.visitorteam_id + ".png";
+          var flag__loal = self.flage_baseUrl + item.localteam_id + ".png";
+          var flag_visit = self.flage_baseUrl + item.visitorteam_id + ".png";
 
           var status;
           if (item.status == "") {
@@ -276,35 +271,35 @@ export class MatchesDashboardComponent implements OnInit {
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
 
-          let match_number;
-          let match_type;
-          for (let i = 0; i < self.localmatches['length']; i++) {
-
-            let selected2 = self.jsCustomeFun.SpliteStrDateFormat(self.localmatches[i].formatted_date);
-            var date22 = new Date(selected2 + " " + self.localmatches[i].time);
-
-            if (item.id == self.localmatches[i].id) {
-              match_number = self.localmatches[i].match_number;
-              match_type = self.localmatches[i].match_type;
-            }
-          }
+          // AGG (0-0)--------------------------------------------
           var lats_score_local;
           var lats_score_vist;
           var vscore;
           var lscore;
-          if (item.localteam_score == "" || item.localteam_score == null   || item.localteam_score !== undefined || item.visitorteam_score == "" || item.visitorteam_score == null || item.visitorteam_score !== undefined) {
+          if (item.localteam_score == "" || item.localteam_score == null || item.localteam_score == undefined || item.visitorteam_score == "" || item.visitorteam_score == null || item.visitorteam_score == undefined) {
             vscore = 0;
             lscore = 0;
           }
+          else {
+            vscore = item.visitorteam_score;
+            lscore = item.localteam_score;
+          }
 
-          if (item.last_score !== "" && item.last_score !== null && item.last_score !==undefined) {
+          if (item.last_score !== "" && item.last_score !== null && item.last_score !== undefined) {
             var ls = item.last_score;
             let string1 = ls.split("-", 2);
-
             lats_score_local = parseInt(string1[1]) + parseInt(lscore);
             lats_score_vist = parseInt(string1[0]) + parseInt(vscore);
           }
+          // end AGG (0-0)-------------------------------------------
 
+          //PEN (0-0)------------------------------------------------
+          var penalty_localvist = false;
+
+          if (item.penalty_local !== "" && item.penalty_local !== null && item.penalty_local !== undefined && item.penalty_visitor !== "" && item.penalty_visitor !== null && item.penalty_visitor !== undefined) {
+            penalty_localvist = true;
+          }
+          //end PEN (0-0)--------------------------------------------
 
           var competitions = item.competitions;
 
@@ -324,6 +319,7 @@ export class MatchesDashboardComponent implements OnInit {
             "localteam_image": flag__loal,
             "penalty_local": item.penalty_local,
             "penalty_visitor": item.penalty_visitor,
+            "penalty_localvist": penalty_localvist,
             "season": item.season,
             "status": status,
             "time": match_time,
@@ -338,8 +334,6 @@ export class MatchesDashboardComponent implements OnInit {
             "_id": item._id,
             "id": item.id,
             "live_status": live_status,
-            "match_number": match_number,
-            "match_type": match_type,
             "competitions": item.competitions,
             "lats_score_local": lats_score_local,
             "lats_score_vist": lats_score_vist
@@ -349,7 +343,6 @@ export class MatchesDashboardComponent implements OnInit {
         this.match_ground_details = grouped;
       }
     })
-
   }
 
 
@@ -362,8 +355,6 @@ export class MatchesDashboardComponent implements OnInit {
     this.router.navigate(['/matches', id]);
     //  this.router.navigate(['/matches',id], { queryParams: comp_id, skipLocationChange: true});
   }
-
-
 
   loadjquery() {
     setTimeout(function () {

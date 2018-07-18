@@ -22,10 +22,13 @@ export class TeamSquadComponent implements OnInit {
   team_id;
   team_name;
   team_flage;
+  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+
 
   SquadTeam = [];
 
-   constructor(
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
     private matchService: MatchService,
@@ -41,21 +44,21 @@ export class TeamSquadComponent implements OnInit {
       let team_name = params.get("team_name");
       this.team_name = team_name;
     });
-  
+
   }
 
 
   ngOnInit() {
-    
-    this.team_flage = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/teamsNew/" + this.team_id + ".png";
+
+    this.team_flage = this.flage_baseUrl + this.team_id + ".png";
     this.SquadTeam = [];
     this.GetSquad();
-   
+
   }
 
   GetSquad() {
     this.SquadTeam = [];
-
+var self = this;
     this.matchService.GetSquadByTeamId(this.team_id).subscribe(data => {
       console.log("Squad res", data);
       var TeamSquad = data['data'];
@@ -89,7 +92,7 @@ export class TeamSquadComponent implements OnInit {
             }
             grouped.push({ type: position_name, group: groups[item.position] });
           }
-          var TeamPlayer_url = "https://s3.ap-south-1.amazonaws.com/tuppleapps/fifa18images/players/" + item['id'] + ".jpg";
+          var TeamPlayer_url = self.player_baseUrl + item['id'] + ".jpg";
           groups[item.position].push({
             "id": item['id'],
             "age": item['age'],
@@ -108,8 +111,8 @@ export class TeamSquadComponent implements OnInit {
   }
 
   Playerdetails(player_id) {
-    this.router.navigate(['/player', player_id]);
+    this.router.navigate(['/player', player_id, { "comp_id":"", "season": "" }]);
   }
 
- 
+
 }
