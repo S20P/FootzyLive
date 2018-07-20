@@ -14,6 +14,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from "firebase";
 
 
+
 // declare var firebase: any;
 
 @Component({
@@ -49,8 +50,8 @@ export class AppComponent {
     ngOnInit() {
 
         this.msgService.getPermission();
-       // let msg = this.msgService.receiveMessage();
-      //  console.log("msg is...*", msg);
+        // let msg = this.msgService.receiveMessage();
+        //  console.log("msg is...*", msg);
 
         this.msgService.currentMessage.subscribe(data => {
             console.log("message-resis", data);
@@ -63,7 +64,7 @@ export class AppComponent {
                     'title': this.message.title,
                     'alertContent': this.message.body,
                     'click_action': this.message.click_action,
-                    'action_id':this.message.action_id
+                    'action_id': this.message.action_id
                 });
                 this._notificationService.generateNotification(datamsg);
             }

@@ -217,8 +217,9 @@ export class TeamNextMatchesComponent implements OnInit {
     this.router.navigate(['/competition', comp_id, { "comp_name": comp_name, "season": season }]);
   }
 
+
   matchdetails(id) {
-    this.router.navigate([id], { relativeTo: this.route });
+    this.router.navigate(['/matches', id]);
   }
 
 

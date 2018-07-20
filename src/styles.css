@@ -77,7 +77,7 @@ p {
     float: left;
     margin-left: 0;
     margin-right: 0;
-    background-color: #223052;
+    background-color: #00d15f;
     /* background-image: url(assets/img/headerbg.png); */
     BACKGROUND-POSITION: LEFT;
     height: 50px;
@@ -149,8 +149,8 @@ a:focus {
 }
 
 body {
-    /* font-family: 'Open Sans', sans-serif; */
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Quicksand', sans-serif; */
 }
 
 h2 {
@@ -162,7 +162,8 @@ h2 {
 }
 
 h2 span {
-    font-family: 'Libre Baskerville', serif;
+    /* font-family: 'Libre Baskerville', serif; */
+    font-family: 'Open Sans', sans-serif;
     display: block;
     font-size: 45px;
     text-transform: none;
@@ -294,7 +295,7 @@ ul.nav.navbar-nav.navbar-right img {
     display: block;
     float: none;
     width: 100%;
-    background: #223052;
+    background: #00d15f;
     /* background-image: url(assets/img/footerbg.jpg); */
     color: #eeeeee;
 }
@@ -336,7 +337,7 @@ ul.nav.navbar-nav {
     border-color: unset;
     border: none;
     width: 100%;
-    background: #223052;
+    background: #00d15f;
     opacity: .85;
     margin-top: -2px;
 }
@@ -365,7 +366,7 @@ ul.nav.navbar-nav {
 
 button.navbar-toggle:hover .icon-bar,
 button.navbar-toggle:focus .icon-bar {
-    background: #223052;
+    background: #00d15f;
 }
 
 *,
@@ -417,7 +418,7 @@ section {
     border: 3px solid #fff;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #223052 transparent transparent transparent;
+    border-color: #00d15f transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -495,7 +496,7 @@ section {
 }
 
 .match-page-header {
-    background: #223052;
+    background: #00d15f;
     padding: 10px;
     color: #fff;
 }
@@ -531,7 +532,7 @@ section {
 
 .header {
     /* / color: #ffffff; / */
-    color: #223052;
+    color: #00d15f;
     /* / background: #425279; / */
     background: #eeeeee;
     line-height: 2.5;
@@ -640,7 +641,7 @@ i.fa.fa-circle {
 
 .team-detail-header {
     text-align: center;
-    background-color: #223052;
+    background-color: #00d15f;
     background-position: center;
     color: #FFF;
     padding: 20px 10px 18px;
@@ -769,7 +770,7 @@ i.fa.fa-circle {
 @media (max-width: 991px) and (min-width:768px) {
     .reponsive-menu {
         width: 100%;
-        background: #223052;
+        background: #00d15f;
         opacity: 0.85;
         margin-top: -2px;
     }
@@ -1136,6 +1137,7 @@ span.upertxt.dashed {
     text-align: center;
     display: block;
     margin: auto;
+    margin-bottom: 5px;
 }
 
 .agg_pen ul {
