@@ -48,7 +48,7 @@ export class MatchesDetailComponentComponent implements OnInit {
     status;
     live_matches: boolean;
 
-    flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+    flage_baseUrl = "/assets/img/TeamFlage/";
     player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
 
     season;

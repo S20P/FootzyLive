@@ -1,8 +1,8 @@
 ul.groups_list {
     list-style: none;
     margin-top: 10px;
-    border-bottom: 3px solid #425279;
-    border-top: 3px solid #425279;
+    border-bottom: 3px solid #c7c7c7;
+    border-top: 3px solid #c7c7c7;
     margin-bottom: 10px;
 }
 
@@ -16,7 +16,7 @@ ul.groups_list {
 
 .grouptable thead,
 .teamgroupname {
-    background: #425279;
+    background: #00d15f;
     color: #fff;
 }
 

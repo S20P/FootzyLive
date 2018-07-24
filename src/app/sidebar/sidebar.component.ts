@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
   currentdaydate;
   localmatches = [];
   localtimezone;
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
   constructor(private matchesApiService: MatchesApiService,
     private matchService: MatchService,
     private router: Router,

@@ -1,55 +1,24 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
-//declare var io: any;
-
 
 @Injectable()
 export class MatchesApiService {
-
-  private url_live = "https://api.footzyscore.com:8080";
-
-  //private url_live = "http://206.189.173.79:8080";
-
-  private socket;
+  socket: any;
+  SocketPath: any;
+  
 
   constructor() {
 
-    var connection = {
-      "force new connection": true,
-      "reconnectionAttempts": "Infinity",
-      "timeout": 10000,
-      "transports": ["websocket", "polling"],
-      "reconnect": true,
-      'pingInterval': 40000,
-      'pingTimeout': 25000,
-      'check_origin': false
-    };
+    this.SocketPath = 'https://api.footzyscore.com';
+    this.socket = '';
 
-
-    // this.socket = io.connect(this.url_live, connection, {
-    //   secure: true
-    // });
-
-    // this.socket = io.connect('ws://api.footzyscore.com', connection,
-    //   {
-    //     "transports": ['websocket', 'polling'],
-    //     "secure": true,
-    //     "reconnect": true
-    //   });
-
-    this.socket = io.connect('https://api.footzyscore.com', {
-      secure: true,
-      transports: ['xhr-polling']
+    this.socket = io.connect(this.SocketPath, {
+      secure: true
     });
-    console.log(this.socket);
-
-
 
     console.log("socket", this.socket);
-    this.socket.on("response", (data) => {
-      // console.log('TodoAdded: '+JSON.stringify(data));
-    });
+
   }
 
   public getMessages = () => {

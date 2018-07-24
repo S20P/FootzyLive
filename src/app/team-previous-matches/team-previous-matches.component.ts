@@ -23,7 +23,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
   team_flage;
 
   PreviousMatchesTeam = [];
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
 
   constructor(
     private route: ActivatedRoute,

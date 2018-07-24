@@ -22,7 +22,7 @@ export class TeamSquadComponent implements OnInit {
   team_id;
   team_name;
   team_flage;
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
   player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
 
 

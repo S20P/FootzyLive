@@ -23,7 +23,10 @@ export class CompetitionTeamsComponent implements OnInit {
   comp_id;
   competition_name;
   season;
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  // flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
+
+
 
   constructor(
     private route: ActivatedRoute,

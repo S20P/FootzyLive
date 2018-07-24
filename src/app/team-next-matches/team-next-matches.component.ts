@@ -24,7 +24,7 @@ export class TeamNextMatchesComponent implements OnInit {
   team_flage;
 
   NextMatchesTeam = [];
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
 
   constructor(
     private route: ActivatedRoute,

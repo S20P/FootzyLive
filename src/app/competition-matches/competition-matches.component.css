@@ -24,12 +24,12 @@
 #style_child::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
-    background-color: #425279;
+    background-color: #00d15f;
 }
 
 #style_child::-webkit-scrollbar {
     width: 10px;
-    background-color: #425279;
+    background-color: #00d15f;
 }
 
 #style_child::-webkit-scrollbar-thumb {
@@ -44,7 +44,7 @@
     display: flex;
     align-items: center;
     color: #fff;
-    background: #425279;
+    background: #00d15f;
     border-top: #223052 solid 1px;
     position: absolute;
     top: 0;

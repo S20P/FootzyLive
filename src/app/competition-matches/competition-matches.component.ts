@@ -30,7 +30,7 @@ export class CompetitionMatchesComponent implements OnInit {
   season;
   selectedposition;
   height;
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
 
   @Input()
   set SelectedSeason(message: number) {

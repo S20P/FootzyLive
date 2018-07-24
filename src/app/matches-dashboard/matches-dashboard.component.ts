@@ -49,7 +49,7 @@ export class MatchesDashboardComponent implements OnInit {
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
+  flage_baseUrl = "/assets/img/TeamFlage/";
 
   constructor(
     private matchesApiService: MatchesApiService,
@@ -116,6 +116,9 @@ export class MatchesDashboardComponent implements OnInit {
 
     this.GetAllCompetitionMatchesByMonth(param);
 
+
+
+    
   }
 
 
