@@ -18,7 +18,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment-timezone';
@@ -36,15 +35,15 @@ export class CompetitionComponent implements OnInit {
   public showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
-  localtimezone;
-  firstDay_Month;
-  lastDay_Month;
-  comp_id;
-  competition_name;
-  season;
-  position: number = 0;
+  public localtimezone: any;
+  public firstDay_Month: any;
+  public lastDay_Month: any;
+  public comp_id: any;
+  public competition_name: any;
+  public season: any;
+  public position: number = 0;
 
-  Competition_list = [];
+  public Competition_list = [];
 
 
   constructor(
@@ -63,8 +62,6 @@ export class CompetitionComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
       this.GetAllCompetitions_list();
-      // this.competition_name = params.get("comp_name");
-      // this.season = params.get("season");
     });
 
   }
@@ -72,6 +69,9 @@ export class CompetitionComponent implements OnInit {
   ngOnInit() {
     this.setTimer();
   }
+
+
+
 
   GetAllCompetitions_list() {
 

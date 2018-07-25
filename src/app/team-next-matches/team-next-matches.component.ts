@@ -18,13 +18,11 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
 })
 export class TeamNextMatchesComponent implements OnInit {
 
-
-  team_id;
-  team_name;
-  team_flage;
-
-  NextMatchesTeam = [];
-  flage_baseUrl = "/assets/img/TeamFlage/";
+  public NextMatchesTeam = [];
+  public team_id:any;
+  public team_name:any;
+  public team_flage:any;
+  public flage_baseUrl:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +33,7 @@ export class TeamNextMatchesComponent implements OnInit {
     private jsCustomeFun: JsCustomeFunScriptService
 
   ) {
-
+    this.flage_baseUrl ="/assets/img/TeamFlage/";
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = parseInt(params.get("id"));
       this.team_id = id;
@@ -85,14 +83,6 @@ export class TeamNextMatchesComponent implements OnInit {
 
           var flag__loal = self.flage_baseUrl + item.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + item.visitorteam_id + ".png";
-
-          var status;
-          if (item.status == "") {
-            status = match_time;
-          }
-          else {
-            status = item.status;
-          }
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
@@ -148,7 +138,7 @@ export class TeamNextMatchesComponent implements OnInit {
             "penalty_visitor": item.penalty_visitor,
             "penalty_localvist": penalty_localvist,
             "season": item.season,
-            "status": status,
+            "status": item.status,
             "time": match_time,
             "venue": item.venue,
             "venue_city": item.venue_city,

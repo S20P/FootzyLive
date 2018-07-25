@@ -2,28 +2,38 @@
     <div class="col-md-12">
         <div class="match-page-header">
             <p>Season {{season}}</p>
+            <div class="dropdown" *ngIf="Group_collection.length > 0">
+                <button class="btn  dropdown-toggle" id="dropdown_btn" type="button" data-toggle="dropdown">
+                                       <span *ngFor="let item of Group_collection;let i = index">
+                                        <span *ngIf="i==selectedpositionofGroup" class="option_title"> {{item.type}} </span>
+                                    </span>
+                                        <span class="caret"></span>
+                                    </button>
+
+                <ul class="dropdown-menu select_dropdown" id="style_scroll">
+                    <li (click)="onchangefillter_group(j)" [ngClass]="{'text_selected':j==selectedpositionofGroup}" *ngFor=" let item of Group_collection;let j=index">
+                        {{item.type}}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+
+
+
 <div class="row">
     <div class="col-md-12">
         <div *ngIf="Group_collection.length > 0;else nogroup">
-            <div class="groupp-list-navbar with-nav-tabs panel-default">
-                <!-- tabs menu  -->
+            <!-- tabs menu  -->
+            <div class="row">
+                <!-- group tab -->
+                <div class="col-sm-12 col-md-12 col-lg-12 remove_right_padding">
 
-                <ul class="nav nav-tabs groups_list">
-                    <li *ngFor="let item of Group_collection;let i=index" [ngClass]="{'active':i == 0}">
-                        <a href="#tab{{i}}default" data-toggle="tab">{{item.type}}</a>
-                    </li>
-                </ul>
-
-                <div class="row">
-                    <!-- group tab -->
-                    <div class="col-sm-12 col-md-12 col-lg-12 remove_right_padding">
-
-                        <div class="tab-content remove_right_padding">
-                            <!--******** DETAILS ************-->
-                            <div *ngFor="let item of Group_collection;let i=index" [ngClass]="{'active':i == 0}" class="tab-pane fade in active" id="tab{{i}}default">
+                    <div class="remove_right_padding">
+                        <!--******** DETAILS ************-->
+                        <div *ngFor="let item of Group_collection;let i=index">
+                            <div *ngIf="selectedpositionofGroup==i">
                                 <div id="group1">
                                     <div class="groupp-list-navbar">
                                         <h4 *ngIf="item.type!=='Group'" class="col-sm-12 teamgroupname">{{item.type}}</h4>
@@ -57,11 +67,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <!-- end group tab -->
+
                 </div>
+                <!-- end group tab -->
             </div>
+
         </div>
 
         <ng-template #nogroup>

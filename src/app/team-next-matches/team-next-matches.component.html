@@ -15,7 +15,7 @@
                                     <!-- Time & Status -->
                                     <div class="col-sm-2 col-xs-2 match_time">
                                         <!-- Live -->
-                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.';else offlineTime1">
+                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='';else offlineTime1">
                                             <div *ngIf="item_details.live_status;else offlineTime1">
                                                 <div *ngIf="item_details.status=='';else status1">
                                                     <p>{{item_details.time|date:'hh:mm a'}}</p>
@@ -26,6 +26,7 @@
                                                     </div>
                                                     <ng-template #second1>
                                                         <p>{{item_details.status}}'</p>
+                                                        {{"2018-07-20 10:00:00 pm"|date:'hh:mm a'}}
                                                     </ng-template>
                                                 </ng-template>
                                             </div>
@@ -33,9 +34,11 @@
                                         <!-- end live -->
 
                                         <!-- offline  -->
+
                                         <ng-template #offlineTime1>
                                             <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.';else time1">
                                                 <p>{{item_details.time|date:'hh:mm a'}}</p>
+
                                             </div>
                                             <ng-template #time1>
                                                 <p>{{item_details.status}}</p>
@@ -53,26 +56,24 @@
                                     <div class="col-sm-2 col-xs-2 match-team-group">
                                         <!-- Live -->
 
-                                        <div *ngIf="item_details.live_status;else offlineTeam1">
+                                        <div *ngIf="item_details.live_status && item_details.status!=='';else offlineTeam1">
 
                                             <div class="matchscore">
                                                 <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</span>
                                                 <span class="upertxt dashed">-</span>
                                                 <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</span>
                                             </div>
-
-
                                         </div>
                                         <!-- end live -->
 
                                         <!-- offline  -->
                                         <ng-template #offlineTeam1>
-                                            <div *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET' || item_details.status==='Postp.'; else noscore1">
+                                            <div *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET' || item_details.status==='Postp.' || item_details.status===''; else noscore1">
                                                 <div class="row">
                                                     <div class="col-xs-2 col-md-2 col-sm-3 match_time">
                                                         <p [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</p>
                                                     </div>
-                                                    <div class="col-xs-8 col-md-8 col-sm-6 removepadding">
+                                                    <div class="col-xs-8 col-md-4 col-sm-6 removepadding">
                                                         <h1 class="upertxt">-</h1>
                                                     </div>
                                                     <div class="col-xs-2 match_time  col-sm-3 col-md-2">
@@ -97,7 +98,7 @@
 
                                     <!--end Score & Group of Team -->
                                     <div class="col-sm-2 col-xs-1">
-                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.'">
+                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!==''">
                                             <div *ngIf="item_details.live_status">
                                                 <div class="live_badge">
                                                     <span class="status_offon">LIVE</span>
@@ -119,7 +120,7 @@
                                     <div class="col-md-5 col-sm-5 col-xs-5 match-team-group">
                                         <div class="numerType">
                                             <!-- Live -->
-                                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.';else offlineTime2">
+                                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='';else offlineTime2">
                                                 <div *ngIf="item_details.live_status;else offlineTime2">
                                                     <div *ngIf="item_details.status=='';else status2">
                                                         <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
@@ -171,7 +172,7 @@
                                         <!-- offline  -->
                                         <ng-template #offlineTeam2>
                                             <p>
-                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.'  && item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score"
+                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.'|| item_details.status==='' " [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score"
                                                     class="score">
                                                   {{item_details.localteam_score}}
                                                 </span>{{item_details.localteam_name}}
@@ -192,7 +193,7 @@
                                     </div>
 
                                     <div class="col-md-1 col-sm-1 col-xs-1 circle">
-                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.'">
+                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!==''">
                                             <div *ngIf="item_details.live_status" class="live_badge">
                                                 <span class="status_offon ">LIVE</span>
                                             </div>

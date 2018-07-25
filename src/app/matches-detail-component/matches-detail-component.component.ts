@@ -23,35 +23,29 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
 )
 export class MatchesDetailComponentComponent implements OnInit {
 
-    public id;
-    public comp_id;
-    match_detailcollection = [];
-    events_collection = [];
 
-    localteam_player_lineup = [];
-    visitorteam_player_lineup = [];
-    localteam_player_subs = [];
-    visitorteam_player_subs = [];
-    Commentary_collection = [];
-
-    ic_event_penalty_scored;
-    ic_event_own_goal;
-    ic_event_goal;
-
-    match_stats_collection = [];
-
+    public match_detailcollection = [];
+    public events_collection = [];
+    public localteam_player_lineup = [];
+    public visitorteam_player_lineup = [];
+    public localteam_player_subs = [];
+    public visitorteam_player_subs = [];
+    public Commentary_collection = [];
+    public match_stats_collection = [];
+    public id: any;
+    public comp_id: any;
+    public ic_event_penalty_scored: any;
+    public ic_event_own_goal: any;
+    public ic_event_goal: any;
+    public statsA_min: any;
+    public status: any;
+    public live_matches: boolean;
     public showloader: boolean = false;
     private subscription: Subscription;
     private timer: Observable<any>;
-
-    statsA_min;
-    status;
-    live_matches: boolean;
-
-    flage_baseUrl = "/assets/img/TeamFlage/";
-    player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
-
-    season;
+    public flage_baseUrl: any;
+    public player_baseUrl: any;
+    public season: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -61,7 +55,8 @@ export class MatchesDetailComponentComponent implements OnInit {
         private liveMatchesApiService: MatchesApiService,
         private jsCustomeFun: JsCustomeFunScriptService
     ) {
-
+        this.flage_baseUrl = "/assets/img/TeamFlage/";
+        this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
         this.ic_event_penalty_scored = false;
         this.ic_event_own_goal = false;
         this.ic_event_goal = false;
@@ -88,9 +83,9 @@ export class MatchesDetailComponentComponent implements OnInit {
     }
     public setTimer() {
         this.showloader = true;
-        this.timer = Observable.timer(2000); 
+        this.timer = Observable.timer(2000);
         this.subscription = this.timer.subscribe(() => {
-        this.showloader = false;
+            this.showloader = false;
         });
     }
 
@@ -512,13 +507,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                         console.log(":Matches tiem:", match_time);
                         let live_status = this.jsCustomeFun.CompareTimeDate(match_time);
 
-                        var status;
-                        if (result[k].status == "") {
-                            status = match_time;
-                        }
-                        else {
-                            status = result[k].status;
-                        }
+
 
                         this.season = result[k].season;
                         this.comp_id = result[k].comp_id;
@@ -537,7 +526,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 "penalty_local": result[k].penalty_local,
                                 "penalty_visitor": result[k].penalty_visitor,
                                 "season": result[k].season,
-                                "status": status,
+                                "status": result[k].status,
                                 "time": match_time,
                                 "timer": result[k].timer,
                                 "venue": result[k].venue,

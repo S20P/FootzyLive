@@ -1,11 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --theme-color: #00d15f;
+}
 
 
-/* @import 'styles/bootstrap/css/bootstrap.min.css'; */
+/* color: var(--theme-color); */
 
-@import "../node_modules/ng2-slim-loading-bar/style.css";
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    src: url("/assets/fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+}
+
 body {
     background: #eee;
+    font-family: 'Open Sans', sans-serif;
 }
 
 p {
@@ -77,7 +84,7 @@ p {
     float: left;
     margin-left: 0;
     margin-right: 0;
-    background-color: #00d15f;
+    background-color: var(--theme-color);
     /* background-image: url(assets/img/headerbg.png); */
     BACKGROUND-POSITION: LEFT;
     height: 50px;
@@ -122,7 +129,7 @@ p {
 
 nav.navbar.navbar-default.navbar-fixed-top {
     height: 70px;
-    box-shadow: 3px -4px 3px 7px #999;
+    box-shadow: 0px 2px 4px 0px #9999994d;
 }
 
 .top-header {
@@ -146,11 +153,6 @@ a:hover,
 a:focus {
     outline: none;
     text-decoration: none;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    /* font-family: 'Quicksand', sans-serif; */
 }
 
 h2 {
@@ -295,9 +297,9 @@ ul.nav.navbar-nav.navbar-right img {
     display: block;
     float: none;
     width: 100%;
-    background: #00d15f;
+    background: var(--theme-color);
     /* background-image: url(assets/img/footerbg.jpg); */
-    color: #eeeeee;
+    color: #ffffff;
 }
 
 .footer_logo {
@@ -310,7 +312,7 @@ ul.nav.navbar-nav.navbar-right img {
 }
 
 #footer a {
-    color: #eeeeee;
+    color: #ffffff;
 }
 
 .footer_menu ul li {
@@ -337,7 +339,7 @@ ul.nav.navbar-nav {
     border-color: unset;
     border: none;
     width: 100%;
-    background: #00d15f;
+    background: var(--theme-color);
     margin-top: -2px;
 }
 
@@ -365,7 +367,7 @@ ul.nav.navbar-nav {
 
 button.navbar-toggle:hover .icon-bar,
 button.navbar-toggle:focus .icon-bar {
-    background: #00d15f;
+    background: var(--theme-color);
 }
 
 *,
@@ -417,7 +419,7 @@ section {
     border: 3px solid #fff;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #00d15f transparent transparent transparent;
+    border-color: var(--theme-color) transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -444,8 +446,16 @@ section {
 .theme-hover:hover {
     /* background: linear-gradient(-225deg, rgb(93, 125, 187) 0%, rgb(122, 154, 216) 48%, rgb(195, 205, 224) 100%) */
     /* background-color: #3e7fff; */
-    background-color: #d8d8d8 !important;
+    /* background-color: #d8d8d8 !important;
+    cursor: pointer; */
+    background-color: var(--theme-color) !important;
     cursor: pointer;
+    color: #ffffff;
+    box-shadow: 0px 2px 4px 0px #00d15f2b;
+}
+
+.theme-hover:hover p.rigth_arrow {
+    color: #ffffff;
 }
 
 .c-pointer {
@@ -464,7 +474,7 @@ section {
 
 .matches_date p {
     margin: 0px;
-    color: #00d15f;
+    color: var(--theme-color);
     padding: 5px 15px;
     font-weight: bold;
     background: #d8d8d8 !important;
@@ -488,14 +498,20 @@ section {
 }
 
 .match-list {
-    border-bottom: 1px solid #eee;
-    padding: 15px 10px 5px 10px;
+    padding: 7px 0px 2px 0px;
+    /* border-bottom: 1px solid #eee; */
+    padding: 10px 10px 5px 19px;
     text-align: center;
     cursor: pointer;
+    /* border: 1px solid #e3e8e6; */
+}
+
+.match-list-card-body p {
+    font-size: 14px;
 }
 
 .match-page-header {
-    background: #00d15f;
+    background: var(--theme-color);
     padding: 10px;
     color: #fff;
 }
@@ -532,7 +548,7 @@ section {
 .header {
     /* / color: #ffffff; / */
     color: #000;
-    /* / background: #00d15f; / */
+    /* / background: var(--theme-color); / */
     background: #eeeeee;
     line-height: 2.5;
     /* / border-bottom: 1px solid #dcdcdc; / */
@@ -558,7 +574,7 @@ p.upertxt {
 }
 
 p.btm-txt {
-    color: #00d15f;
+    color: var(--theme-color);
     font-weight: 600;
     font-size: 14px;
 }
@@ -641,7 +657,7 @@ i.fa.fa-circle {
 .team-detail-header {
     background-image: url('/assets/img/score_bg2.jpg');
     text-align: center;
-    background-color: #00d15f;
+    background-color: var(--theme-color);
     background-position: center;
     color: #FFF;
     padding: 20px 10px 18px;
@@ -683,7 +699,7 @@ i.fa.fa-circle {
 .with-nav-tabs.panel-default .nav-tabs>li>a,
 .with-nav-tabs.panel-default .nav-tabs>li>a:hover,
 .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
-    color: #828282;
+    color: #484848;
     font-size: 16px;
 }
 
@@ -693,14 +709,14 @@ i.fa.fa-circle {
 .with-nav-tabs.panel-default .nav-tabs>li>a:hover,
 .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
     color: #ffffff;
-    background: #00d15f;
+    background: var(--theme-color);
 }
 
 .with-nav-tabs.panel-default .nav-tabs>li.active>a,
 .with-nav-tabs.panel-default .nav-tabs>li.active>a:hover,
 .with-nav-tabs.panel-default .nav-tabs>li.active>a:focus {
     color: #ffffff;
-    background: #00d15f;
+    background: var(--theme-color);
     border: none;
 }
 
@@ -873,7 +889,7 @@ ul.nav.nav-tabs {
 @media (max-width: 991px) and (min-width:768px) {
     .reponsive-menu {
         width: 100%;
-        background: #00d15f;
+        background: var(--theme-color);
         opacity: 0.85;
         margin-top: -2px;
     }
@@ -941,7 +957,7 @@ ul.nav.nav-tabs {
     }
     .top-header {
         padding: 0px;
-        background: #00d15f;
+        background: var(--theme-color);
     }
     .navbar-brand {
         padding: 0px;
@@ -983,7 +999,7 @@ ul.nav.nav-tabs {
     }
     .top-header {
         padding: 0px;
-        background: #00d15f;
+        background: var(--theme-color);
     }
     .matches_date {
         padding: 0px 10px 0px 10px;
@@ -1050,7 +1066,7 @@ ul.nav.nav-tabs {
         color: #ffffff !important;
         padding-left: 15px;
         border-bottom: 0px solid #ffffff !important;
-        background: #00d15f !important;
+        background: var(--theme-color) !important;
     }
     .with-nav-tabs.panel-default .nav-tabs>li.active>a,
     .with-nav-tabs.panel-default .nav-tabs>li.active>a:hover,
@@ -1058,7 +1074,7 @@ ul.nav.nav-tabs {
         color: #ffffff !important;
         padding-left: 15px;
         border-bottom: 0px solid #ffffff !important;
-        background: #00d15f !important;
+        background: var(--theme-color) !important;
     }
     .nav-tabs li {
         float: none;
@@ -1276,7 +1292,7 @@ span.upertxt.dashed {
     text-align: center;
     display: block;
     margin: auto;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
 }
 
 .agg_pen ul {
@@ -1293,7 +1309,7 @@ span.upertxt.dashed {
     position: relative;
     float: left;
     list-style: none;
-    color: #00d15f;
+    color: var(--theme-color);
     font-weight: 600;
     font-size: 12px;
     margin: 0px 5px;
@@ -1319,7 +1335,7 @@ span.upertxt.dashed {
 }
 
 .player_img img {
-    margin-bottom: 2px !important;
+    margin-bottom: 2px;
 }
 
 .more-link {
@@ -1356,4 +1372,78 @@ span.upertxt.dashed {
 .playerlist {
     border-bottom: 1px solid lightgrey;
     border-color: solid lightgrey;
+}
+
+
+/* Drop-Down css */
+
+#dropdown_btn {
+    font-size: 12px;
+    padding: 10px 20px;
+    background-color: var(--theme-color);
+}
+
+.select_dropdown {
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.select_dropdown li {
+    padding: 7px 10px;
+    color: #000;
+}
+
+.select_dropdown li:hover {
+    background: var(--theme-color);
+    color: #fff;
+}
+
+.btn .caret {
+    margin-left: 10px;
+    margin-top: -1px;
+}
+
+.dropdown .btn {
+    box-shadow: unset!important;
+    outline: 0;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    padding: 0;
+    top: 98%;
+    border: 0;
+}
+
+.text_selected {
+    background: #c7c7c7;
+    color: unset;
+}
+
+
+/* Fancy scrollbar css */
+
+#style_scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    background-color: var(--theme-color);
+}
+
+#style_scroll::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--theme-color);
+}
+
+#style_scroll::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #223052;
+}
+
+
+/* Fancy scrollbar css  end*/
+
+.list_item {
+    margin: 5px;
 }

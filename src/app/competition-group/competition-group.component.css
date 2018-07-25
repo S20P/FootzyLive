@@ -16,7 +16,7 @@ ul.groups_list {
 
 .grouptable thead,
 .teamgroupname {
-    background: #00d15f;
+    background: var(--theme-color);
     color: #fff;
 }
 
@@ -81,4 +81,48 @@ ul.groups_list {
     position: relative;
     display: block;
     padding: 10px 15px 11px;
+}
+
+
+/* Dropdown css */
+
+.option_title {
+    font-size: 14px;
+}
+
+.dropdown {
+    float: right;
+    top: -13px;
+    /* bottom: 37px; */
+    margin-top: -25px;
+}
+
+#dropdown_btn {
+    padding: 10px;
+}
+
+@media (max-width: 580px) {
+    .dropdown {
+        float: left!important;
+        top: 18px!important;
+        margin: 0px;
+        left: -15px!important;
+        margin-bottom: 23px;
+    }
+    #dropdown_btn {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 669px) {
+    #dropdown_btn {
+        padding: 10px;
+    }
+    .dropdown-menu {
+        min-width: 121px !important;
+    }
+}
+
+.dropdown-menu {
+    min-width: 141px;
 }

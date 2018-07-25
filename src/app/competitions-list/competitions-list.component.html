@@ -18,35 +18,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-8 col-lg-8 remove_right_padding">
-                <div class="card list_item">
-                    <div class="match-list-card-body collapse in" id="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
-                        <div *ngFor="let item of Competition_list|orderBy:'name';let t = index">
-                            <div *ngIf="Competition_list.length > 0">
-                                <div (click)="CompetitionDetails(item.id)">
-                                    <div class="row match-list theme-hover">
-                                        <div class="list-line">
-                                            <div class="col-md-10 col-sm-10 col-xs-10">
-                                                <div class="team_flag">
-                                                    <div class="name">
-                                                        <p>
-                                                            <img [src]="Competition_flag" />
-                                                            <span>{{item.name}}</span>
+            <div class="col-sm-12 col-md-8 col-lg-8 remove_right_padding lr-padd">
+
+                <div class="collapse in  no-padding" id="collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                    <div class="col-md-6 no-padding" *ngFor="let item of Competition_list|orderBy:'name';let t = index">
+                        <div *ngIf="Competition_list.length > 0">
+                            <div class="card list_item">
+                                <div class="match-list-card-body">
+                                    <div (click)="CompetitionDetails(item.id)">
+                                        <div class="row match-list theme-hover">
+                                            <div class="list-line">
+                                                <div class="col-md-10 col-sm-10 col-xs-10">
+                                                    <div class="team_flag">
+                                                        <div class="name">
+                                                            <p>
+                                                                <img [src]="Competition_flag" />
+                                                                <span>{{item.name}}</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-2">
+                                                    <div class="team_arrow theme-hover">
+                                                        <p class="rigth_arrow"> <i class="fa fa-chevron-right " aria-hidden="true"></i>
                                                         </p>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                                <div class="team_arrow theme-hover">
-                                                    <p class="rigth_arrow"> <i class="fa fa-chevron-right " aria-hidden="true"></i>
-                                                    </p>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
                         </div>
                         <div *ngIf="Competition_list.length <= 0">

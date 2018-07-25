@@ -5,7 +5,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
@@ -20,8 +19,8 @@ import { MatchesApiService } from '../service/live_match/matches-api.service';
 })
 export class CompetitionsListComponent implements OnInit {
 
-  Competition_list = [];
-  Competition_flag;
+  public Competition_list = [];
+  public Competition_flag:any;
 
   public showloader: boolean = false;
   private subscription: Subscription;

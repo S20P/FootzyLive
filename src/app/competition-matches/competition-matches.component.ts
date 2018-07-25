@@ -5,7 +5,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
@@ -22,16 +21,13 @@ export class CompetitionMatchesComponent implements OnInit {
 
   match_ground_details = [];
 
-  list_matches = [];
-  League_name;
-
-  comp_id;
-  competition_name;
-  season;
-  selectedposition;
-  height;
-  flage_baseUrl = "/assets/img/TeamFlage/";
-
+  public list_matches = [];
+  public comp_id:any;
+  public competition_name:any;
+  public season:any;
+  public selectedposition:any;
+  public flage_baseUrl:any;
+ 
   @Input()
   set SelectedSeason(message: number) {
     this.filterData(message);
@@ -47,6 +43,7 @@ export class CompetitionMatchesComponent implements OnInit {
 
   ) {
 
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
@@ -99,8 +96,7 @@ export class CompetitionMatchesComponent implements OnInit {
       if (result !== undefined) {
 
         var array = result.reduce((r, { week, formatted_date }, index, arr) => {
-          // console.log("id", index);
-          // console.log("value", arr[index]);
+      
           var data = arr[index];
           var last = r[r.length - 1];
 
@@ -112,14 +108,7 @@ export class CompetitionMatchesComponent implements OnInit {
 
           var flag__loal = self.flage_baseUrl + data.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + data.visitorteam_id + ".png";
-
-          var status;
-          if (data.status == "") {
-            status = match_time;
-          }
-          else {
-            status = data.status;
-          }
+      
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
           var date11 = new Date(selected1 + " " + data.time);
@@ -178,7 +167,7 @@ export class CompetitionMatchesComponent implements OnInit {
             "penalty_visitor": data.penalty_visitor,
             "penalty_localvist": penalty_localvist,
             "season": data.season,
-            "status": status,
+            "status": data.status,
             "time": match_time,
             "venue": data.venue,
             "venue_city": data.venue_city,
@@ -235,11 +224,12 @@ export class CompetitionMatchesComponent implements OnInit {
 
             var pos = p - 1;
             this.selectedposition = pos;
-
             console.log("pos", pos);
+       
           }
           else {
             this.selectedposition = 0;
+            
           }
         }
 
@@ -253,6 +243,8 @@ export class CompetitionMatchesComponent implements OnInit {
 
 
   }
+
+ 
 
   GetMatchesByCompetition_ById_live() {
 

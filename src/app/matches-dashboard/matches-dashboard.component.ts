@@ -18,7 +18,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment-timezone';
@@ -34,22 +33,22 @@ import { concat } from 'rxjs/operators';
 })
 
 export class MatchesDashboardComponent implements OnInit {
-  paramDate: any;
-  message: string;
-  messages = [];
-  alldaymatch_list = [];
+  public paramDate: any;
+  public message: string;
+  public messages = [];
+  public alldaymatch_list = [];
 
-  timezone;
-  todays_Matches_title;
-  localtimezone;
-  firstDay_Month;
-  lastDay_Month;
+  public timezone: any;
+  public todays_Matches_title: any;
+  public localtimezone: any;
+  public firstDay_Month: any;
+  public lastDay_Month: any;
   public match_ground_details = [];
   public showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
 
-  flage_baseUrl = "/assets/img/TeamFlage/";
+  public flage_baseUrl: any;
 
   constructor(
     private matchesApiService: MatchesApiService,
@@ -61,7 +60,7 @@ export class MatchesDashboardComponent implements OnInit {
     private jsCustomeFun: JsCustomeFunScriptService
 
   ) {
-
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
     this.localtimezone = this.jsCustomeFun.LocalTimeZone();
     this.firstDay_Month = this.jsCustomeFun.firstDay_Month();
     this.lastDay_Month = this.jsCustomeFun.lastDay_Month();
@@ -118,7 +117,7 @@ export class MatchesDashboardComponent implements OnInit {
 
 
 
-    
+
   }
 
 
@@ -263,14 +262,6 @@ export class MatchesDashboardComponent implements OnInit {
           var flag__loal = self.flage_baseUrl + item.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + item.visitorteam_id + ".png";
 
-          var status;
-          if (item.status == "") {
-            status = match_time;
-          }
-          else {
-            status = item.status;
-          }
-
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
 
@@ -324,7 +315,7 @@ export class MatchesDashboardComponent implements OnInit {
             "penalty_visitor": item.penalty_visitor,
             "penalty_localvist": penalty_localvist,
             "season": item.season,
-            "status": status,
+            "status": item.status,
             "time": match_time,
             "venue": item.venue,
             "venue_city": item.venue_city,

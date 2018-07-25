@@ -5,7 +5,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
@@ -19,13 +18,12 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
   styleUrls: ['./competition-group.component.css']
 })
 export class CompetitionGroupComponent implements OnInit {
-  position: number;
-  Group_collection = [];
-  comp_id;
-  competition_name;
-  season;
-
-
+  public position: number;
+  public Group_collection = [];
+  public comp_id: any;
+  public competition_name: any;
+  public season: any;
+  public selectedpositionofGroup:any;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +32,7 @@ export class CompetitionGroupComponent implements OnInit {
     private orderPipe: OrderPipe,
     private jsCustomeFun: JsCustomeFunScriptService
   ) {
+    this.selectedpositionofGroup = 0;
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
     });
@@ -48,7 +47,7 @@ export class CompetitionGroupComponent implements OnInit {
   ngOnInit() {
 
   }
- 
+
 
   filterData(i) {
     console.log("position is", i);
@@ -124,5 +123,12 @@ export class CompetitionGroupComponent implements OnInit {
   teamdetails(team_id, team_name) {
     this.router.navigate(['/team', team_id, { "team_name": team_name }]);
   }
+
+
+  onchangefillter_group(pos) {
+    console.log("filter is change", pos);
+    this.selectedpositionofGroup = pos;
+  }
+
 
 }

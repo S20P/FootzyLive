@@ -18,7 +18,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { DatePipe } from '@angular/common';
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
@@ -32,11 +31,11 @@ import * as moment from 'moment';
 })
 export class SidebarComponent implements OnInit {
 
-  match_ground_details = [];
-  currentdaydate;
-  localmatches = [];
-  localtimezone;
-  flage_baseUrl = "/assets/img/TeamFlage/";
+  public match_ground_details = [];
+  public currentdaydate: any;
+  public localmatches = [];
+  public localtimezone: any;
+  public flage_baseUrl: any;
   constructor(private matchesApiService: MatchesApiService,
     private matchService: MatchService,
     private router: Router,
@@ -46,40 +45,26 @@ export class SidebarComponent implements OnInit {
     private jsCustomeFun: JsCustomeFunScriptService
 
   ) {
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
     this.localtimezone = this.jsCustomeFun.LocalTimeZone();
   }
 
   ngOnInit() {
-    this.localmatches = [];
 
     this.match_ground_details = [];
     var dateofday = Date();
-    this.GetLocaltypeMatches();
 
     var currentdaydate = this.jsCustomeFun.ChangeDateFormat(dateofday);
     this.liveMatchesApiService.liveMatches().subscribe(data => {
-      console.log("Live-Matches-data", data);
-      console.log("live data1", data['data']['events']);
-      var result = data['data'];
-      var events = result.events;
-      console.log("live events", events);
       this.GetMatchesByCompetition_ById_live();
     });
 
     console.log("today side bar", currentdaydate);
-
     this.GetMatchesByDate(currentdaydate);
     this.currentdaydate = currentdaydate;
   }
 
-  GetLocaltypeMatches() {
-    this.localmatches = [];
-    this.matchService.GetStaticMatches().subscribe(res => {
-      for (let i = 0; i < res['length']; i++) {
-        this.localmatches.push(res[i]);
-      }
-    });
-  }
+
 
 
   GetMatchesByCompetition_ById_live() {
@@ -241,9 +226,8 @@ export class SidebarComponent implements OnInit {
     })
 
 
-    //result = [];
     console.log("filter-date_data", this.match_ground_details);
-    //this.match_ground_details = [];
+
   }
 
 

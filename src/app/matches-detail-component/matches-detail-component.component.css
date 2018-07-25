@@ -64,7 +64,7 @@
 .event h4,
 .status h4 {
     color: #ffffff;
-    background: #00d15f;
+    background: var(--theme-color);
     line-height: 2.5;
     border-bottom: 1px solid #dcdcdc;
     text-transform: uppercase;
@@ -125,7 +125,7 @@
 /* commentry */
 
 .Commentary-box .header {
-    background: #00d15f;
+    background: var(--theme-color);
 }
 
 .Commentary-box .card {
@@ -160,7 +160,7 @@
 .commentary-time {
     border-right: 1px solid #ccc;
     font-weight: bold;
-    color: #00d15f;
+    color: var(--theme-color);
     font-size: 20px;
     margin-bottom: 5px;
 }
@@ -200,7 +200,7 @@ p.border-btm {
 /* lineup css */
 
 .lineupititle {
-    background: #00d15f;
+    background: var(--theme-color);
     color: #fff;
 }
 
@@ -363,7 +363,7 @@ img.lineup_title_img {
 }
 
 .lt-progress {
-    background-color: #00d15f!important;
+    background-color: var(--theme-color)!important;
     float: right;
 }
 
@@ -472,7 +472,7 @@ img.lineup_title_img {
     top: 25px;
     left: 50%;
     margin-left: -5px;
-    background-color: #00d15f;
+    background-color: var(--theme-color);
     z-index: 100;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
@@ -593,6 +593,6 @@ img.lineup_title_img {
     .player_name {
         overflow-wrap: break-word;
         word-wrap: break-word;
-        width: 45px;
+        width: 80px;
     }
 }

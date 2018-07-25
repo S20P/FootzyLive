@@ -40,16 +40,25 @@
                                 </li>
                             </ul>
                             <div class="col-md-3 col-sm-3 col-xs-3 dropselct-auto-bg">
-                                <div class="overflow_perant-select" id="style_perant-2">
-                                    <div class="select_perant" id="style_perant" tabindex="1">
-                                        <div *ngFor="let item of Competition_list;let i = index">
-                                            <div *ngFor="let item_details of item.availableSeason;let j = index">
-                                                <input (click)="onchangefillter(j)" value="j" class="selectopt_perant" name="defaultValueSelectd{{j}}" type="radio" id="opt_perant{{j}}" [checked]="j==position">
-                                                <label for="opt_perant{{j}}" class="option_perant"> {{item_details}}</label>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                <div class="dropdown" *ngIf="Competition_list.length > 0">
+                                    <button class="btn  dropdown-toggle" id="dropdown_btn" type="button" data-toggle="dropdown">
+                                           <span *ngFor="let item of Competition_list;let i = index">
+                                               <span *ngFor="let item_details of item.availableSeason;let j = index"> 
+                                            <span *ngIf="j==position" class="option_title"> {{item_details}} </span>
+                                        </span>
+                                        </span>
+                                            <span class="caret"></span>
+                                        </button>
+
+                                    <ul class="dropdown-menu select_dropdown" id="style_scroll" *ngFor="let item_main of Competition_list;let i = index">
+                                        <li (click)="onchangefillter(x)" [ngClass]="{'text_selected':x==position}" *ngFor="let item_title of item_main.availableSeason;let x=index">
+                                            {{item_title}}
+                                        </li>
+                                    </ul>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -101,7 +110,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>

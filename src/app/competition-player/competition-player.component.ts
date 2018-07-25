@@ -5,7 +5,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
@@ -19,11 +18,11 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
 })
 export class CompetitionPlayerComponent implements OnInit {
 
-  player_collection = [];
-  comp_id;
-  competition_name;
-  season;
-  player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+  public player_collection = [];
+  public comp_id: any;
+  public competition_name: any;
+  public season: any;
+  public player_baseUrl: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,7 +30,7 @@ export class CompetitionPlayerComponent implements OnInit {
     private orderPipe: OrderPipe,
     private jsCustomeFun: JsCustomeFunScriptService
   ) {
-
+    this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
     });
@@ -42,6 +41,7 @@ export class CompetitionPlayerComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
   filterData(i) {
     console.log("position is", i);

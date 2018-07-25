@@ -5,7 +5,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
@@ -18,13 +17,13 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
   styleUrls: ['./competition-teams.component.css']
 })
 export class CompetitionTeamsComponent implements OnInit {
-  teams_collection = [];
+  public teams_collection = [];
 
-  comp_id;
-  competition_name;
-  season;
-  // flage_baseUrl = "https://s3.amazonaws.com/starapps/footzy/team/";
-  flage_baseUrl = "/assets/img/TeamFlage/";
+  public comp_id: any;
+  public competition_name: any;
+  public season: any;
+
+  public flage_baseUrl: any;
 
 
 
@@ -35,7 +34,7 @@ export class CompetitionTeamsComponent implements OnInit {
     private orderPipe: OrderPipe,
     private jsCustomeFun: JsCustomeFunScriptService
   ) {
-
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
     });
@@ -48,6 +47,7 @@ export class CompetitionTeamsComponent implements OnInit {
   ngOnInit() {
 
   }
+
   filterData(i) {
     console.log("position is", i);
     this.matchService.GetAllLeague().subscribe(data => {

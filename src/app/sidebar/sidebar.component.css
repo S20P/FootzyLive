@@ -24,12 +24,12 @@
 
 .header {
     padding: 1px 15px;
-    background: #00d15f!important;
+    background: var(--theme-color)!important;
     color: #ffffff!important;
 }
 
 .header p {
-    background: #00d15f!important;
+    background: var(--theme-color)!important;
     margin: 0px;
     color: #ffffff;
     padding: 2px 15px;

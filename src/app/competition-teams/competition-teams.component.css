@@ -12,7 +12,7 @@
 }
 
 .grouptable thead {
-    background: #00d15f;
+    background: var(--theme-color);
     color: #fff;
 }
 

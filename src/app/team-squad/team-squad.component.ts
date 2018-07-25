@@ -4,9 +4,7 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
-
 import { DatePipe } from '@angular/common';
 import { MatchesApiService } from '../service/live_match/matches-api.service';
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
@@ -17,16 +15,12 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
   styleUrls: ['./team-squad.component.css']
 })
 export class TeamSquadComponent implements OnInit {
-
-
-  team_id;
-  team_name;
-  team_flage;
-  flage_baseUrl = "/assets/img/TeamFlage/";
-  player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
-
-
-  SquadTeam = [];
+  public SquadTeam = [];
+  public team_id: any;
+  public team_name: any;
+  public team_flage: any;
+  public flage_baseUrl: any;
+  public player_baseUrl: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +31,8 @@ export class TeamSquadComponent implements OnInit {
     private jsCustomeFun: JsCustomeFunScriptService
 
   ) {
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
+    this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = parseInt(params.get("id"));
@@ -49,16 +45,14 @@ export class TeamSquadComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.team_flage = this.flage_baseUrl + this.team_id + ".png";
     this.SquadTeam = [];
     this.GetSquad();
-
   }
 
   GetSquad() {
     this.SquadTeam = [];
-var self = this;
+    var self = this;
     this.matchService.GetSquadByTeamId(this.team_id).subscribe(data => {
       console.log("Squad res", data);
       var TeamSquad = data['data'];
@@ -111,7 +105,7 @@ var self = this;
   }
 
   Playerdetails(player_id) {
-    this.router.navigate(['/player', player_id, { "comp_id":"", "season": "" }]);
+    this.router.navigate(['/player', player_id, { "comp_id": "", "season": "" }]);
   }
 
 

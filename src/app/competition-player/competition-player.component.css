@@ -7,7 +7,7 @@
 }
 
 .grouptable thead {
-    background: #00d15f;
+    background: var(--theme-color);
     color: #fff;
 }
 
@@ -90,4 +90,8 @@ td.first {
     .player_img img {
         width: 25px;
     }
+}
+
+.player_img img {
+    margin-bottom: 0px !important;
 }

@@ -13,7 +13,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-5 match-team-group">
                         <div class="numerType">
                             <!-- Live -->
-                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET';else offlineTime2">
+                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='';else offlineTime2">
                                 <div *ngIf="item_details.live_status;else offlineTime2">
                                     <div *ngIf="item_details.status=='';else status2">
                                         <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="col-md-1 col-sm-1 col-xs-1 circle">
-                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET'">
+                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET'&& item_details.status!==''">
                             <div *ngIf="item_details.live_status" class="live_badge">
                                 <span class="status_offon ">LIVE</span>
                             </div>

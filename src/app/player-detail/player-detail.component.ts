@@ -4,7 +4,6 @@ import { MatchService } from '../service/match.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
-declare var jQuery: any;
 declare var $: any;
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
 
@@ -14,24 +13,25 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
   styleUrls: ['./player-detail.component.css']
 })
 export class PlayerDetailComponent implements OnInit {
-
+  public player_collection = [];
   public showloader: boolean = false;
   private subscription: Subscription;
   private timer: Observable<any>;
-  player_id;
-  player_collection = [];
-  player_status: boolean;
-  comp_id;
-  season;
-  player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/"; 
-  
+  public player_id: any;
+  public player_status: boolean;
+  public comp_id: any;
+  public season: any;
+  public player_baseUrl: any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private matchService: MatchService,
     private jsCustomeFun: JsCustomeFunScriptService
 
-  ) { }
+  ) {
+    this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+  }
 
   ngOnInit() {
     this.setTimer();
@@ -50,7 +50,7 @@ export class PlayerDetailComponent implements OnInit {
   PlayerDetails() {
     this.player_collection = [];
     let player_id = this.player_id;
-    this.matchService.GetPlayerById(player_id,this.comp_id,this.season).subscribe(data => {
+    this.matchService.GetPlayerById(player_id, this.comp_id, this.season).subscribe(data => {
       console.log("Player_Details", data);
 
       var result = data['data'];
@@ -61,7 +61,7 @@ export class PlayerDetailComponent implements OnInit {
         for (let player of result) {
 
           var TeamPlayer_url = this.player_baseUrl + player['id'] + ".jpg";
-         
+
 
           this.player_collection.push({
             "id": player['id'],
