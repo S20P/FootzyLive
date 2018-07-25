@@ -50,7 +50,7 @@
 
                                     <!-- Score & Group of Team -->
                                     <div class="col-sm-3 col-xs-4 flag-lwidth">
-                                        <p>{{item_details.localteam_name}}</p>
+                                        <p [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score && item_details.localteam_score!==''">{{item_details.localteam_name}}</p>
                                     </div>
 
                                     <div class="col-sm-2 col-xs-2 match-team-group">
@@ -71,13 +71,13 @@
                                             <div *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET' || item_details.status==='Postp.' || item_details.status===''; else noscore1">
                                                 <div class="row">
                                                     <div class="col-xs-2 col-md-2 col-sm-3 match_time">
-                                                        <p [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</p>
+                                                        <p [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score && item_details.localteam_score!==''">{{item_details.localteam_score}}</p>
                                                     </div>
                                                     <div class="col-xs-8 col-md-4 col-sm-6 removepadding">
                                                         <h1 class="upertxt">-</h1>
                                                     </div>
                                                     <div class="col-xs-2 match_time  col-sm-3 col-md-2">
-                                                        <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</p>
+                                                        <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">{{item_details.visitorteam_score}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,45 +93,45 @@
                                     <!--end Score & Group of Team -->
 
                                     <div class="col-sm-3 col-xs-3 flag-rwidth">
-                                        <p>{{item_details.visitorteam_name}}</p>
+                                        <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">{{item_details.visitorteam_name}}</p>
                                     </div>
 
                                     <!--end Score & Group of Team -->
-                                    <div class="col-sm-2 col-xs-1">
-                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!==''">
-                                            <div *ngIf="item_details.live_status">
-                                                <div class="live_badge">
-                                                    <span class="status_offon">LIVE</span>
+                                    <div class=" col-sm-2 col-xs-1 ">
+                                        <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='' ">
+                                            <div *ngIf="item_details.live_status ">
+                                                <div class="live_badge ">
+                                                    <span class="status_offon ">LIVE</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="item_details.lats_score_local !==undefined && item_details.lats_score_vist || item_details.penalty_localvist" class="col-xs-12 agg_pen">
+                                    <div *ngIf="item_details.lats_score_local !==undefined && item_details.lats_score_vist || item_details.penalty_localvist " class="col-xs-12 agg_pen ">
                                         <ul>
-                                            <li *ngIf="item_details.lats_score_local !==undefined && item_details.lats_score_vist">(AGG {{item_details.lats_score_local}}-{{item_details.lats_score_vist}})</li>
-                                            <li *ngIf="item_details.penalty_localvist">(PEN {{item_details.penalty_local}}-{{item_details.penalty_visitor}})</li>
+                                            <li *ngIf="item_details.lats_score_local !==undefined && item_details.lats_score_vist ">(AGG {{item_details.lats_score_local}}-{{item_details.lats_score_vist}})</li>
+                                            <li *ngIf="item_details.penalty_localvist ">(PEN {{item_details.penalty_local}}-{{item_details.penalty_visitor}})</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <!-- hide Responshive end-->
 
                                 <!-- Show Responshive -->
-                                <div class="hide-responsive-list r-dashbord-team">
-                                    <div class="col-md-5 col-sm-5 col-xs-5 match-team-group">
-                                        <div class="numerType">
+                                <div class="hide-responsive-list r-dashbord-team ">
+                                    <div class="col-md-5 col-sm-5 col-xs-5 match-team-group ">
+                                        <div class="numerType ">
                                             <!-- Live -->
-                                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='';else offlineTime2">
-                                                <div *ngIf="item_details.live_status;else offlineTime2">
-                                                    <div *ngIf="item_details.status=='';else status2">
-                                                        <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
+                                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='' ;else offlineTime2 ">
+                                                <div *ngIf="item_details.live_status;else offlineTime2 ">
+                                                    <div *ngIf="item_details.status=='' ;else status2 ">
+                                                        <p class="match_time ">{{item_details.time|date:'hh:mm a'}}</p>
                                                     </div>
                                                     <ng-template #status2>
-                                                        <div *ngIf="item_details.status=='HT';else second2 || item_details.status=='FT';else second2">
-                                                            <p class="match_time">{{item_details.status}}</p>
+                                                        <div *ngIf="item_details.status=='HT' ;else second2 || item_details.status=='FT' ;else second2 ">
+                                                            <p class="match_time ">{{item_details.status}}</p>
                                                         </div>
 
                                                         <ng-template #second2>
-                                                            <p class="match_time">{{item_details.status}}'</p>
+                                                            <p class="match_time ">{{item_details.status}}'</p>
                                                         </ng-template>
                                                     </ng-template>
                                                 </div>
@@ -140,11 +140,11 @@
 
                                             <!-- offline -->
                                             <ng-template #offlineTime2>
-                                                <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.';else time2">
-                                                    <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
+                                                <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' ;else time2 ">
+                                                    <p class="match_time ">{{item_details.time|date:'hh:mm a'}}</p>
                                                 </div>
                                                 <ng-template #time2>
-                                                    <p class="match_time">{{item_details.status}}</p>
+                                                    <p class="match_time ">{{item_details.status}}</p>
                                                 </ng-template>
 
                                             </ng-template>
@@ -153,16 +153,15 @@
                                     </div>
 
 
-                                    <div class="col-md-6 col-sm-6 col-xs-6 r-flag-team">
+                                    <div class="col-md-6 col-sm-6 col-xs-6 r-flag-team ">
                                         <!-- Live -->
-                                        <div *ngIf="item_details.live_status;else offlineTeam2">
-                                            <p>
-                                                <span *ngIf="item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score" class="score">
-                                                            {{item_details.localteam_score}}
-                                                    </span> {{item_details.localteam_name}}
+                                        <div *ngIf="item_details.live_status;else offlineTeam2 ">
+                                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                                <span *ngIf="item_details.localteam_score !=='' " class="score"> {{item_details.localteam_score}}
+                                                </span> {{item_details.localteam_name}}
                                             </p>
-                                            <p>
-                                                <span *ngIf="item_details.visitorteam_score !==''" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score" class="score">
+                                            <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
+                                                <span *ngIf="item_details.visitorteam_score !==''" class="score">
                                                                     {{item_details.visitorteam_score}} 
                                                               </span>{{item_details.visitorteam_name}}
                                             </p>
@@ -171,14 +170,13 @@
 
                                         <!-- offline  -->
                                         <ng-template #offlineTeam2>
-                                            <p>
-                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.'|| item_details.status==='' " [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score"
-                                                    class="score">
+                                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.' && item_details.localteam_score!=='' " class="score">
                                                   {{item_details.localteam_score}}
                                                 </span>{{item_details.localteam_name}}
                                             </p>
-                                            <p> <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !=='' " [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score"
-                                                    class="score">
+                                            <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
+                                                <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !=='' " class="score">
                                                       {{item_details.visitorteam_score}} 
                                                   </span>{{item_details.visitorteam_name}}
                                             </p>
@@ -202,6 +200,7 @@
 
                                 </div>
                                 <!-- Show Responshive end-->
+
 
 
                             </div>

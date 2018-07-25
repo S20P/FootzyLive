@@ -85,7 +85,9 @@ export class CompetitionMatchesComponent implements OnInit {
   }
 
   GetAllCompetitions(com) {
+    console.log("com",com);
     var season = com.season;
+
     var list = [];
     this.match_ground_details = [];
     this.list_matches = [];
@@ -120,6 +122,12 @@ export class CompetitionMatchesComponent implements OnInit {
           } else {
             week = week;
           }
+          if (week == "") {
+            week = "Week all";
+          } else {
+            week = week;
+          }
+
 
 
           // AGG (0-0)--------------------------------------------

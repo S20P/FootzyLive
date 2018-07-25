@@ -13,13 +13,13 @@
                     <div class="col-md-5 col-sm-5 col-xs-5 match-team-group">
                         <div class="numerType">
                             <!-- Live -->
-                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='';else offlineTime2">
+                            <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='' ;else offlineTime2">
                                 <div *ngIf="item_details.live_status;else offlineTime2">
-                                    <div *ngIf="item_details.status=='';else status2">
+                                    <div *ngIf="item_details.status=='' ;else status2">
                                         <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
                                     </div>
                                     <ng-template #status2>
-                                        <div *ngIf="item_details.status=='HT';else second2 || item_details.status=='FT';else second2">
+                                        <div *ngIf="item_details.status=='HT' ;else second2 || item_details.status=='FT' ;else second2">
                                             <p class="match_time">{{item_details.status}}</p>
                                         </div>
 
@@ -33,7 +33,7 @@
 
                             <!-- offline -->
                             <ng-template #offlineTime2>
-                                <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET';else time2">
+                                <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' ;else time2">
                                     <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
                                 </div>
                                 <ng-template #time2>
@@ -49,30 +49,29 @@
                     <div class="col-md-6 col-sm-6 col-xs-6 r-flag-team">
                         <!-- Live -->
                         <div *ngIf="item_details.live_status;else offlineTeam2">
-                            <p>
-                                <span *ngIf="item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score" class="score">
-                                        {{item_details.localteam_score}}
-                                </span> {{item_details.localteam_name}}
+                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                <span *ngIf="item_details.localteam_score !==''" class="score"> {{item_details.localteam_score}}
+                                    </span> {{item_details.localteam_name}}
                             </p>
-                            <p>
-                                <span *ngIf="item_details.visitorteam_score !==''" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score" class="score">
-                                                {{item_details.visitorteam_score}} 
-                                          </span>{{item_details.visitorteam_name}}
+                            <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
+                                <span *ngIf="item_details.visitorteam_score !==''" class="score">
+                                                        {{item_details.visitorteam_score}} 
+                                                  </span>{{item_details.visitorteam_name}}
                             </p>
                         </div>
                         <!--end Live -->
 
                         <!-- offline  -->
                         <ng-template #offlineTeam2>
-                            <p>
-                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status!=='AET'  && item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score" class="score">
-                              {{item_details.localteam_score}}
-                            </span>{{item_details.localteam_name}}
+                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.' && item_details.localteam_score!==''" class="score">
+                                      {{item_details.localteam_score}}
+                                    </span>{{item_details.localteam_name}}
                             </p>
-                            <p> <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  && item_details.visitorteam_score !=='' " [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score"
-                                    class="score">
-                                  {{item_details.visitorteam_score}} 
-                              </span>{{item_details.visitorteam_name}}
+                            <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
+                                <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !==''" class="score">
+                                          {{item_details.visitorteam_score}} 
+                                      </span>{{item_details.visitorteam_name}}
                             </p>
                         </ng-template>
                         <!--end offline  -->
@@ -87,7 +86,7 @@
                     <div class="col-md-1 col-sm-1 col-xs-1 circle">
                         <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET'&& item_details.status!==''">
                             <div *ngIf="item_details.live_status" class="live_badge">
-                                <span class="status_offon ">LIVE</span>
+                                <span class="status_offon">LIVE</span>
                             </div>
                         </div>
                     </div>

@@ -295,6 +295,20 @@ export class MatchesDashboardComponent implements OnInit {
           }
           //end PEN (0-0)--------------------------------------------
 
+          var visitorteam_score;
+          var localteam_score;
+          if (item.visitorteam_score == '?') {
+            visitorteam_score = "";
+          } else {
+            visitorteam_score = item.visitorteam_score
+          }
+
+          if (item.localteam_score == '?') {
+            localteam_score = "";
+          } else {
+            localteam_score = item.localteam_score
+          }
+
           var competitions = item.competitions;
 
           if (!groups[competitions.id]) {
@@ -309,7 +323,7 @@ export class MatchesDashboardComponent implements OnInit {
             "ht_score": item.ht_score,
             "localteam_id": item.localteam_id,
             "localteam_name": item.localteam_name,
-            "localteam_score": item.localteam_score,
+            "localteam_score": localteam_score,
             "localteam_image": flag__loal,
             "penalty_local": item.penalty_local,
             "penalty_visitor": item.penalty_visitor,
@@ -322,7 +336,7 @@ export class MatchesDashboardComponent implements OnInit {
             "venue_id": item.venue_id,
             "visitorteam_id": item.visitorteam_id,
             "visitorteam_name": item.visitorteam_name,
-            "visitorteam_score": item.visitorteam_score,
+            "visitorteam_score": visitorteam_score,
             "visitorteam_image": flag_visit,
             "week": item.week,
             "_id": item._id,

@@ -1246,6 +1246,10 @@ ul.nav.nav-tabs {
     font-weight: bold !important;
 }
 
+.text-bold span {
+    font-weight: bold !important;
+}
+
 .match_time {
     margin-top: 0;
     font-size: 16px;

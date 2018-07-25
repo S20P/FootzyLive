@@ -596,3 +596,8 @@ img.lineup_title_img {
         width: 80px;
     }
 }
+
+.theme-hover:hover .lineup_name p,
+.theme-hover:hover .lineup_number p {
+    color: #ffffff;
+}

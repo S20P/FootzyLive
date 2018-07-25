@@ -10,10 +10,11 @@ import { MessagingService } from './service/firebase/messaging.service';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import { ActivatedRoute, Router, ParamMap, RoutesRecognized } from '@angular/router';
 import * as firebase from "firebase";
 
-
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/pairwise';
 
 // declare var firebase: any;
 
@@ -25,30 +26,28 @@ import * as firebase from "firebase";
 
 
 export class AppComponent {
-    
+
     loading;
     albums;
     items;
     message;
     user;
-
-
-
-
-
     constructor(
+        private route: ActivatedRoute,
+        private router: Router,
         private _notificationService: PushNotificationService,
         private msgService: MessagingService
     ) {
         localStorage.removeItem('firebase:previous_websocket_failure');
         this.loading = "none";
         this._notificationService.requestPermission();
-    }
+   
+   }
 
     ngOnInit() {
 
         this.msgService.getPermission();
-      
+
 
         this.msgService.currentMessage.subscribe(data => {
             console.log("message-resis", data);
@@ -72,7 +71,7 @@ export class AppComponent {
         let data = this.msgService.Subscribe_topic();
         console.log("mess-dd", data);
 
-       
+
 
 
     }

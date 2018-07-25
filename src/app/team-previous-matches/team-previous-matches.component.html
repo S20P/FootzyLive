@@ -47,7 +47,7 @@
 
                                     <!-- Score & Group of Team -->
                                     <div class="col-sm-3 col-xs-4 flag-lwidth">
-                                        <p>{{item_details.localteam_name}}</p>
+                                        <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">{{item_details.localteam_name}}</p>
                                     </div>
 
                                     <div class="col-sm-2 col-xs-2 match-team-group">
@@ -92,7 +92,7 @@
                                     <!--end Score & Group of Team -->
 
                                     <div class="col-sm-3 col-xs-3 flag-rwidth">
-                                        <p>{{item_details.visitorteam_name}}</p>
+                                        <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">{{item_details.visitorteam_name}}</p>
                                     </div>
 
                                     <!--end Score & Group of Team -->
@@ -151,8 +151,8 @@
                                     <div class="col-md-6 col-sm-6 col-xs-5 r-flag-team">
                                         <!-- Live -->
                                         <div *ngIf="item_details.live_status;else offlineTeam2">
-                                            <p>
-                                                <span *ngIf="item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score" class="score">
+                                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                                <span *ngIf="item_details.localteam_score !==''" class="score">
                                                         {{item_details.localteam_score}}
                                                 </span> {{item_details.localteam_name}}
                                             </p>
@@ -166,14 +166,12 @@
 
                                         <!-- offline  -->
                                         <ng-template #offlineTeam2>
-                                            <p>
-                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.'  && item_details.localteam_score !==''" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score"
-                                                    class="score">
+                                            <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
+                                                <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.'  && item_details.localteam_score !==''" class="score">
                                               {{item_details.localteam_score}}
                                             </span>{{item_details.localteam_name}}
                                             </p>
-                                            <p> <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !=='' " [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score"
-                                                    class="score">
+                                            <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''"> <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !=='' " class="score">
                                                   {{item_details.visitorteam_score}} 
                                               </span>{{item_details.visitorteam_name}}
                                             </p>
