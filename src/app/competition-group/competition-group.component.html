@@ -1,8 +1,8 @@
 <div class="row" *ngIf="Group_collection.length > 0">
     <div class="col-md-12">
-        <div class="match-page-header">
+        <div class="match-page-header" [ngClass]="{'toppadd':Group_collection.length <=1}">
             <p>Season {{season}}</p>
-            <div class="dropdown" *ngIf="Group_collection.length > 0">
+            <div class="dropdown" *ngIf="Group_collection.length > 1">
                 <button class="btn  dropdown-toggle" id="dropdown_btn" type="button" data-toggle="dropdown">
                                        <span *ngFor="let item of Group_collection;let i = index">
                                         <span *ngIf="i==selectedpositionofGroup" class="option_title"> {{item.type}} </span>

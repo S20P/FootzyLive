@@ -126,3 +126,7 @@ ul.groups_list {
 .dropdown-menu {
     min-width: 141px;
 }
+
+.toppadd {
+    margin-bottom: 15px;
+}
