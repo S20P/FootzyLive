@@ -1,35 +1,31 @@
-<div class="row">
+<div class="row com-matches-section">
     <div class="col-md-12">
-
-
-
-
         <div *ngFor="let item of match_ground_details; let i=index">
             <div *ngIf="selectedposition==i">
-                <div class="card">
-                    <div class="header">
 
-                        <div class="dropdown" *ngIf="match_ground_details.length > 0 ">
-                            <button class="btn  dropdown-toggle" id="dropdown_btn" type="button" data-toggle="dropdown">
+                <div class="match-page-header">
+                    <div class="dropdown" *ngIf="match_ground_details.length > 0 ">
+                        <button class="btn  dropdown-toggle" id="dropdown_btn" type="button" data-toggle="dropdown">
                                                    <span *ngFor="let item of match_ground_details;let i = index">
                                                     <span *ngIf="i==selectedposition"> {{item.week.week}} </span>
                                                 </span>
                                                     <span class="caret"></span>
                                                 </button>
 
-                            <ul class="dropdown-menu select_dropdown" id="style_scroll">
-                                <li (click)="onchangefillter_matches(j)" [ngClass]="{'text_selected':j==selectedposition}" *ngFor=" let item of match_ground_details;let j=index">
-                                    {{item.week.week}}
-                                </li>
-                            </ul>
-                        </div>
-                        <h4 id="week_title">{{item.week.week}}</h4>
+                        <ul class="dropdown-menu select_dropdown" id="style_scroll">
+                            <li (click)="onchangefillter_matches(j)" [ngClass]="{'text_selected':j==selectedposition}" *ngFor=" let item of match_ground_details;let j=index">
+                                {{item.week.week}}
+                            </li>
+                        </ul>
                     </div>
+                    <!-- <h4 id="week_title">{{item.week.week}}</h4> -->
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div *ngFor="let item_details of item.group|orderBy:'formatted_date';let j=index">
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div *ngFor="let paire of item.group|groupBy:'formatted_date'|orderBy:'formatted_date';let j=index">
+                            <h5 class="groupBy-date-title"> {{paire.key|date:'EEEE,d MMMM y'}}</h5>
+                            <div *ngFor="let item_details of paire.value|orderBy:'formatted_date';let j=index" class="card theme-hover">
                                 <div class="row match-detail" (click)="matchdetails(item_details.id)">
                                     <!-- hide Responshive -->
                                     <div class="show-responsive-list">
@@ -47,7 +43,6 @@
                                                         </div>
                                                         <ng-template #second1>
                                                             <p>{{item_details.status}}'</p>
-                                                            {{"2018-07-20 10:00:00 pm"|date:'hh:mm a'}}
                                                         </ng-template>
                                                     </ng-template>
                                                 </div>
@@ -80,9 +75,9 @@
                                             <div *ngIf="item_details.live_status && item_details.status!=='';else offlineTeam1">
 
                                                 <div class="matchscore">
-                                                    <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</span>
+                                                    <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score && item_details.localteam_score!==''">{{item_details.localteam_score}}</span>
                                                     <span class="upertxt dashed">-</span>
-                                                    <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</span>
+                                                    <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">{{item_details.visitorteam_score}}</span>
                                                 </div>
                                             </div>
                                             <!-- end live -->
@@ -179,12 +174,12 @@
                                             <div *ngIf="item_details.live_status;else offlineTeam2 ">
                                                 <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
                                                     <span *ngIf="item_details.localteam_score !=='' " class="score"> {{item_details.localteam_score}}
-                                                </span> {{item_details.localteam_name}}
+                                                            </span> {{item_details.localteam_name}}
                                                 </p>
                                                 <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
                                                     <span *ngIf="item_details.visitorteam_score !==''" class="score">
-                                                                    {{item_details.visitorteam_score}} 
-                                                              </span>{{item_details.visitorteam_name}}
+                                                                                {{item_details.visitorteam_score}} 
+                                                                          </span>{{item_details.visitorteam_name}}
                                                 </p>
                                             </div>
                                             <!--end Live -->
@@ -193,13 +188,13 @@
                                             <ng-template #offlineTeam2>
                                                 <p [class.text-bold]="item_details.localteam_score>= item_details.visitorteam_score && item_details.localteam_score!==''">
                                                     <span *ngIf="item_details.status==='FT'  || item_details.status==='Pen.' ||  item_details.status==='AET' || item_details.status==='Postp.' && item_details.localteam_score!=='' " class="score">
-                                                  {{item_details.localteam_score}}
-                                                </span>{{item_details.localteam_name}}
+                                                              {{item_details.localteam_score}}
+                                                            </span>{{item_details.localteam_name}}
                                                 </p>
                                                 <p [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">
                                                     <span *ngIf="item_details.status==='FT' || item_details.status==='Pen.' || item_details.status==='AET'  || item_details.status==='Postp.' && item_details.visitorteam_score !=='' " class="score">
-                                                      {{item_details.visitorteam_score}} 
-                                                  </span>{{item_details.visitorteam_name}}
+                                                                  {{item_details.visitorteam_score}} 
+                                                              </span>{{item_details.visitorteam_name}}
                                                 </p>
                                             </ng-template>
                                             <!--end offline  -->
@@ -225,10 +220,10 @@
 
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 

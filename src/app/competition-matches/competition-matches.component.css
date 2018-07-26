@@ -2,27 +2,29 @@
     margin-bottom: -13px;
 }
 
-.option_title {
-    font-size: 14px;
-}
-
 .dropdown {
-    float: right;
+    float: none;
     top: 0px;
-    margin-top: -4px;
-    margin-bottom: 10px;
 }
 
 #dropdown_btn {
-    padding: 10px;
+    padding: 0px;
+}
+
+#dropdown_btn,
+.select_dropdown li {
+    font-size: 17px;
 }
 
 .dropdown-menu {
-    top: 40px;
+    float: left;
+    left: auto;
+    right: auto;
+    margin-top: 10px;
 }
 
 @media (max-width: 580px) {
-    .dropdown {
+    /* .dropdown {
         top: 0px!important;
         float: none!important;
         margin: 0px;
@@ -31,19 +33,19 @@
     }
     #dropdown_btn {
         margin: 0px 15px;
-        padding: 10px;
     }
     .dropdown-menu {
         min-width: 121px !important;
         left: 15px;
         top: 36px;
+    } */
+    #dropdown_btn,
+    .select_dropdown li {
+        font-size: 12px;
     }
 }
 
 @media (max-width: 669px) {
-    #dropdown_btn {
-        padding: 10px;
-    }
     .dropdown-menu {
         min-width: 121px !important;
         width: fit-content;
@@ -51,4 +53,27 @@
     #week_title {
         margin-bottom: 15px;
     }
+    #dropdown_btn,
+    .select_dropdown li {
+        font-size: 14px;
+    }
 }
+
+.card {
+    margin-bottom: 0px!important;
+}
+
+.groupBy-date-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 15px 0px 10px;
+}
+
+.com-matches-section {
+    margin-bottom: 15px;
+}
+
+
+/* .match-page-header {
+    padding: 5px 0px 5px 10px;
+} */

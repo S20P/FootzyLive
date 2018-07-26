@@ -112,13 +112,7 @@ export class TeamPreviousMatchesComponent implements OnInit {
             team_d = true;
           }
 
-          var status;
-          if (item.status == "") {
-            status = match_time;
-          }
-          else {
-            status = item.status;
-          }
+
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
@@ -153,6 +147,19 @@ export class TeamPreviousMatchesComponent implements OnInit {
           }
           //end PEN (0-0)--------------------------------------------
 
+          var visitorteam_score;
+          var localteam_score;
+          if (item.visitorteam_score == '?') {
+            visitorteam_score = "";
+          } else {
+            visitorteam_score = item.visitorteam_score
+          }
+
+          if (item.localteam_score == '?') {
+            localteam_score = "";
+          } else {
+            localteam_score = item.localteam_score
+          }
 
           var competitions = item.competitions;
 
@@ -163,25 +170,25 @@ export class TeamPreviousMatchesComponent implements OnInit {
           groups[competitions.id].push({
             "comp_id": item.comp_id,
             "et_score": item.et_score,
-            "formatted_date": item.formatted_date,
+            "formatted_date": selected1,
             "ft_score": item.ft_score,
             "ht_score": item.ht_score,
             "localteam_id": item.localteam_id,
             "localteam_name": item.localteam_name,
-            "localteam_score": item.localteam_score,
+            "localteam_score": localteam_score,
             "localteam_image": flag__loal,
             "penalty_local": item.penalty_local,
             "penalty_visitor": item.penalty_visitor,
             "penalty_localvist": penalty_localvist,
             "season": item.season,
-            "status": status,
+            "status": item.status,
             "time": match_time,
             "venue": item.venue,
             "venue_city": item.venue_city,
             "venue_id": item.venue_id,
             "visitorteam_id": item.visitorteam_id,
             "visitorteam_name": item.visitorteam_name,
-            "visitorteam_score": item.visitorteam_score,
+            "visitorteam_score": visitorteam_score,
             "visitorteam_image": flag_visit,
             "week": item.week,
             "_id": item._id,

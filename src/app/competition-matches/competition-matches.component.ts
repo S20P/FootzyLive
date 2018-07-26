@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 declare var $: any;
 import { OrderPipe } from 'ngx-order-pipe';
+
 import * as moment from 'moment-timezone';
 import "moment-timezone";
 import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunScript.service';
@@ -22,12 +23,12 @@ export class CompetitionMatchesComponent implements OnInit {
   match_ground_details = [];
 
   public list_matches = [];
-  public comp_id:any;
-  public competition_name:any;
-  public season:any;
-  public selectedposition:any;
-  public flage_baseUrl:any;
- 
+  public comp_id: any;
+  public competition_name: any;
+  public season: any;
+  public selectedposition: any;
+  public flage_baseUrl: any;
+
   @Input()
   set SelectedSeason(message: number) {
     this.filterData(message);
@@ -85,7 +86,7 @@ export class CompetitionMatchesComponent implements OnInit {
   }
 
   GetAllCompetitions(com) {
-    console.log("com",com);
+    console.log("com", com);
     var season = com.season;
 
     var list = [];
@@ -98,7 +99,7 @@ export class CompetitionMatchesComponent implements OnInit {
       if (result !== undefined) {
 
         var array = result.reduce((r, { week, formatted_date }, index, arr) => {
-      
+
           var data = arr[index];
           var last = r[r.length - 1];
 
@@ -110,7 +111,7 @@ export class CompetitionMatchesComponent implements OnInit {
 
           var flag__loal = self.flage_baseUrl + data.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + data.visitorteam_id + ".png";
-      
+
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(data.formatted_date);
           var date11 = new Date(selected1 + " " + data.time);
@@ -128,7 +129,19 @@ export class CompetitionMatchesComponent implements OnInit {
             week = week;
           }
 
+          var visitorteam_score;
+          var localteam_score;
+          if (data.visitorteam_score == '?') {
+            visitorteam_score = "";
+          } else {
+            visitorteam_score = data.visitorteam_score
+          }
 
+          if (data.localteam_score == '?') {
+            localteam_score = "";
+          } else {
+            localteam_score = data.localteam_score
+          }
 
           // AGG (0-0)--------------------------------------------
           var lats_score_local;
@@ -164,12 +177,12 @@ export class CompetitionMatchesComponent implements OnInit {
           var obj = {
             "comp_id": data.comp_id,
             "et_score": data.et_score,
-            "formatted_date": data.formatted_date,
+            "formatted_date": selected1,
             "ft_score": data.ft_score,
             "ht_score": data.ht_score,
             "localteam_id": data.localteam_id,
             "localteam_name": data.localteam_name,
-            "localteam_score": data.localteam_score,
+            "localteam_score": localteam_score,
             "localteam_image": flag__loal,
             "penalty_local": data.penalty_local,
             "penalty_visitor": data.penalty_visitor,
@@ -182,7 +195,7 @@ export class CompetitionMatchesComponent implements OnInit {
             "venue_id": data.venue_id,
             "visitorteam_id": data.visitorteam_id,
             "visitorteam_name": data.visitorteam_name,
-            "visitorteam_score": data.visitorteam_score,
+            "visitorteam_score": visitorteam_score,
             "visitorteam_image": flag_visit,
             "week": data.week,
             "_id": data._id,
@@ -233,11 +246,11 @@ export class CompetitionMatchesComponent implements OnInit {
             var pos = p - 1;
             this.selectedposition = pos;
             console.log("pos", pos);
-       
+
           }
           else {
             this.selectedposition = 0;
-            
+
           }
         }
 
@@ -252,7 +265,7 @@ export class CompetitionMatchesComponent implements OnInit {
 
   }
 
- 
+
 
   GetMatchesByCompetition_ById_live() {
 

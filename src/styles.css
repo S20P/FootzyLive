@@ -458,6 +458,14 @@ section {
     color: #ffffff;
 }
 
+.theme-hover:hover .matchscore {
+    color: #000;
+}
+
+.theme-hover:hover .agg_pen ul li {
+    color: #ffffff;
+}
+
 .c-pointer {
     cursor: pointer!important;
 }
@@ -488,7 +496,7 @@ section {
     font-size: 10px;
     font-weight: bold;
     background: green;
-    padding: 1px 5px;
+    padding: 3px 5px 2px;
     border: 1px solid #eee;
     margin-left: -5px;
 }
@@ -1284,7 +1292,7 @@ span.upertxt.dashed {
 @media (min-width: 768px) {
     .matchscore {
         margin-top: 11px;
-        padding: 4px 0 6px;
+        padding: 4px 0 4px;
         background: #f2f2f2;
     }
     .match_time p {

@@ -15,7 +15,7 @@
 }
 
 .sidebar-card-body .live_badge {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .list-cursor {
@@ -23,7 +23,7 @@
 }
 
 .header {
-    padding: 1px 15px;
+    padding: 5px 15px;
     background: var(--theme-color)!important;
     color: #ffffff!important;
 }

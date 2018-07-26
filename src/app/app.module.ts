@@ -11,6 +11,8 @@ import { AppRoutingModule, routingComponents } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { GroupByPipe } from './short-array.pipe';
+import { GroupByArrayPipe } from './group-by.pipe';
+
 
 import { OrderModule } from 'ngx-order-pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -34,6 +36,7 @@ import { CompetitionAsideRightComponent } from './competition-aside-right/compet
     AppComponent,
     routingComponents,
     GroupByPipe,
+    GroupByArrayPipe,
     SidebarComponent,
     CompetitionAsideRightComponent
   ],

@@ -66,7 +66,6 @@
                                                             </div>
                                                             <ng-template #second1>
                                                                 <p>{{item_details.status}}'</p>
-                                                                {{"2018-07-20 10:00:00 pm"|date:'hh:mm a'}}
                                                             </ng-template>
                                                         </ng-template>
                                                     </div>
@@ -99,9 +98,9 @@
                                                 <div *ngIf="item_details.live_status && item_details.status!=='';else offlineTeam1">
 
                                                     <div class="matchscore">
-                                                        <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score">{{item_details.localteam_score}}</span>
+                                                        <span class="match_time" [class.text-bold]="item_details.localteam_score >= item_details.visitorteam_score && item_details.localteam_score!==''">{{item_details.localteam_score}}</span>
                                                         <span class="upertxt dashed">-</span>
-                                                        <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score">{{item_details.visitorteam_score}}</span>
+                                                        <span class="match_time" [class.text-bold]="item_details.visitorteam_score >= item_details.localteam_score && item_details.visitorteam_score!==''">{{item_details.visitorteam_score}}</span>
                                                     </div>
                                                 </div>
                                                 <!-- end live -->
