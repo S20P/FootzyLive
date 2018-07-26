@@ -1418,6 +1418,9 @@ span.upertxt.dashed {
     padding: 0;
     top: 98%;
     border: 0;
+    width: auto;
+    right: 1px;
+    left: auto;
 }
 
 .text_selected {
@@ -1450,4 +1453,14 @@ span.upertxt.dashed {
 
 .list_item {
     margin: 5px;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
 }

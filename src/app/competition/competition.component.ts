@@ -10,11 +10,11 @@ import {
   AfterViewInit,
   OnDestroy,
   NgZone,
-  
+
 } from '@angular/core';
 import { MatchesApiService } from '../service/live_match/matches-api.service';
 import { MatchService } from '../service/match.service';
-import { Router, ActivatedRoute, ParamMap,NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, NavigationEnd } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -44,7 +44,7 @@ export class CompetitionComponent implements OnInit {
   public season: any;
   public position: number = 0;
 
-  public Competition_list = [];
+  public Competition_list: any;
 
   previousUrl: string;
   constructor(
@@ -64,15 +64,13 @@ export class CompetitionComponent implements OnInit {
       this.comp_id = parseInt(params.get("id"));
       this.GetAllCompetitions_list();
     });
-   
+
   }
 
   ngOnInit() {
+    this.Competition_list = [];
     this.setTimer();
   }
-
- 
-
 
 
   GetAllCompetitions_list() {
@@ -105,4 +103,11 @@ export class CompetitionComponent implements OnInit {
       this.showloader = false;
     });
   }
+
+
+
+
+
+
+
 }

@@ -1,9 +1,54 @@
-.dropdown ul {
-    /* margin-left: 3px; */
-    margin-top: 1px;
-    width: 190px;
+.header h4 {
+    margin-bottom: -13px;
 }
 
-button#dropdown_btn {
-    margin: 0;
+.option_title {
+    font-size: 14px;
+}
+
+.dropdown {
+    float: right;
+    top: 0px;
+    margin-top: -4px;
+    margin-bottom: 10px;
+}
+
+#dropdown_btn {
+    padding: 10px;
+}
+
+.dropdown-menu {
+    top: 40px;
+}
+
+@media (max-width: 580px) {
+    .dropdown {
+        top: 0px!important;
+        float: none!important;
+        margin: 0px;
+        left: -15px!important;
+        margin-bottom: 23px;
+    }
+    #dropdown_btn {
+        margin: 0px 15px;
+        padding: 10px;
+    }
+    .dropdown-menu {
+        min-width: 121px !important;
+        left: 15px;
+        top: 36px;
+    }
+}
+
+@media (max-width: 669px) {
+    #dropdown_btn {
+        padding: 10px;
+    }
+    .dropdown-menu {
+        min-width: 121px !important;
+        width: fit-content;
+    }
+    #week_title {
+        margin-bottom: 15px;
+    }
 }

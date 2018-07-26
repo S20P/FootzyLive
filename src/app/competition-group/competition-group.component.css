@@ -62,12 +62,6 @@ td:first-child {
     border-radius: 0;
 }
 
-@media (max-width:360px) {
-    table.table.grouptable tr td {
-        font-size: 12px !important;
-    }
-}
-
 ul.groups_list {
     list-style: none;
     margin-top: 11px;
@@ -111,6 +105,13 @@ ul.groups_list {
     }
     #dropdown_btn {
         margin-top: 0px;
+        padding: 10px;
+    }
+    .dropdown-menu {
+        left: 5px;
+    }
+    table.table.grouptable tr td {
+        font-size: 12px !important;
     }
 }
 
@@ -123,9 +124,16 @@ ul.groups_list {
     }
 }
 
-.dropdown-menu {
-    min-width: 141px;
+@media (max-width:360px) {
+    table.table.grouptable tr td {
+        font-size: 10px !important;
+    }
 }
+
+
+/* .dropdown-menu {
+    min-width: 141px;
+} */
 
 .toppadd {
     margin-bottom: 15px;

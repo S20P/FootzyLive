@@ -26,6 +26,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MessagingService } from './service/firebase/messaging.service';
 import { JsCustomeFunScriptService } from './service/jsCustomeFun/jsCustomeFunScript.service';
+import { CompetitionAsideRightComponent } from './competition-aside-right/competition-aside-right.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { JsCustomeFunScriptService } from './service/jsCustomeFun/jsCustomeFunSc
     AppComponent,
     routingComponents,
     GroupByPipe,
-    SidebarComponent
+    SidebarComponent,
+    CompetitionAsideRightComponent
   ],
   imports: [
     BrowserModule,

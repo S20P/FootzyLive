@@ -104,9 +104,19 @@
     padding: 10px;
 }
 
+@media (max-width: 580px) {
+    .dropdown-menu {
+        left: 0px;
+        top: 44px;
+    }
+    #dropdown_btn {
+        margin-top: 6px;
+    }
+}
+
 @media (max-width: 669px) {
     #dropdown_btn {
-        padding: 10px;
+        padding: 10px 0px;
     }
     .option_title {
         font-size: 14px;

@@ -33,7 +33,6 @@ export class SidebarComponent implements OnInit {
 
   public match_ground_details = [];
   public currentdaydate: any;
-  public localmatches = [];
   public localtimezone: any;
   public flage_baseUrl: any;
   constructor(private matchesApiService: MatchesApiService,
@@ -139,18 +138,10 @@ export class SidebarComponent implements OnInit {
           var flag__loal = self.flage_baseUrl + item.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + item.visitorteam_id + ".png";
 
-          var status;
-          if (item.status == "") {
-            status = match_time;
-          }
-          else {
-            status = item.status;
-          }
+       
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
-
-
 
           // AGG (0-0)--------------------------------------------
           var lats_score_local;
@@ -217,7 +208,7 @@ export class SidebarComponent implements OnInit {
             "penalty_visitor": item.penalty_visitor,
             "penalty_localvist": penalty_localvist,
             "season": item.season,
-            "status": status,
+            "status": item.status,
             "time": match_time,
             "venue": item.venue,
             "venue_city": item.venue_city,

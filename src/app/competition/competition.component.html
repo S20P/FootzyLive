@@ -26,12 +26,13 @@
                     <div class="panel-heading">
                         <div class="no-margin row">
                             <ul class="nav nav-tabs col-md-9 col-sm-9 col-xs-9">
-                                <li class="active">
-                                    <a href="#tab1_table" data-toggle="tab">Table</a>
-                                </li>
                                 <li>
                                     <a href="#tab2_Matches" data-toggle="tab">Matches</a>
                                 </li>
+                                <li class="active">
+                                    <a href="#tab1_table" data-toggle="tab">Table</a>
+                                </li>
+
                                 <li>
                                     <a href="#tab3_TopPlayers" data-toggle="tab">Top players</a>
                                 </li>
@@ -71,17 +72,19 @@
 
                             <div class="">
                                 <div class="tab-content">
-                                    <!--******** Table Group ************-->
-                                    <div class="tab-pane fade in active" id="tab1_table">
-                                        <app-competition-group [SelectedSeason]="position"></app-competition-group>
-                                    </div>
-                                    <!--******* end Table Group  ***********-->
 
                                     <!--******* Matches ***********-->
                                     <div class="tab-pane" id="tab2_Matches">
                                         <app-competition-matches [SelectedSeason]="position"></app-competition-matches>
                                     </div>
                                     <!--******* end Matches ***********-->
+
+
+                                    <!--******** Table Group ************-->
+                                    <div class="tab-pane fade in active" id="tab1_table">
+                                        <app-competition-group [SelectedSeason]="position"></app-competition-group>
+                                    </div>
+                                    <!--******* end Table Group  ***********-->
 
 
                                     <!--******** Top players ************-->
@@ -95,22 +98,18 @@
                                         <app-competition-teams [SelectedSeason]="position"></app-competition-teams>
                                     </div>
                                     <!--******* end Top teams ***********-->
-
-
                                 </div>
                             </div>
                             <!--end tabs body  -->
-
                         </div>
                         <!--side bar  -->
                         <div class="col-md-4 col-sm-12 col-lg-4 remove_left_padding">
-                            <app-sidebar></app-sidebar>
+                            <app-competition-aside-right></app-competition-aside-right>
                         </div>
                         <!--end side bar  -->
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
