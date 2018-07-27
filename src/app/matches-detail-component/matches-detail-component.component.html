@@ -97,13 +97,7 @@
                         </ul>
                     </div>
                     <!-- end tabs menu  -->
-                    <div *ngFor="let match of match_detailcollection;let i=index">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="slogen">{{match.localteam_name}} v {{match.visitorteam_name}} Live Commentary, {{match.formatted_date}}</p>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
 
                         <div class="col-sm-12 col-md-8 col-lg-8 remove_right_padding">
@@ -113,7 +107,11 @@
                                     <div class="tab-content">
                                         <!--******** DETAILS ************-->
                                         <div class="tab-pane fade in active" id="tab1default">
-
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="slogen">{{match.localteam_name}} v {{match.visitorteam_name}} Key events and Stats, {{match.time| date: 'dd MMM yyyy'}}</p>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6 remove_right_padding">
                                                     <!-- key Events -->
@@ -600,7 +598,11 @@
 
                                         <!--******* LINEUPS ***********-->
                                         <div class="tab-pane" id="tab2default">
-
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="slogen">{{match.localteam_name}} v {{match.visitorteam_name}} Lineups, {{match.time| date: 'dd MMM yyyy'}}</p>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6 remove_right_padding">
                                                     <!-- LINEUPS localteam Title -->
@@ -746,7 +748,11 @@
 
                                         <!--******** Commentry ************-->
                                         <div class="tab-pane" id="tab3default">
-
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="slogen">{{match.localteam_name}} v {{match.visitorteam_name}} Commentaries, {{match.time| date: 'dd MMM yyyy'}}</p>
+                                                </div>
+                                            </div>
                                             <div class=" Commentary-box">
                                                 <div class="card">
                                                     <div class="col-md-12 header">
@@ -797,7 +803,7 @@
                             </div>
                         </div>
                         <!--side bar  -->
-                        <div class="col-md-4 col-sm-12 col-lg-4 remove_left_padding">
+                        <div class="col-md-4 col-sm-12 col-lg-4 remove_left_padding sidebar_page">
                             <app-sidebar></app-sidebar>
                         </div>
                         <!--end side bar  -->

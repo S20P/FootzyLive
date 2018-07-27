@@ -435,6 +435,7 @@ img.lineup_title_img {
 
 .uptime {
     font-size: 30px!important;
+    margin: 10px 0px 20px !important;
 }
 
 .inline {
@@ -604,6 +605,9 @@ img.lineup_title_img {
         overflow-wrap: break-word;
         word-wrap: break-word;
         width: 80px;
+    }
+    .sidebar_page {
+        margin-top: 45px;
     }
 }
 

@@ -14,4 +14,5 @@
 
 .not_avilable_content {
     font-size: var(--theme-body-font1);
+    padding: 4px 0px 4px 15px;
 }

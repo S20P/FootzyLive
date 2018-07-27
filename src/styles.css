@@ -5,7 +5,7 @@
     --theme-body-font1: 14px;
     --theme-body-font2: 16px;
     --theme-body-font3: 18px;
-    --theme-hover-bg: #dadada;
+    --theme-hover-bg: #fafafa;
 }
 
 
@@ -18,14 +18,20 @@
   background: var(--theme-hover-bg);
   */
 
-@font-face {
+
+/* @font-face {
     font-family: 'Open Sans', sans-serif;
     src: url("/assets/fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+} */
+
+@font-face {
+    font-family: 'Montserrat', sans-serif;
+    src: url("/assets/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
 }
 
 body {
     background: #eee;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 p {
@@ -177,7 +183,7 @@ h2 {
 
 h2 span {
     /* font-family: 'Libre Baskerville', serif; */
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: block;
     font-size: 45px;
     text-transform: none;
@@ -456,14 +462,9 @@ section {
 }
 
 .theme-hover:hover {
-    /* background: linear-gradient(-225deg, rgb(93, 125, 187) 0%, rgb(122, 154, 216) 48%, rgb(195, 205, 224) 100%) */
-    /* background-color: #3e7fff; */
-    /* background-color: #d8d8d8 !important;
-    cursor: pointer; */
     background-color: var(--theme-hover-bg) !important;
     cursor: pointer;
     color: var(--theme-fn-color);
-    /* box-shadow: 0px 2px 4px 0px #00d15f2b; */
 }
 
 .theme-hover:hover p.rigth_arrow {
