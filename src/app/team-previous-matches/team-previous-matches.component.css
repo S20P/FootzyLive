@@ -4,7 +4,7 @@
 
 .groupBy-date-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: var(--theme-body-font2);
     margin: 15px 0px 10px;
 }
 
@@ -13,5 +13,5 @@
 }
 
 .not_avilable_content {
-    font-size: 16px;
+    font-size: var(--theme-body-font1);
 }

@@ -24,12 +24,12 @@
 
 .header {
     padding: 5px 15px;
-    background: var(--theme-color)!important;
+    background: var(--theme-bg-color)!important;
     color: #ffffff!important;
 }
 
 .header p {
-    background: var(--theme-color)!important;
+    background: var(--theme-bg-color)!important;
     margin: 0px;
     color: #ffffff;
     padding: 2px 15px;
@@ -53,12 +53,12 @@
 
 .sidebar_date {
     padding: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .sidebar_date p {
     margin: 0px;
-    color: #000;
+    color: var(--theme-fn-color);
     padding: 5px 15px;
     font-weight: bold;
     background: #d8d8d8 !important;

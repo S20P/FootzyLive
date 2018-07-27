@@ -49,6 +49,6 @@
 
 .NoUserInfo p {
     margin: 0px;
-    font-size: 20px;
+    font-size: var(--theme-body-font1);
     font-weight: bold;
 }

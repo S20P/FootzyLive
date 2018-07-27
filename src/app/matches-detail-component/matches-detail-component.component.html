@@ -29,14 +29,15 @@
                             <p>{{match.time| date: 'dd MMM yyyy'}}</p>
                             <div class="border"></div>
                             <!-- Live -->
-                            <div *ngIf="match.status!=='FT' && match.status!=='Pen.'&& match.status!=='';else offlineTime1">
+                            <div *ngIf="match.status!=='FT' && match.status!=='Pen.'&& match.status!=='AET' && match.status!=='Postp.' && match.status!=='';else offlineTime1">
                                 <div *ngIf="match.live_status;else offlineTime1">
-                                    <h2 class="teamscore">{{match.localteam_score}} - {{match.visitorteam_score}}</h2>
-                                    <div *ngIf="match.status=='';else status1">
-                                        <h2 class="uptime">{{match.time|date:'hh:mm a'}}</h2>
+                                    <h2 class="teamscore theme-color" *ngIf="match.visitorteam_score !==''&& match.visitorteam_score !==''">{{match.localteam_score}} - {{match.visitorteam_score}}</h2>
+                                    <div *ngIf=" match.status=='' ;else status1">
+                                        <h2 class="uptime theme-color">{{match.time|date:'hh:mm a'}}</h2>
                                     </div>
                                     <ng-template #status1>
-                                        <h2 class="status-txt">{{match.status}}</h2>
+                                        <h2 *ngIf="match.status!==''" class="status-txt theme-color">{{match.status}}</h2>
+                                        <h2 *ngIf="match.status==''" class="status-txt theme-color">-</h2>
                                     </ng-template>
 
                                 </div>
@@ -45,17 +46,19 @@
 
                             <!-- offline  -->
                             <ng-template #offlineTime1>
-                                <div *ngIf="match.status!=='FT' && match.status!=='Pen.';else time1">
+                                <div *ngIf="match.status!=='FT' && match.status!=='Pen.' && match.status!=='AET' && match.status!=='Postp.' && match.status!=='' ;else time1">
                                     <h2 class="uptime">{{match.time|date:'hh:mm a'}}</h2>
                                 </div>
                                 <ng-template #time1>
-                                    <h2 class="teamscore">{{match.localteam_score}} - {{match.visitorteam_score}}</h2>
-                                    <h2 class="status-txt">{{match.status}}</h2>
+                                    <h2 class="teamscore" *ngIf="match.status==='FT' || match.status==='Pen.' || match.status==='AET' || match.status==='Postp.' && match.visitorteam_score !=='' && match.localteam_score !==''">{{match.localteam_score}} - {{match.visitorteam_score}}</h2>
+                                    <h2 *ngIf="match.status!==''" class="status-txt">{{match.status}}</h2>
                                 </ng-template>
                             </ng-template>
                             <!-- end offline -->
                         </div>
-
+                        <div class="venue_name">
+                            <p>{{match.venue}}</p>
+                        </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div class="visited-team c-pointer" (click)="teamdetails(match.visitorteam_id,match.visitorteam_name)">
@@ -67,13 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="venue_name">
-                            <p>{{match.venue}}</p>
-                        </div>
-                    </div>
-                </div>
+
 
             </div>
         </div>
@@ -120,7 +117,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 remove_right_padding">
                                                     <!-- key Events -->
-                                                    <div class="event ">
+                                                    <div class="event">
                                                         <h4>
                                                             <b>Key Events</b>
                                                         </h4>
@@ -141,12 +138,12 @@
                                                                                 </div>
 
 
-                                                                                <div class="col-sm-6 col-xs-6  timeline-item">
+                                                                                <div class="col-sm-6 col-xs-6 timeline-item">
                                                                                     <div class="row">
                                                                                         <div class="col-sm-11">
                                                                                             <div class="timeline-panel credits">
                                                                                                 <div *ngIf="events.team=='localteam'">
-                                                                                                    <ul class="inline  right_team">
+                                                                                                    <ul class="inline right_team">
                                                                                                         <li>
                                                                                                             <div class="event-text-main">
                                                                                                                 <p class="player_name">{{events.player}}</p>
@@ -155,7 +152,7 @@
                                                                                                                 <div *ngIf="events.assist_id !==''">
                                                                                                                     <p class="small">{{events.assist}} </p>
                                                                                                                 </div>
-                                                                                                                <div *ngIf="events.assist_id ==''">
+                                                                                                                <div *ngIf="events.assist_id==''">
                                                                                                                     <div *ngIf="events.type=='yellowcard'">
                                                                                                                         <p class="small">{{events.type}}</p>
                                                                                                                     </div>
@@ -270,7 +267,7 @@
                                                                                                                 <div *ngIf="events.assist_id !==''">
                                                                                                                     <p class="small">{{events.assist}} </p>
                                                                                                                 </div>
-                                                                                                                <div *ngIf="events.assist_id ==''">
+                                                                                                                <div *ngIf="events.assist_id==''">
                                                                                                                     <div *ngIf="events.type=='yellowcard'">
                                                                                                                         <p class="small">{{events.type}}</p>
                                                                                                                     </div>
@@ -301,13 +298,13 @@
 
                                                         </div>
 
-                                                        <div *ngIf="events_collection.length > 0">
+                                                        <div *ngIf="events_collection.length> 0">
                                                             <div class="keyevnt-detail kick_off">
                                                                 <div class="row">
                                                                     <div class="col-md-12 left-keyevnt">
                                                                         <div class="col-xs-4">
                                                                         </div>
-                                                                        <div class="col-xs-4 ic_img_middle">
+                                                                        <div class="col-xs-4 ic_img_middle kick_img">
                                                                             <img src="assets/img/Kick_Off.png">
                                                                             <p>Kick Off</p>
                                                                         </div>
@@ -608,7 +605,7 @@
                                                 <div class="col-md-6 remove_right_padding">
                                                     <!-- LINEUPS localteam Title -->
 
-                                                    <div class="lineup_one ">
+                                                    <div class="lineup_one">
                                                         <div class="card">
                                                             <div class="col-md-12 lineupititle">
                                                                 <h4>
@@ -755,7 +752,7 @@
                                                     <div class="col-md-12 header">
                                                         <h4><b>COMMENTARY</b></h4>
                                                     </div>
-                                                    <p class="slogen cheadlines "> {{match.localteam_name}} {{match.localteam_score}} , {{match.visitorteam_name}} {{match.visitorteam_score}}</p>
+                                                    <p class="slogen cheadlines"> {{match.localteam_name}} {{match.localteam_score}} , {{match.visitorteam_name}} {{match.visitorteam_score}}</p>
 
                                                     <div class="card-body" *ngFor="let comment of Commentary_collection">
                                                         <div class="commentary-content">

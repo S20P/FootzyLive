@@ -60,7 +60,7 @@
 
 .panel-default>.panel-heading {
     color: #333;
-    background-color: var(--theme-color);
+    background-color: var(--theme-bg-color);
     border-color: #ddd;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .panel.with-nav-tabs .nav-tabs {
-    background: var(--theme-color) !important;
+    background: var(--theme-bg-color) !important;
 }
 
 
@@ -92,7 +92,7 @@
 }
 
 .option_title {
-    font-size: 16px;
+    font-size: var(--theme-body-font2);
 }
 
 .dropdown {
@@ -119,7 +119,7 @@
         padding: 10px 0px;
     }
     .option_title {
-        font-size: 14px;
+        font-size: var(--theme-body-font1);
     }
     .dropdown-menu {
         min-width: 121px !important;

@@ -118,9 +118,27 @@ export class MatchesDetailComponentComponent implements OnInit {
                         var status_offon;
                         status_offon = true;
 
+                        var visitorteam_score;
+                        var localteam_score;
+                        if (result_events.visitorteam_score == '?') {
+                            visitorteam_score = "";
+                            status_offon = false;
+                        } else {
+                            visitorteam_score = result_events.visitorteam_score;
+                            status_offon = true;
+                        }
+
+                        if (result_events.localteam_score == '?') {
+                            localteam_score = "";
+                            status_offon = false;
+                        } else {
+                            localteam_score = result_events.localteam_score;
+                            status_offon = true;
+                        }
+
                         this.match_detailcollection[i]['status'] = result_events.status;
-                        this.match_detailcollection[i]['localteam_score'] = result_events.localteam_score;
-                        this.match_detailcollection[i]['visitorteam_score'] = result_events.visitorteam_score;
+                        this.match_detailcollection[i]['localteam_score'] = localteam_score;
+                        this.match_detailcollection[i]['visitorteam_score'] = visitorteam_score;
                         this.match_detailcollection[i]['id'] = result_events.id;
                         this.match_detailcollection[i]['live_status'] = status_offon;
 
@@ -507,6 +525,19 @@ export class MatchesDetailComponentComponent implements OnInit {
                         console.log(":Matches tiem:", match_time);
                         let live_status = this.jsCustomeFun.CompareTimeDate(match_time);
 
+                        var visitorteam_score;
+                        var localteam_score;
+                        if (result[k].visitorteam_score == '?') {
+                          visitorteam_score = "";
+                        } else {
+                          visitorteam_score = result[k].visitorteam_score;
+                        }
+              
+                        if (result[k].localteam_score == '?') {
+                          localteam_score = "";
+                        } else {
+                          localteam_score = result[k].localteam_score;
+                        }
 
 
                         this.season = result[k].season;
@@ -521,7 +552,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 "ht_score": result[k].ht_score,
                                 "localteam_id": result[k].localteam_id,
                                 "localteam_name": result[k].localteam_name,
-                                "localteam_score": result[k].localteam_score,
+                                "localteam_score": localteam_score,
                                 "localteam_image": flag__loal,
                                 "penalty_local": result[k].penalty_local,
                                 "penalty_visitor": result[k].penalty_visitor,
@@ -534,7 +565,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 "venue_id": result[k].venue_id,
                                 "visitorteam_id": result[k].visitorteam_id,
                                 "visitorteam_name": result[k].visitorteam_name,
-                                "visitorteam_score": result[k].visitorteam_score,
+                                "visitorteam_score": visitorteam_score,
                                 "visitorteam_image": flag_visit,
                                 "week": result[k].week,
                                 "_id": result[k]._id,

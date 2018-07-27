@@ -187,8 +187,27 @@ export class MatchesDashboardComponent implements OnInit {
               var status_offon;
               status_offon = true;
               group[i]['status'] = item.status;
-              group[i]['localteam_score'] = item.localteam_score;
-              group[i]['visitorteam_score'] = item.visitorteam_score;
+
+              var visitorteam_score;
+              var localteam_score;
+              if (item.visitorteam_score == '?') {
+                visitorteam_score = "";
+                status_offon = false;
+              } else {
+                visitorteam_score = item.visitorteam_score;
+                status_offon = true;
+              }
+
+              if (item.localteam_score == '?') {
+                localteam_score = "";
+                status_offon = false;
+              } else {
+                localteam_score = item.localteam_score;
+                status_offon = true;
+              }
+
+              group[i]['localteam_score'] = localteam_score;
+              group[i]['visitorteam_score'] = visitorteam_score;
               group[i]['id'] = item.id;
               group[i]['live_status'] = status_offon;
             }
@@ -300,13 +319,13 @@ export class MatchesDashboardComponent implements OnInit {
           if (item.visitorteam_score == '?') {
             visitorteam_score = "";
           } else {
-            visitorteam_score = item.visitorteam_score
+            visitorteam_score = item.visitorteam_score;
           }
 
           if (item.localteam_score == '?') {
             localteam_score = "";
           } else {
-            localteam_score = item.localteam_score
+            localteam_score = item.localteam_score;
           }
 
           var competitions = item.competitions;

@@ -19,10 +19,10 @@ import { JsCustomeFunScriptService } from '../service/jsCustomeFun/jsCustomeFunS
 export class TeamNextMatchesComponent implements OnInit {
 
   public NextMatchesTeam = [];
-  public team_id:any;
-  public team_name:any;
-  public team_flage:any;
-  public flage_baseUrl:any;
+  public team_id: any;
+  public team_name: any;
+  public team_flage: any;
+  public flage_baseUrl: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class TeamNextMatchesComponent implements OnInit {
     private jsCustomeFun: JsCustomeFunScriptService
 
   ) {
-    this.flage_baseUrl ="/assets/img/TeamFlage/";
+    this.flage_baseUrl = "/assets/img/TeamFlage/";
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = parseInt(params.get("id"));
       this.team_id = id;
@@ -198,9 +198,26 @@ export class TeamNextMatchesComponent implements OnInit {
               console.log("current_matchId", current_matchId);
               var status_offon;
               status_offon = true;
+              var visitorteam_score;
+              var localteam_score;
+              if (item.visitorteam_score == '?') {
+                visitorteam_score = "";
+                status_offon = false;
+              } else {
+                visitorteam_score = item.visitorteam_score;
+                status_offon = true;
+              }
+
+              if (item.localteam_score == '?') {
+                localteam_score = "";
+                status_offon = false;
+              } else {
+                localteam_score = item.localteam_score;
+                status_offon = true;
+              }
               group[i]['status'] = item.status;
-              group[i]['localteam_score'] = item.localteam_score;
-              group[i]['visitorteam_score'] = item.visitorteam_score;
+              group[i]['localteam_score'] = localteam_score;
+              group[i]['visitorteam_score'] = visitorteam_score;
               group[i]['id'] = item.id;
               group[i]['live_status'] = status_offon;
             }

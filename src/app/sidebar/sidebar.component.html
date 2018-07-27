@@ -6,7 +6,7 @@
         <div class="sidebar_date">
             <p>{{item.competitions.name}}</p>
         </div>
-        <div class="card-body sidebar-card-body" *ngFor="let item_details of item.group|orderBy:'_id';let j = index">
+        <div class="card-body sidebar-card-body theme-hover" *ngFor="let item_details of item.group|orderBy:'time';let j = index">
             <div class="list-cursor" *ngIf="match_ground_details.length>0" (click)="matchdetails_go(item_details.id)">
 
                 <div class="r-dashbord-team">
@@ -16,15 +16,15 @@
                             <div *ngIf="item_details.status!=='FT' && item_details.status!=='Pen.' && item_details.status!=='AET' && item_details.status!=='Postp.' && item_details.status!=='' ;else offlineTime2">
                                 <div *ngIf="item_details.live_status;else offlineTime2">
                                     <div *ngIf="item_details.status=='' ;else status2">
-                                        <p class="match_time">{{item_details.time|date:'hh:mm a'}}</p>
+                                        <p class="match_time theme-color">{{item_details.time|date:'hh:mm a'}}</p>
                                     </div>
                                     <ng-template #status2>
                                         <div *ngIf="item_details.status=='HT' ;else second2 || item_details.status=='FT' ;else second2">
-                                            <p class="match_time">{{item_details.status}}</p>
+                                            <p class="match_time theme-color">{{item_details.status}}</p>
                                         </div>
 
                                         <ng-template #second2>
-                                            <p class="match_time">{{item_details.status}}'</p>
+                                            <p class="match_time theme-color">{{item_details.status}}</p>
                                         </ng-template>
                                     </ng-template>
                                 </div>

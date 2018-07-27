@@ -290,9 +290,27 @@ export class CompetitionMatchesComponent implements OnInit {
               console.log("current_matchId", current_matchId);
               var status_offon;
               status_offon = true;
+
+              var visitorteam_score;
+              var localteam_score;
+              if (item.visitorteam_score == '?') {
+                visitorteam_score = "";
+                status_offon = false;
+              } else {
+                visitorteam_score = item.visitorteam_score;
+                status_offon = true;
+              }
+
+              if (item.localteam_score == '?') {
+                localteam_score = "";
+                status_offon = false;
+              } else {
+                localteam_score = item.localteam_score;
+                status_offon = true;
+              }
               group[i]['status'] = item.status;
-              group[i]['localteam_score'] = item.localteam_score;
-              group[i]['visitorteam_score'] = item.visitorteam_score;
+              group[i]['localteam_score'] = localteam_score;
+              group[i]['visitorteam_score'] = visitorteam_score;
               group[i]['id'] = item.id;
               group[i]['live_status'] = status_offon;
             }

@@ -41,7 +41,7 @@
     } */
     #dropdown_btn,
     .select_dropdown li {
-        font-size: 12px;
+        font-size: var(--theme-body-font-sm);
     }
 }
 
@@ -55,7 +55,7 @@
     }
     #dropdown_btn,
     .select_dropdown li {
-        font-size: 14px;
+        font-size: var(--theme-body-font1);
     }
 }
 
@@ -65,7 +65,7 @@
 
 .groupBy-date-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: var(--theme-body-font2);
     margin: 15px 0px 10px;
 }
 

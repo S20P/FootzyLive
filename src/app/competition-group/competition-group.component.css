@@ -8,7 +8,7 @@ ul.groups_list {
 
 .groups_list li {
     display: inline-block;
-    font-size: 16px;
+    font-size: var(--theme-body-font2);
     font-weight: bold;
     color: #8e8e8e;
     margin-bottom: 0;
@@ -16,7 +16,7 @@ ul.groups_list {
 
 .grouptable thead,
 .teamgroupname {
-    background: var(--theme-color);
+    background: var(--theme-bg-color);
     color: #fff;
 }
 
@@ -27,17 +27,13 @@ ul.groups_list {
     margin-top: 0;
 }
 
-.table-header td {
-    font-weight: bold;
-}
-
 table.table.grouptable {
     background: #fff;
     margin-bottom: 15px;
 }
 
 table.table.grouptable tr td {
-    font-size: 16px;
+    font-size: var(--theme-body-font1);
     padding: 10px 5px;
 }
 
@@ -84,7 +80,7 @@ ul.groups_list {
 /* Dropdown css */
 
 .option_title {
-    font-size: 14px;
+    font-size: var(--theme-body-font1);
 }
 
 .dropdown {
@@ -114,7 +110,7 @@ ul.groups_list {
         left: 5px;
     }
     table.table.grouptable tr td {
-        font-size: 12px !important;
+        font-size: var(--theme-body-font-sm) !important;
     }
 }
 

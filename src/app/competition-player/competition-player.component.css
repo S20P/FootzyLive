@@ -7,12 +7,8 @@
 }
 
 .grouptable thead {
-    background: var(--theme-color);
+    background: var(--theme-bg-color);
     color: #fff;
-    font-weight: bold;
-}
-
-.table-header td {
     font-weight: bold;
 }
 
@@ -22,7 +18,7 @@ table.table.grouptable {
 }
 
 table.table.grouptable tr td {
-    font-size: 16px;
+    font-size: var(--theme-body-font1);
     /* font-weight: bold; */
     padding: 15px 0px 9px;
 }
@@ -74,7 +70,7 @@ td.first {
         width: 45%;
     }
     table.table.grouptable tr td {
-        font-size: 14px;
+        font-size: var(--theme-body-font1);
     }
     .player_img img {
         width: 30px;
@@ -83,14 +79,11 @@ td.first {
 
 @media (max-width: 367px) {
     table.table.grouptable tr td {
-        font-size: 13px;
+        font-size: var(--theme-body-font-sm);
     }
     .text-left {
         text-align: center !important;
         width: 100%;
-    }
-    .match-list p {
-        font-size: 14px;
     }
     .player_img img {
         width: 25px;

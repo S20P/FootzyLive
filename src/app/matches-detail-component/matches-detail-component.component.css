@@ -1,5 +1,5 @@
 .team-detail-header {
-    padding: 20px 10px 10px;
+    padding: 30px 10px 15px;
 }
 
 .local-team-flag img,
@@ -19,24 +19,24 @@
 
 .team-status h2 {
     font-size: 40px;
-    line-height: 30px;
-    margin: 0;
-    color: #ffc928;
+    line-height: 14px;
+    margin: 5px 0px 10px;
+    color: #fabe05;
 }
 
 .border {
-    border: 1px solid #bbb;
+    border: 1px solid var(--theme-bg-color);
     width: 10%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 7px;
     margin-bottom: 10px;
 }
 
 .team-status p {
     margin-bottom: 5px;
     font-weight: bold;
-    font-size: 14px;
-    margin-top: -4px;
+    font-size: var(--theme-body-font1);
+    margin-top: 0px;
 }
 
 .match-name {
@@ -64,7 +64,7 @@
 .event h4,
 .status h4 {
     color: #ffffff;
-    background: var(--theme-color);
+    background: var(--theme-bg-color);
     line-height: 2.5;
     border-bottom: 1px solid #dcdcdc;
     text-transform: uppercase;
@@ -112,7 +112,7 @@
 .keyevnt-detail p,
 .commentry-player p {
     margin-bottom: 0px;
-    font-size: 12px;
+    font-size: var(--theme-body-font-sm);
     font-weight: bold;
 }
 
@@ -125,7 +125,7 @@
 /* commentry */
 
 .Commentary-box .header {
-    background: var(--theme-color);
+    background: var(--theme-bg-color);
 }
 
 .Commentary-box .card {
@@ -160,8 +160,8 @@
 .commentary-time {
     border-right: 1px solid #ccc;
     font-weight: bold;
-    color: var(--theme-color);
-    font-size: 16px;
+    color: var(--theme-bg-color);
+    font-size: var(--theme-body-font2);
     margin-bottom: 5px;
 }
 
@@ -171,7 +171,7 @@
 }
 
 span.smalltime {
-    font-size: 12px;
+    font-size: var(--theme-body-font-sm);
 }
 
 p.border-btm {
@@ -199,7 +199,7 @@ p.border-btm {
 /* lineup css */
 
 .lineupititle {
-    background: var(--theme-color);
+    background: var(--theme-bg-color);
     color: #fff;
 }
 
@@ -230,14 +230,14 @@ img.lineup_title_img {
 }
 
 .lineup_number p {
-    color: #000;
+    color: var(--theme-fn-color);
     font-weight: 600;
 }
 
 .lineup_name p,
 .lineup_number p {
-    font-size: 14px;
-    color: #6f6f6f;
+    font-size: var(--theme-body-font1);
+    color: var(--theme-fn-color);
     line-height: 20px;
     MARGIN: 7px 0 0PX;
 }
@@ -263,6 +263,9 @@ img.lineup_title_img {
     }
     .venue_name {
         margin-top: 15px;
+    }
+    #timeline .timeline-movement .timeline-item {
+        padding: 10px 0px;
     }
 }
 
@@ -301,6 +304,12 @@ img.lineup_title_img {
         word-wrap: break-word;
         width: 100px;
     }
+    #timeline .timeline-movement .timeline-item {
+        padding: 10px 1px !important;
+    }
+    .ic_img_middle .goal_img {
+        margin: -5px 0px 0px 5px !important;
+    }
 }
 
 @media (max-width: 350px) {
@@ -319,7 +328,7 @@ img.lineup_title_img {
 }
 
 .ic_img_middle {
-    margin: 5px 0px;
+    margin: 0px 0px;
 }
 
 .ic_img_middle .goal_img {
@@ -339,9 +348,10 @@ img.lineup_title_img {
 /********************************************************************/
 
 .venue_name p {
-    font-weight: bold;
-    font-size: 14px;
+    font-size: var(--theme-body-font-sm);
     line-height: 16px;
+    margin-bottom: 0;
+    margin-top: 30px;
 }
 
 .stats_list .row {
@@ -350,7 +360,7 @@ img.lineup_title_img {
 
 .stats_list p {
     /* text-transform: uppercase; */
-    font-size: 14px;
+    font-size: var(--theme-body-font1);
     font-weight: bold;
 }
 
@@ -362,7 +372,7 @@ img.lineup_title_img {
 }
 
 .lt-progress {
-    background-color: var(--theme-color)!important;
+    background-color: var(--theme-bg-color)!important;
     float: right;
 }
 
@@ -402,20 +412,21 @@ img.lineup_title_img {
 }
 
 .teamscore {
-    line-height: 40px!important;
+    line-height: 25px!important;
+    margin-bottom: 15px!important;
 }
 
 
 /* NEW EVENTS CSS */
 
 .status-txt {
-    font-size: 14px !important;
+    font-size: var(--theme-body-font1) !important;
     font-weight: normal;
 }
 
 .events_time {
     vertical-align: middle;
-    margin-top: 7px;
+    margin-top: 0px;
 }
 
 .events_time p {
@@ -437,7 +448,7 @@ img.lineup_title_img {
 .inline li {
     position: relative;
     float: left;
-    margin: 5px;
+    margin: 10px 5px;
 }
 
 #timeline {
@@ -471,7 +482,7 @@ img.lineup_title_img {
     top: 25px;
     left: 50%;
     margin-left: -5px;
-    background-color: var(--theme-color);
+    background-color: var(--theme-bg-color);
     z-index: 100;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
@@ -532,7 +543,7 @@ img.lineup_title_img {
 }
 
 #timeline .timeline-movement .timeline-item {
-    padding: 10px 0;
+    padding: 10px 5px;
 }
 
 #timeline .timeline-movement .timeline-item .timeline-panel {
@@ -596,7 +607,6 @@ img.lineup_title_img {
     }
 }
 
-.theme-hover:hover .lineup_name p,
-.theme-hover:hover .lineup_number p {
-    color: #ffffff;
+.kick_img {
+    margin: 10px 0px !important;
 }
