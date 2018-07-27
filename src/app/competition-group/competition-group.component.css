@@ -27,6 +27,10 @@ ul.groups_list {
     margin-top: 0;
 }
 
+.table-header td {
+    font-weight: bold;
+}
+
 table.table.grouptable {
     background: #fff;
     margin-bottom: 15px;
@@ -34,7 +38,6 @@ table.table.grouptable {
 
 table.table.grouptable tr td {
     font-size: 16px;
-    font-weight: bold;
     padding: 10px 5px;
 }
 

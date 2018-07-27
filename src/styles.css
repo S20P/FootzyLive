@@ -1344,10 +1344,12 @@ span.upertxt.dashed {
     box-shadow: 0px 2px 7px #00000038;
     margin-right: 12px;
     border-radius: 50%;
+    vertical-align: top;
 }
 
 .player_img img {
     margin-bottom: 2px;
+    margin-top: -4px;
 }
 
 .more-link {

@@ -11,3 +11,7 @@
 .match-page-header {
     padding: 5px 0px 5px 15px;
 }
+
+.not_avilable_content {
+    font-size: 16px;
+}
