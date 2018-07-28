@@ -52,3 +52,9 @@
     font-size: var(--theme-body-font1);
     font-weight: bold;
 }
+
+@media (max-width: 480px) {
+    .player_img img {
+        width: 60px !important;
+    }
+}

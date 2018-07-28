@@ -7,7 +7,7 @@ table.table.grouptable {
     margin-bottom: 15px;
 }
 
-table.table.grouptable tr td {
+table.table.grouptable tbody tr td {
     font-size: var(--theme-body-font1);
     padding: 13px 0px;
 }
@@ -71,7 +71,6 @@ td.first {
     }
     table.table.grouptable tr td {
         font-size: var(--theme-body-font-sm);
-        font-weight: bold;
         padding: 13px 2px;
     }
     .player_img img {
@@ -82,7 +81,6 @@ td.first {
 @media (max-width: 367px) {
     table.table.grouptable tr td {
         font-size: 10px;
-        font-weight: bold;
         padding: 13px 2px;
     }
     .text-left {

@@ -286,10 +286,11 @@ img.lineup_title_img {
         width: 16px;
     }
     .lineup_img img {
-        width: 26px;
+        width: 25px;
+        margin-top: 5px;
     }
     .lineup_one .card-body {
-        padding: 15px 5px 15px 10px;
+        padding: 5px 0px 10px 15px;
     }
     .lineup_name p,
     .lineup_number p {

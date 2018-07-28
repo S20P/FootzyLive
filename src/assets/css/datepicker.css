@@ -234,12 +234,12 @@ span.ui-datepicker-month {
         display: inline-block;
         font-weight: bold;
         text-align: center;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         color: #666666;
         text-shadow: 1px 1px 0px #fff;
-        margin: auto 0;
+        margin: 1px;
         border: 1px solid;
         filter: dropshadow(color=#fff, offx=1, offy=1);
         font-size: 11px;
@@ -273,9 +273,9 @@ span.ui-datepicker-month {
         display: inline-block;
         font-weight: bold;
         text-align: center;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
         color: #666666;
         text-shadow: 1px 1px 0px #fff;
         margin: 1px;
@@ -306,12 +306,12 @@ span.ui-datepicker-month {
         display: inline-block;
         font-weight: bold;
         text-align: center;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
         color: #666666;
         text-shadow: 1px 1px 0px #fff;
-        margin: auto 0;
+        margin: 1px;
         border: 1px solid;
         filter: dropshadow(color=#fff, offx=1, offy=1);
         font-size: 11px;
@@ -345,12 +345,12 @@ span.ui-datepicker-month {
         display: inline-block;
         font-weight: bold;
         text-align: center;
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         color: #666666;
         text-shadow: 1px 1px 0px #fff;
-        margin: auto 0;
+        margin: 1px;
         border: 1px solid;
         filter: dropshadow(color=#fff, offx=1, offy=1);
         font-size: 11px;
@@ -372,5 +372,23 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
         width: 20px;
+    }
+}
+
+@media (max-width: 300px) {
+    .ui-datepicker td span,
+    .ui-datepicker td a {
+        display: inline-block;
+        font-weight: bold;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        color: #666666;
+        text-shadow: 1px 1px 0px #fff;
+        margin: 1px;
+        border: 1px solid;
+        filter: dropshadow(color=#fff, offx=1, offy=1);
+        font-size: 11px;
     }
 }

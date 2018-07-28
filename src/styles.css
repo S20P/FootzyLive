@@ -1094,6 +1094,29 @@ ul.nav.nav-tabs {
         width: 150px;
         padding: 5px 0px;
     }
+    .more-link {
+        font-size: var(--theme-body-font-sm)!important;
+        line-height: var(--theme-body-font1) !important;
+    }
+    .more-link .fa {
+        font-size: 9px!important;
+    }
+    .r-dashbord-team .match_time,
+    p {
+        font-size: var(--theme-body-font-sm)!important;
+    }
+    h3,
+    h2,
+    h1,
+    h4,
+    .groupBy-date-title,
+    .match-page-header p,
+    .table-header td {
+        font-size: var(--theme-body-font1)!important;
+    }
+    .player_img img {
+        width: 25px!important;
+    }
 }
 
 @media (max-width: 450px) {
@@ -1433,7 +1456,7 @@ span.upertxt.dashed {
 
 .table-header td {
     padding: 15px 0px 15px 9px !important;
-    font-size: var(--theme-body-font2)!important;
+    font-size: var(--theme-body-font2);
     font-weight: bold;
 }
 

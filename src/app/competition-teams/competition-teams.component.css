@@ -21,7 +21,7 @@ table.table.grouptable {
     margin-bottom: 15px;
 }
 
-table.table.grouptable tr td {
+table.table.grouptable tbody tr td {
     font-size: var(--theme-body-font1);
     padding: 15px 0px 9px;
 }
@@ -86,9 +86,6 @@ td.first {
     }
     table.table.grouptable tr td {
         font-size: var(--theme-body-font1);
-    }
-    .player_img img {
-        width: 30px;
     }
 }
 
