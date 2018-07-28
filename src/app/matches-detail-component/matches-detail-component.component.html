@@ -46,7 +46,7 @@
 
                             <!-- offline  -->
                             <ng-template #offlineTime1>
-                                <div *ngIf="match.status!=='FT' && match.status!=='Pen.' && match.status!=='AET' && match.status!=='Postp.' && match.status!=='' ;else time1">
+                                <div *ngIf="match.status!=='FT' && match.status!=='Pen.' && match.status!=='AET' && match.status!=='Postp.';else time1">
                                     <h2 class="uptime">{{match.time|date:'hh:mm a'}}</h2>
                                 </div>
                                 <ng-template #time1>
@@ -312,7 +312,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body" *ngIf="events_collection.length <= 0">
+                                                        <div class="card" *ngIf="events_collection.length <= 0">
                                                             <p>No Events </p>
                                                         </div>
 
@@ -334,7 +334,6 @@
                                                                     <p>{{stats.lt_possesiontime}}</p>
                                                                 </div>
                                                                 <div class="col-xs-8">
-
                                                                     <div class="row">
                                                                         <div class="col-xs-6 no-padding">
                                                                             <div class="status-progress">
@@ -347,7 +346,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-xs-2">
                                                                     <p>{{stats.vt_possesiontime}}</p>
@@ -584,7 +582,7 @@
 
                                                         </div>
                                                         <!-- status end -->
-                                                        <div class="card-body" *ngIf="match_stats_collection.length <= 0">
+                                                        <div class="card" *ngIf="match_stats_collection.length <= 0">
                                                             <p>No Status </p>
                                                         </div>
 
@@ -617,7 +615,7 @@
                                                             </div>
 
 
-                                                            <div class="card-body theme-hover" *ngFor="let player of localteam_player_lineup|orderBy:'number';let i=index">
+                                                            <div class="card-body theme-hover" *ngFor="let player of localteam_player_lineup|orderBy_ace_desc:'number':ascending;let i=index">
                                                                 <div class="lineup_data" (click)="Playerdetails(player.id)">
 
                                                                     <div class="col-xs-2 lineup_img">
@@ -648,7 +646,7 @@
                                                                 </h4>
                                                             </div>
 
-                                                            <div class="card-body  theme-hover" *ngFor="let player of localteam_player_subs|orderBy:'number';let i=index">
+                                                            <div class="card-body  theme-hover" *ngFor="let player of localteam_player_subs|orderBy_ace_desc:'number':ascending;let i=index">
                                                                 <div class="lineup_data" (click)="Playerdetails(player.id)">
 
                                                                     <div class="col-xs-2 lineup_img">
@@ -666,8 +664,6 @@
                                                             <div class="card-body  theme-hover" *ngIf="localteam_player_subs.length <= 0">
                                                                 <p>No LocalTeam Substitutes </p>
                                                             </div>
-
-
 
                                                         </div>
 
@@ -688,7 +684,7 @@
                                                                 </h4>
                                                             </div>
 
-                                                            <div class="card-body  theme-hover" *ngFor="let player of visitorteam_player_lineup|orderBy:'number';let i=index">
+                                                            <div class="card-body  theme-hover" *ngFor="let player of visitorteam_player_lineup|orderBy_ace_desc:'number':ascending;let i=index">
                                                                 <div class="lineup_data" (click)="Playerdetails(player.id)">
 
                                                                     <div class="col-xs-2 lineup_img">
@@ -716,7 +712,7 @@
                                                                 </h4>
                                                             </div>
 
-                                                            <div class="card-body  theme-hover" *ngFor="let player of visitorteam_player_subs|orderBy:'number';let i=index">
+                                                            <div class="card-body  theme-hover" *ngFor="let player of visitorteam_player_subs|orderBy_ace_desc:'number':ascending;let i=index">
                                                                 <div class="lineup_data" (click)="Playerdetails(player.id)">
 
                                                                     <div class="col-xs-2 lineup_img">
@@ -756,9 +752,9 @@
                                             <div class=" Commentary-box">
                                                 <div class="card">
                                                     <div class="col-md-12 header">
-                                                        <h4><b>COMMENTARY</b></h4>
+                                                        <h4 class="text-left"><b>COMMENTARY</b></h4>
                                                     </div>
-                                                    <p class="slogen cheadlines"> {{match.localteam_name}} {{match.localteam_score}} , {{match.visitorteam_name}} {{match.visitorteam_score}}</p>
+                                                    <p class="slogen cheadlines text-left"> {{match.localteam_name}} {{match.localteam_score}} , {{match.visitorteam_name}} {{match.visitorteam_score}}</p>
 
                                                     <div class="card-body" *ngFor="let comment of Commentary_collection">
                                                         <div class="commentary-content">
@@ -784,19 +780,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-body" *ngIf="Commentary_collection.length <= 0">
-                                                        <div class="commentary-content">
-                                                            <p class="text-center">No Commentary found</p>
-                                                        </div>
+                                                    <div *ngIf="Commentary_collection.length <= 0">
+                                                        <p class="text-left not_avilable_content">No Commentaries Found </p>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                         <!--******* end Commentry ***********-->
-
-
-
                                     </div>
                                 </div>
                                 <!--end tabs body  -->
@@ -808,17 +798,10 @@
                         </div>
                         <!--end side bar  -->
                     </div>
-
-
-
                 </div>
             </div>
-
             <!-- </div> -->
-
             <!-- match-name end -->
-
-
         </div>
 
     </div>

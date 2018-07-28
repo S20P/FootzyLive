@@ -4,7 +4,7 @@
     </div>
     <div class="card sidebar-card" *ngFor="let item of match_ground_details">
         <div class="sidebar_date">
-            <p>{{item.competitions.name}}</p>
+            <p>{{item.competitions.name}} <span (click)="CompetitionDetails(item.competitions.id)" class="more-link">More <i class="fa fa-chevron-right " aria-hidden="true"></i></span></p>
         </div>
         <div class="card-body sidebar-card-body theme-hover" *ngFor="let item_details of item.group|orderBy:'time';let j = index">
             <div class="list-cursor" *ngIf="match_ground_details.length>0" (click)="matchdetails_go(item_details.id)">
@@ -99,7 +99,7 @@
         <div class="card-body sidebar-card-body sidebar-nomatche">
             <div class="col-md-12 col-sm-12 col-xs-12  match-team-group">
                 <div class="list-line">
-                    <h4>No Matches today</h4>
+                    <p>No Matches today</p>
                 </div>
             </div>
         </div>

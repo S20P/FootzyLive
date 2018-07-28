@@ -75,7 +75,6 @@
 .event img,
 .commentary_img img {
     width: 18px;
-    ;
 }
 
 .left-text-wrapper {
@@ -143,7 +142,7 @@
     line-height: 2.5;
     margin: 0;
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 .cheadlines {
@@ -153,7 +152,7 @@
 }
 
 .Commentary-box .card-body {
-    padding: 10px 0 0;
+    padding: 10px 0px 0px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -319,11 +318,10 @@ img.lineup_title_img {
 }
 
 .slogen {
-    /* color: gray;
-    font-size: 14px; */
     margin: 0px;
     line-height: 25px;
-    padding: 10px;
+    text-align: left;
+    padding: 10px 0px 10px 15px;
     background: #eeeeee;
 }
 
@@ -356,6 +354,10 @@ img.lineup_title_img {
 
 .stats_list .row {
     padding: 0px 15px;
+}
+
+.stats_list {
+    text-align: center;
 }
 
 .stats_list p {

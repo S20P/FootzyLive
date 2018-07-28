@@ -133,12 +133,14 @@ export class CompetitionMatchesComponent implements OnInit {
           var localteam_score;
           if (data.visitorteam_score == '?') {
             visitorteam_score = "";
+            live_status = false;
           } else {
             visitorteam_score = data.visitorteam_score
           }
 
           if (data.localteam_score == '?') {
             localteam_score = "";
+            live_status = false;
           } else {
             localteam_score = data.localteam_score
           }

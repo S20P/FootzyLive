@@ -6,6 +6,7 @@
     --theme-body-font2: 16px;
     --theme-body-font3: 18px;
     --theme-hover-bg: #fafafa;
+    --theme-font-bold: 'Montserrat-Bold';
 }
 
 
@@ -25,16 +26,34 @@
 } */
 
 @font-face {
-    font-family: 'Montserrat', sans-serif;
-    src: url("/assets/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-family: 'Montserrat';
+    src: url("assets/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url("assets/fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
+    font-weight: bold;
 }
 
 body {
     background: #eee;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
+}
+
+b {
+    font-family: var(--theme-font-bold);
+}
+
+h3,
+h2,
+h1,
+h4 {
+    font-family: var(--theme-font-bold);
 }
 
 p {
+    font-family: 'Montserrat';
     font-size: var(--theme-body-font1);
 }
 
@@ -179,11 +198,12 @@ h2 {
     width: 100%;
     color: #fff;
     margin-bottom: 30px;
+    font-family: 'Montserrat-Bold', sans-serif;
 }
 
 h2 span {
     /* font-family: 'Libre Baskerville', serif; */
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat-Bold', sans-serif;
     display: block;
     font-size: 45px;
     text-transform: none;
@@ -603,7 +623,7 @@ p.btm-txt {
 }
 
 .match_time p {
-    font-size: var(--theme-body-font2) !important;
+    font-size: var(--theme-body-font1) !important;
 }
 
 i.fa.fa-circle {
@@ -875,7 +895,7 @@ ul.nav.nav-tabs {
         margin-top: -15px;
     }
     .circle-team {
-        margin-top: 12px!important;
+        margin-top: 7px!important;
     }
 }
 
@@ -1109,6 +1129,7 @@ ul.nav.nav-tabs {
     .nav-tabs>li>a {
         padding-left: 15px !important;
         border-radius: 0px !important;
+        margin-right: 0px !important;
     }
 }
 
@@ -1205,9 +1226,12 @@ ul.nav.nav-tabs {
 
 .circle-team {
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 11px;
+    top: 50%;
     color: #fff;
     padding: 0px;
+    bottom: 50%;
+    vertical-align: middle;
 }
 
 .circle-team span {
@@ -1271,7 +1295,7 @@ ul.nav.nav-tabs {
 
 .match_time {
     margin-top: 0;
-    font-size: var(--theme-body-font2);
+    font-size: var(--theme-body-font1);
     font-weight: normal;
 }
 
@@ -1381,6 +1405,10 @@ span.upertxt.dashed {
     cursor: pointer;
     font-size: var(--theme-body-font1);
     line-height: 20px;
+}
+
+.more-link .fa {
+    font-size: var(--theme-body-font1);
 }
 
 .more-link:hover {
@@ -1503,4 +1531,13 @@ span.upertxt.dashed {
 
 .theme-color {
     color: var(--theme-bg-color);
+}
+
+.sidebar-nomatche {
+    padding: 10px 0px !important;
+}
+
+.not_avilable_content {
+    font-size: var(--theme-body-font1);
+    padding: 10px 0px 4px 15px;
 }

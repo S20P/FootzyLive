@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row next-matces-page">
     <div class="col-md-12">
         <div *ngFor="let item of NextMatchesTeam; let i = index">
             <div class="col-md-12 match-page-header" (click)="CompetitionDetails(item.type.id,item.type.name,item.type.season)">
@@ -195,8 +195,7 @@
             </div>
         </div>
         <div *ngIf="NextMatchesTeam.length <=0" class="card">
-            <h4 class="text-left not_avilable_content">No matches Found </h4>
+            <p class="text-left not_avilable_content">No matches Found </p>
         </div>
-
     </div>
 </div>

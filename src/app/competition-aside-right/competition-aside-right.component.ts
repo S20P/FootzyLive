@@ -147,12 +147,16 @@ export class CompetitionAsideRightComponent implements OnInit {
           var localteam_score;
           if (item.visitorteam_score == '?') {
             visitorteam_score = "";
+            live_status = false;
+            
           } else {
             visitorteam_score = item.visitorteam_score
           }
 
           if (item.localteam_score == '?') {
             localteam_score = "";
+            live_status = false;
+            
           } else {
             localteam_score = item.localteam_score
           }

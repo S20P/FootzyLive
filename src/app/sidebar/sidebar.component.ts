@@ -138,7 +138,7 @@ export class SidebarComponent implements OnInit {
           var flag__loal = self.flage_baseUrl + item.localteam_id + ".png";
           var flag_visit = self.flage_baseUrl + item.visitorteam_id + ".png";
 
-       
+
 
           var selected1 = self.jsCustomeFun.SpliteStrDateFormat(item.formatted_date);
           var date11 = new Date(selected1 + " " + item.time);
@@ -177,12 +177,16 @@ export class SidebarComponent implements OnInit {
           var localteam_score;
           if (item.visitorteam_score == '?') {
             visitorteam_score = "";
+            live_status = false;
+
           } else {
             visitorteam_score = item.visitorteam_score
           }
 
           if (item.localteam_score == '?') {
             localteam_score = "";
+            live_status = false;
+
           } else {
             localteam_score = item.localteam_score
           }
@@ -235,7 +239,10 @@ export class SidebarComponent implements OnInit {
 
   }
 
-
+  CompetitionDetails(comp_id) {
+    console.log("going to CompetitionDetails page...", comp_id);
+    this.router.navigate(['/competition', comp_id]);
+  }
 
   matchdetails_go(id) {
     this.router.navigate(['/matches', id]);

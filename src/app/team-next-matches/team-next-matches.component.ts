@@ -120,12 +120,14 @@ export class TeamNextMatchesComponent implements OnInit {
           var visitorteam_score;
           var localteam_score;
           if (item.visitorteam_score == '?') {
+            live_status = false;
             visitorteam_score = "";
           } else {
             visitorteam_score = item.visitorteam_score
           }
 
           if (item.localteam_score == '?') {
+            live_status = false;
             localteam_score = "";
           } else {
             localteam_score = item.localteam_score

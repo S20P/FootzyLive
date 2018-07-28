@@ -529,12 +529,14 @@ export class MatchesDetailComponentComponent implements OnInit {
                         var localteam_score;
                         if (result[k].visitorteam_score == '?') {
                           visitorteam_score = "";
+                          live_status = false;
                         } else {
                           visitorteam_score = result[k].visitorteam_score;
                         }
               
                         if (result[k].localteam_score == '?') {
                           localteam_score = "";
+                          live_status = false;
                         } else {
                           localteam_score = result[k].localteam_score;
                         }
