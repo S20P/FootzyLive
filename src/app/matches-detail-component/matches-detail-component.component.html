@@ -768,12 +768,12 @@
                                                                 <ng-template #noborder>
                                                                     <p class="border-btm">{{comment.comment}}</p>
                                                                     <div class="commentary_img_player col-sm-12 col-xs-12">
-                                                                        <div class="col-xs-2 col-sm-1 commentary_img">
-                                                                            <img src="{{comment.icon}}" alt="">
+                                                                        <div class="col-xs-2 col-sm-1  commentary_img" [class.align-flex]="comment.downName">
+                                                                            <img [class.align-fit]="comment.downName" src="{{comment.icon}}" alt="">
                                                                         </div>
                                                                         <div class="col-xs-10 col-sm-11 commentry-player">
                                                                             <p>{{comment.upName}}</p>
-                                                                            <p class="small">{{comment.downName}}</p>
+                                                                            <p *ngIf="comment.downName" class="small">{{comment.downName}}</p>
                                                                         </div>
                                                                     </div>
                                                                 </ng-template>

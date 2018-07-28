@@ -20,7 +20,7 @@ table.table.grouptable {
 table.table.grouptable tbody tr td {
     font-size: var(--theme-body-font1);
     /* font-weight: bold; */
-    padding: 15px 0px 9px;
+    padding: 15px 0px 0px 0px;
 }
 
 .table.grouptable tr td.no,

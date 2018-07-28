@@ -34,7 +34,7 @@ table.table.grouptable {
 
 table.table.grouptable tbody tr td {
     font-size: var(--theme-body-font1);
-    padding: 10px 5px;
+    padding: 10px 5px 10px 0px;
 }
 
 table.table.grouptable tbody {

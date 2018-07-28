@@ -36,6 +36,11 @@
     font-weight: bold;
 }
 
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url("assets/fonts/Montserrat/Montserrat-Light.ttf") format("truetype");
+}
+
 body {
     background: #eee;
     font-family: 'Montserrat';
@@ -602,6 +607,10 @@ section {
     padding: 0px 15px 0px 15px;
     margin-top: -1px;
     margin: 0px;
+}
+
+.upertxt {
+    font-family: 'Montserrat-Light';
 }
 
 p.upertxt {
@@ -1455,7 +1464,7 @@ span.upertxt.dashed {
 }
 
 .table-header td {
-    padding: 15px 0px 15px 9px !important;
+    padding: 15px 0px 15px 0px !important;
     font-size: var(--theme-body-font2);
     font-weight: bold;
 }
@@ -1564,3 +1573,5 @@ span.upertxt.dashed {
     font-size: var(--theme-body-font1);
     padding: 10px 0px 4px 15px;
 }
+
+.align-fit {}
