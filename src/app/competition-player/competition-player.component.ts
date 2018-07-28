@@ -22,7 +22,7 @@ export class CompetitionPlayerComponent implements OnInit {
   public comp_id: any;
   public competition_name: any;
   public season: any;
-  public player_baseUrl: any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,7 +30,7 @@ export class CompetitionPlayerComponent implements OnInit {
     private orderPipe: OrderPipe,
     private jsCustomeFun: JsCustomeFunScriptService
   ) {
-    this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+    
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
     });
@@ -93,12 +93,17 @@ export class CompetitionPlayerComponent implements OnInit {
           }
           for (let teams of detailsOfTeam) {
 
-            var flag = self.player_baseUrl + teams['player_id'] + ".jpg";
+              // If you want use Player image use it.
+              //public player_baseUrl: any;
+             // this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+             // var flag = self.player_baseUrl + teams['player_id'] + ".jpg";
+            // "player_flag": flag
+           // <img [src]="item_details.player_flag" onError="this.src='assets/img/avt_player.png'" /> 
+
             groups[type].push({
               "player_id": teams['player_id'],
               "player_name": teams['player'],
               "count": teams['count'],
-              "player_flag": flag
             });
           }
         });

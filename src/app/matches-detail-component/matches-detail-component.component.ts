@@ -44,7 +44,7 @@ export class MatchesDetailComponentComponent implements OnInit {
     private subscription: Subscription;
     private timer: Observable<any>;
     public flage_baseUrl: any;
-    public player_baseUrl: any;
+    // public player_baseUrl: any;
     public season: any;
 
     constructor(
@@ -56,7 +56,7 @@ export class MatchesDetailComponentComponent implements OnInit {
         private jsCustomeFun: JsCustomeFunScriptService
     ) {
         this.flage_baseUrl = "/assets/img/TeamFlage/";
-        this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
+        // this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
         this.ic_event_penalty_scored = false;
         this.ic_event_own_goal = false;
         this.ic_event_goal = false;
@@ -238,7 +238,7 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
-                        var localteamLinePlayer_url = this.player_baseUrl + localteam_lineup[lt].id + ".jpg";
+                       // var localteamLinePlayer_url = this.player_baseUrl + localteam_lineup[lt].id + ".jpg";
 
 
 
@@ -247,8 +247,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                             "name": localteam_lineup[lt].name,
                             "number": localteam_lineup[lt].number,
                             "pos": localteam_lineup[lt].pos,
-                            "picture": localteamLinePlayer_url,
-
+                            // "picture": localteamLinePlayer_url,
                         });
                     }
                     //   end localteam_lineup-----------------------------------------------------------------------------------
@@ -259,8 +258,8 @@ export class MatchesDetailComponentComponent implements OnInit {
                     let localteam_subs = subs['localteam'];
 
                     for (var lts = 0; lts < localteam_subs['length']; lts++) {
-                        var localteamSubsPayer_url = this.player_baseUrl + localteam_subs[lts].id + ".jpg";
-
+                        //var localteamSubsPayer_url = this.player_baseUrl + localteam_subs[lts].id + ".jpg";
+                        // "picture": localteamSubsPayer_url,
 
 
                         this.localteam_player_subs.push({
@@ -268,7 +267,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                             "name": localteam_subs[lts].name,
                             "number": localteam_subs[lts].number,
                             "pos": localteam_subs[lts].pos,
-                            "picture": localteamSubsPayer_url,
+
 
 
                         });
@@ -283,8 +282,8 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
-                        var visitorteamLinePlayer_url = this.player_baseUrl + visitorteam_lineup[vt].id + ".jpg";
-
+                        //var visitorteamLinePlayer_url = this.player_baseUrl + visitorteam_lineup[vt].id + ".jpg";
+                        //"picture": visitorteamLinePlayer_url,
 
                         this.visitorteam_player_lineup.push({
 
@@ -292,7 +291,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                             "name": visitorteam_lineup[vt].name,
                             "number": visitorteam_lineup[vt].number,
                             "pos": visitorteam_lineup[vt].pos,
-                            "picture": visitorteamLinePlayer_url,
+
                         });
                     }
                     //  end visitorteam_lineup--------------------------------------------------------------------------------
@@ -303,8 +302,8 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                     for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
-                        var visitorteamSubsPayer_url = this.player_baseUrl + visitorteam_subs[vts].id + ".jpg";
-
+                        // var visitorteamSubsPayer_url = this.player_baseUrl + visitorteam_subs[vts].id + ".jpg";
+                        //"picture": visitorteamSubsPayer_url,
 
 
                         this.visitorteam_player_subs.push({
@@ -312,7 +311,6 @@ export class MatchesDetailComponentComponent implements OnInit {
                             "name": visitorteam_subs[vts].name,
                             "number": visitorteam_subs[vts].number,
                             "pos": visitorteam_subs[vts].pos,
-                            "picture": visitorteamSubsPayer_url,
                         });
                     }
                     //  end visitorteam_subs------------------------------------------------------------------------------------
@@ -528,17 +526,17 @@ export class MatchesDetailComponentComponent implements OnInit {
                         var visitorteam_score;
                         var localteam_score;
                         if (result[k].visitorteam_score == '?') {
-                          visitorteam_score = "";
-                          live_status = false;
+                            visitorteam_score = "";
+                            live_status = false;
                         } else {
-                          visitorteam_score = result[k].visitorteam_score;
+                            visitorteam_score = result[k].visitorteam_score;
                         }
-              
+
                         if (result[k].localteam_score == '?') {
-                          localteam_score = "";
-                          live_status = false;
+                            localteam_score = "";
+                            live_status = false;
                         } else {
-                          localteam_score = result[k].localteam_score;
+                            localteam_score = result[k].localteam_score;
                         }
 
 
@@ -642,15 +640,13 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                     for (var lt = 0; lt < localteam_lineup['length']; lt++) {
 
-                                        var localteamLinePlayer_url = this.player_baseUrl + localteam_lineup[lt].id + ".jpg";
-
+                                        //var localteamLinePlayer_url = this.player_baseUrl + localteam_lineup[lt].id + ".jpg";
+                                        //"picture": localteamLinePlayer_url,F
                                         this.localteam_player_lineup.push({
                                             "id": localteam_lineup[lt].id,
                                             "name": localteam_lineup[lt].name,
                                             "number": localteam_lineup[lt].number,
                                             "pos": localteam_lineup[lt].pos,
-                                            "picture": localteamLinePlayer_url,
-
                                         });
                                     }
                                 }
@@ -663,13 +659,14 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                 if (localteam_subs !== null) {
                                     for (var lts = 0; lts < localteam_subs['length']; lts++) {
-                                        var localteamSubsPayer_url = this.player_baseUrl + localteam_subs[lts].id + ".jpg";
+                                        //  var localteamSubsPayer_url = this.player_baseUrl + localteam_subs[lts].id + ".jpg";
+                                        //    "picture": localteamSubsPayer_url,
                                         this.localteam_player_subs.push({
                                             "id": localteam_subs[lts].id,
                                             "name": localteam_subs[lts].name,
                                             "number": localteam_subs[lts].number,
                                             "pos": localteam_subs[lts].pos,
-                                            "picture": localteamSubsPayer_url,
+
                                         });
                                     }
                                 }
@@ -684,15 +681,15 @@ export class MatchesDetailComponentComponent implements OnInit {
 
                                     for (var vt = 0; vt < visitorteam_lineup['length']; vt++) {
 
-                                        var visitorteamLinePlayer_url = this.player_baseUrl + visitorteam_lineup[vt].id + ".jpg";
-
+                                        // var visitorteamLinePlayer_url = this.player_baseUrl + visitorteam_lineup[vt].id + ".jpg";
+                                        //"picture": visitorteamLinePlayer_url,
 
                                         this.visitorteam_player_lineup.push({
                                             "id": visitorteam_lineup[vt].id,
                                             "name": visitorteam_lineup[vt].name,
                                             "number": visitorteam_lineup[vt].number,
                                             "pos": visitorteam_lineup[vt].pos,
-                                            "picture": visitorteamLinePlayer_url,
+
                                         });
                                     }
                                 }
@@ -704,8 +701,8 @@ export class MatchesDetailComponentComponent implements OnInit {
                                 if (visitorteam_subs !== null) {
                                     for (var vts = 0; vts < visitorteam_subs['length']; vts++) {
 
-                                        var visitorteamSubsPayer_url = this.player_baseUrl + visitorteam_subs[vts].id + ".jpg";
-
+                                        // var visitorteamSubsPayer_url = this.player_baseUrl + visitorteam_subs[vts].id + ".jpg";
+                                        //"picture": visitorteamSubsPayer_url,
 
 
                                         this.visitorteam_player_subs.push({
@@ -713,7 +710,7 @@ export class MatchesDetailComponentComponent implements OnInit {
                                             "name": visitorteam_subs[vts].name,
                                             "number": visitorteam_subs[vts].number,
                                             "pos": visitorteam_subs[vts].pos,
-                                            "picture": visitorteamSubsPayer_url,
+
                                         });
                                     }
                                 }

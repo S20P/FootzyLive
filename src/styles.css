@@ -1574,4 +1574,20 @@ span.upertxt.dashed {
     padding: 10px 0px 4px 15px;
 }
 
-.align-fit {}
+.first-letters-circle {
+    background: rgb(0, 209, 95);
+    text-transform: uppercase;
+    align-items: center;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    font-size: 16px;
+    width: max-content;
+    margin: 0 auto;
+    padding: 10px 12px;
+    vertical-align: middle;
+    margin: 0px 10px 0px 0;
+}

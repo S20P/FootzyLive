@@ -20,7 +20,7 @@ export class TeamSquadComponent implements OnInit {
   public team_name: any;
   public team_flage: any;
   public flage_baseUrl: any;
-  public player_baseUrl: any;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +32,6 @@ export class TeamSquadComponent implements OnInit {
 
   ) {
     this.flage_baseUrl = "/assets/img/TeamFlage/";
-    this.player_baseUrl = "https://s3.amazonaws.com/starapps/footzy/players/";
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = parseInt(params.get("id"));
@@ -86,7 +85,7 @@ export class TeamSquadComponent implements OnInit {
             }
             grouped.push({ type: position_name, group: groups[item.position] });
           }
-          var TeamPlayer_url = self.player_baseUrl + item['id'] + ".jpg";
+      
           groups[item.position].push({
             "id": item['id'],
             "age": item['age'],
@@ -94,8 +93,7 @@ export class TeamSquadComponent implements OnInit {
             "goals": item['goals'],
             "name": item['name'],
             "number": item['number'],
-            "position": item['position'],
-            "picture": TeamPlayer_url
+            "position": item['position']           
           });
         });
         this.SquadTeam = grouped;
