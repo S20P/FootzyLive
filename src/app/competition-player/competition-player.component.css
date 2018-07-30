@@ -79,7 +79,6 @@ td.first {
         font-size: var(--theme-body-font-sm);
     }
     .text-left {
-        text-align: center !important;
         width: 100%;
     }
     .player_img img {

@@ -6,7 +6,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div *ngFor="let paire of item.group|groupBy:'formatted_date'|orderBy:'formatted_date';let j=index">
+                    <div *ngFor="let paire of item.group|groupBy:'formatted_date'|orderBy:'formatted_date';let j=index" class="matches-list-sec">
                         <h5 class="groupBy-date-title"> {{paire.key|date:'EEEE, d MMMM y'}}</h5>
                         <div *ngFor="let item_details of paire.value|orderBy:'formatted_date';let j=index" class="card">
                             <div class="row match-detail theme-hover" *ngIf="item_details.comp_id==item.type.id" (click)="matchdetails(item_details.id)">

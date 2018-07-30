@@ -221,7 +221,6 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
         width: 35px;
-        margin-left: 0;
     }
 }
 
@@ -254,9 +253,9 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar tr:last-child .ui-state-active {
         margin-bottom: 0;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         margin: 1px;
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
@@ -287,13 +286,13 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar tr:last-child .ui-state-active {
         margin-bottom: 0;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
         margin: 1px;
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
-        width: 30px;
+        width: 40px;
     }
 }
 
@@ -326,13 +325,13 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar tr:last-child .ui-state-active {
         margin-bottom: 0;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
         margin: 1px;
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
-        width: 25px;
+        width: 35px;
     }
 }
 
@@ -365,13 +364,13 @@ span.ui-datepicker-month {
     }
     .ui-datepicker-calendar tr:last-child .ui-state-active {
         margin-bottom: 0;
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         margin: 1px;
     }
     .ui-datepicker-calendar td:first-child .ui-state-active {
-        width: 20px;
+        width: 30px;
     }
 }
 

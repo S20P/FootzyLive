@@ -816,21 +816,18 @@ ul.nav.nav-tabs {
 /********************************************************************/
 
 .first-letters-circle {
-    background: rgb(0, 209, 95);
-    text-transform: uppercase;
-    align-items: center;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    display: inline-block;
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
-    font-size: 16px;
-    width: max-content;
-    margin: 0 auto;
-    padding: 10px 12px;
+    background: rgb(0, 209, 95);
     vertical-align: middle;
-    margin: 0px 10px 0px 0;
+    margin-right: 1em;
+    color: white;
 }
 
 
@@ -1146,8 +1143,9 @@ ul.nav.nav-tabs {
     }
     .first-letters-circle {
         font-size: var(--theme-body-font1)!important;
-        padding: 10px 10px;
-        height: 25px;
+        width: 2.2em;
+        height: 2.2em;
+        line-height: 2.2em;
     }
 }
 
@@ -1281,7 +1279,7 @@ ul.nav.nav-tabs {
 
 .circle-team {
     font-weight: bold;
-    margin-top: 11px;
+    margin-top: 7px;
     top: 50%;
     color: #fff;
     padding: 0px;
@@ -1290,9 +1288,17 @@ ul.nav.nav-tabs {
 }
 
 .circle-team span {
-    border: 1px solid transparent;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
     border-radius: 50%;
     vertical-align: middle;
+    margin-right: 1em;
+    color: white;
 }
 
 .hide-responsive-list .circle-team span {
@@ -1300,31 +1306,16 @@ ul.nav.nav-tabs {
 }
 
 .team_w {
-    padding: 8px 11px;
     background: #0dbf0d;
 }
 
 .team_l {
-    padding: 7px 12px;
     background: rgb(216, 42, 42);
 }
 
 .team_d {
-    padding: 8px 12px;
     background: #837d7de8 !important;
     background-color: #837d7de8 !important;
-}
-
-.hide-responsive-list .team_w {
-    padding: 5px 7px 4px;
-}
-
-.hide-responsive-list .team_l {
-    padding: 4px 9px;
-}
-
-.hide-responsive-list .team_d {
-    padding: 4px 8px;
 }
 
 .numerType .match_time {
