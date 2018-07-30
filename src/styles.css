@@ -41,6 +41,11 @@
     src: url("assets/fonts/Montserrat/Montserrat-Light.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url("assets/fonts/Montserrat/Montserrat-SemiBold.ttf") format("truetype");
+}
+
 body {
     background: #eee;
     font-family: 'Montserrat';
@@ -63,7 +68,7 @@ p {
 }
 
 #wrapper {
-    padding: 90px 15px;
+    padding: 100px 15px 15px;
 }
 
 .navbar-expand-lg .navbar-nav.side-nav {
@@ -93,7 +98,7 @@ p {
         cursor: pointer;
     }
     #wrapper {
-        padding: 90px 15px 15px 15px;
+        padding: 100px 15px 15px;
     }
     .navbar-nav.side-nav.open {
         left: 0;
@@ -364,6 +369,7 @@ ul.nav.navbar-nav.navbar-right img {
 
 h4.footertext {
     font-size: 20px;
+    font-family: 'Montserrat';
 }
 
 .Copyright {
@@ -1013,7 +1019,7 @@ ul.nav.nav-tabs {
 
 @media (max-width: 767px) {
     #wrapper {
-        padding: 90px 0px !important;
+        padding: 100px 15px 15px !important;
     }
     .footer_logo img {
         /* width: 40% !important; */

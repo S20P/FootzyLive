@@ -137,3 +137,16 @@ ul.groups_list {
 .toppadd {
     margin-bottom: 15px;
 }
+
+.select_dropdown li {
+    padding: 0px;
+}
+
+.select_dropdown li a {
+    background: transparent;
+    padding: 10px 20px;
+}
+
+.select_dropdown li a:hover {
+    background: transparent;
+}

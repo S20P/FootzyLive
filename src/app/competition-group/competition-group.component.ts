@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 declare var $: any;
+import {PageScrollConfig} from 'ngx-page-scroll';
+
+
 import { OrderPipe } from 'ngx-order-pipe';
 import * as moment from 'moment-timezone';
 import "moment-timezone";
@@ -23,7 +26,7 @@ export class CompetitionGroupComponent implements OnInit {
   public comp_id: any;
   public competition_name: any;
   public season: any;
-  public selectedpositionofGroup:any;
+  public selectedpositionofGroup: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +39,20 @@ export class CompetitionGroupComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.comp_id = parseInt(params.get("id"));
     });
+
+    PageScrollConfig.defaultScrollOffset = 80;
+    PageScrollConfig.defaultEasingLogic = {
+        ease: (t: number, b: number, c: number, d: number): number => {
+            // easeInOutExpo easing
+            if (t === 0) return b;
+            if (t === d) return b + c;
+            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+        }
+    };
+
+
+
   }
   @Input()
   set SelectedSeason(message: number) {
@@ -126,8 +143,11 @@ export class CompetitionGroupComponent implements OnInit {
 
 
   onchangefillter_group(pos) {
+
     console.log("filter is change", pos);
     this.selectedpositionofGroup = pos;
+
+ 
   }
 
 
